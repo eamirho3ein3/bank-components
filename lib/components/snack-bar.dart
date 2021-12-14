@@ -1,4 +1,4 @@
-part of components;
+part of neo_components;
 
 class NeoSnackBar extends SnackBar {
   final IconData icon;

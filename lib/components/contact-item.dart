@@ -1,4 +1,4 @@
-part of components;
+part of neo_components;
 
 class ContactItem extends StatelessWidget {
   final IconData icon;

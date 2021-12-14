@@ -1,4 +1,4 @@
-part of components;
+part of neo_components;
 
 class NeoTextField extends StatelessWidget {
   final TextfieldType type;

@@ -1,4 +1,4 @@
-part of components;
+part of neo_components;
 
 class NeoSegmented extends StatelessWidget {
   final NeoSegmentedTheme style;

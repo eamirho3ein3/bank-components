@@ -1,4 +1,4 @@
-part of components;
+part of neo_components;
 
 class NeoCard extends StatelessWidget {
   final CardType type;

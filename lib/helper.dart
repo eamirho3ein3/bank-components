@@ -1,4 +1,4 @@
-part of components;
+part of neo_components;
 
 // return list of string that contain card nmuber in 4 pices
 List<String> getCorrectCardNumber(String number) {

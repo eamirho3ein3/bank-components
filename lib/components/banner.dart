@@ -1,4 +1,4 @@
-part of components;
+part of neo_components;
 
 class NeoBanner extends StatelessWidget {
   final IconData icon;

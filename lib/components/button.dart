@@ -1,4 +1,4 @@
-part of components;
+part of neo_components;
 
 class NeoButton extends StatelessWidget {
   final ButtonSize size;
