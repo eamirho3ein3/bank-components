@@ -4,11 +4,12 @@ A new Flutter package project.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+Add this to your package's pubspec.yaml:
+  
+  
+    dependencies:
+      neo_components:
+        git:
+          url: https://github.com/eamirho3ein3/neo-components.git
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+Then run "dart pub get"
