@@ -1,6 +1,6 @@
 part of neo_components;
 
-class NeoTextField extends StatelessWidget {
+class NeoTextField extends StatefulWidget {
   final TextfieldType type;
   final TextEditingController controller;
   final TextAlign textAlign;
@@ -9,7 +9,6 @@ class NeoTextField extends StatelessWidget {
   final int limit;
   final TextfieldExtend prefix;
   final TextfieldExtend suffix;
-  final bool hidePassword;
   final Function(String) validator;
   final TextInputType keyboardType;
   final Function(String) verificationOnComplete; //only use in verification code
@@ -23,47 +22,57 @@ class NeoTextField extends StatelessWidget {
       this.limit,
       this.prefix,
       this.suffix,
-      this.hidePassword,
       this.validator,
       @required this.type,
       this.keyboardType,
       this.verificationOnComplete,
       this.verificationOnChanged,
       this.secondaryTextColor});
+
+  @override
+  _NeoTextFieldState createState() => _NeoTextFieldState();
+}
+
+class _NeoTextFieldState extends State<NeoTextField> {
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
-    if (type == TextfieldType.Reqular) {
-      // regular textfield
+    if (widget.type == TextfieldType.Reqular ||
+        widget.type == TextfieldType.Password) {
+      // regular or password textfield
 
       return Stack(
         children: [
           TextFormField(
-            controller: controller,
-            textAlign: textAlign != null ? textAlign : TextAlign.start,
-            maxLength: limit,
+            controller: widget.controller,
+            textAlign:
+                widget.textAlign != null ? widget.textAlign : TextAlign.start,
+            maxLength: widget.limit,
             buildCounter: (context, {currentLength, isFocused, maxLength}) {
               return Container(
                 child: Text(
-                  limit != null
+                  widget.limit != null
                       ? replaceFarsiNumber(
-                          '$maxLength/${controller.text.length}')
+                          '$maxLength/${widget.controller.text.length}')
                       : '',
                   style: Theme.of(context).inputDecorationTheme.counterStyle,
                 ),
               );
             },
             decoration: InputDecoration(
-              labelText: label,
-              helperText: helper != null ? '' : null,
-              prefixIcon: _buildExtendWidget(prefix, context, false),
-              suffixIcon: _buildExtendWidget(suffix, context, true),
+              labelText: widget.label,
+              helperText: widget.helper != null ? '' : null,
+              prefixIcon: _buildExtendWidget(widget.prefix, context, false),
+              suffixIcon: widget.type == TextfieldType.Password
+                  ? _buildEyeIconSuffix()
+                  : _buildExtendWidget(widget.suffix, context, true),
               contentPadding: EdgeInsets.all(12),
             ),
-            obscureText: hidePassword != null ? hidePassword : false,
-            validator: validator,
-            keyboardType: keyboardType,
+            obscureText: showPassword ? false : true,
+            validator: widget.validator,
+            keyboardType: widget.keyboardType,
           ),
-          helper != null
+          widget.helper != null
               ? Positioned(
                   bottom: 0,
                   right: 12,
@@ -72,29 +81,29 @@ class NeoTextField extends StatelessWidget {
               : SizedBox(),
         ],
       );
-    } else if (type == TextfieldType.Amount) {
+    } else if (widget.type == TextfieldType.Amount) {
       // amount textfield
       return CustomTextfield(
-        type: type,
-        controller: controller,
-        secondaryTextColor: secondaryTextColor,
+        type: widget.type,
+        controller: widget.controller,
+        secondaryTextColor: widget.secondaryTextColor,
       );
     } else {
       // code textfield
       return CustomTextfield(
-        type: type,
-        controller: controller,
-        onComplete: verificationOnComplete,
-        onValueChanged: verificationOnChanged,
+        type: widget.type,
+        controller: widget.controller,
+        onComplete: widget.verificationOnComplete,
+        onValueChanged: widget.verificationOnChanged,
       );
     }
   }
 
   _buildTextFieldHelperWidget(BuildContext context) {
-    if (helper.type == HeplerType.Regular) {
+    if (widget.helper.type == HeplerType.Regular) {
       // regular
       return Text(
-        helper.text,
+        widget.helper.text,
         style: Theme.of(context).inputDecorationTheme.helperStyle,
       );
     } else {
@@ -103,27 +112,40 @@ class NeoTextField extends StatelessWidget {
         children: [
           // TODO: change icon data with real one
           Icon(
-            helper.type == HeplerType.Success ? Icons.info : Icons.info,
-            color: helper.type == HeplerType.Success
-                ? helper.theme.success
-                : helper.theme.error,
+            widget.helper.type == HeplerType.Success ? Icons.info : Icons.info,
+            color: widget.helper.type == HeplerType.Success
+                ? widget.helper.theme.success
+                : widget.helper.theme.error,
           ),
           Padding(
             padding: const EdgeInsets.only(right: 4),
             child: Text(
-              helper.text,
+              widget.helper.text,
               style: Theme.of(context)
                   .inputDecorationTheme
                   .helperStyle
                   .copyWith(
-                      color: helper.type == HeplerType.Success
-                          ? helper.theme.success
-                          : helper.theme.error),
+                      color: widget.helper.type == HeplerType.Success
+                          ? widget.helper.theme.success
+                          : widget.helper.theme.error),
             ),
           ),
         ],
       );
     }
+  }
+
+  _buildEyeIconSuffix() {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          showPassword = !showPassword;
+        });
+      },
+      child: Icon(showPassword
+          ? Icons.visibility_outlined
+          : Icons.visibility_off_outlined),
+    );
   }
 
   _buildExtendWidget(
@@ -206,7 +228,7 @@ enum HeplerType { Regular, Error, Success }
 
 enum TextfieldExtendType { Icon, Text, Child }
 
-enum TextfieldType { Reqular, Amount, Code }
+enum TextfieldType { Reqular, Amount, Code, Password }
 
 class CodeInputFormatter extends TextInputFormatter {
   @override
