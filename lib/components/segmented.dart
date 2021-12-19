@@ -1,11 +1,11 @@
-part of neo_components;
+part of bank_components;
 
-class NeoSegmented extends StatelessWidget {
-  final NeoSegmentedTheme style;
+class CustomSegmented extends StatelessWidget {
+  final CustomSegmentedTheme style;
   final int selectedIndex;
   final Function(int) onTabClick;
   final List<String> tabs;
-  NeoSegmented(
+  CustomSegmented(
       {@required this.style,
       @required this.selectedIndex,
       this.onTabClick,
@@ -63,9 +63,9 @@ class NeoSegmented extends StatelessWidget {
   }
 }
 
-class NeoSegmentedTheme {
+class CustomSegmentedTheme {
   final Color backgroundColor;
   final Color selectedBackgroundColor;
 
-  NeoSegmentedTheme({this.selectedBackgroundColor, this.backgroundColor});
+  CustomSegmentedTheme({this.selectedBackgroundColor, this.backgroundColor});
 }

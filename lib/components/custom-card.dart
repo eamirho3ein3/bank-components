@@ -1,12 +1,12 @@
-part of neo_components;
+part of bank_components;
 
-class NeoCard extends StatelessWidget {
+class CustomCard extends StatelessWidget {
   final CardType type;
   final String title; // card title & profile name
   final String amount;
   final ComponentAction rightButton;
   final ComponentAction leftButton;
-  final NeoCardTheme style;
+  final CustomCardTheme style;
 
   // profile card
   final String profile;
@@ -18,7 +18,7 @@ class NeoCard extends StatelessWidget {
   final List<String> cardNumbers;
 
   // zarrin account card
-  final NeoIconTheme icon; // profile place holdeer & zarrin account icon
+  final CustomIconTheme icon; // profile place holdeer & zarrin account icon
   final Function onMoreClick;
 
   // setting card
@@ -28,7 +28,7 @@ class NeoCard extends StatelessWidget {
   final ToggleTheme toggleTheme;
   final bool toggleValue;
 
-  NeoCard(
+  CustomCard(
       {@required this.type,
       this.title,
       this.amount,
@@ -156,11 +156,11 @@ class NeoCard extends StatelessWidget {
               children: [
                 rightButton != null
                     ? Expanded(
-                        child: NeoButton(
+                        child: CustomButton(
                           title: rightButton.text,
                           size: ButtonSize.large,
                           onClick: rightButton.onClick,
-                          style: NeoButtonTheme(
+                          style: CustomButtonTheme(
                             backgroundColor: rightButton.style.backgroundColor,
                             foregroundColor: rightButton.style.foregroundColor,
                             disabledColor: rightButton.style.disabledColor,
@@ -174,11 +174,11 @@ class NeoCard extends StatelessWidget {
                 ),
                 leftButton != null
                     ? Expanded(
-                        child: NeoButton(
+                        child: CustomButton(
                           title: leftButton.text,
                           size: ButtonSize.large,
                           onClick: rightButton.onClick,
-                          style: NeoButtonTheme(
+                          style: CustomButtonTheme(
                             backgroundColor: leftButton.style.backgroundColor,
                             foregroundColor: leftButton.style.foregroundColor,
                             disabledColor: leftButton.style.disabledColor,
@@ -314,7 +314,7 @@ class NeoCard extends StatelessWidget {
 
               // toggle button or arrow icon
               toggleValue != null
-                  ? NeoToggle(
+                  ? CustomToggle(
                       style: toggleTheme,
                       onToggle: onToggleChange,
                       value: toggleValue,
@@ -380,10 +380,10 @@ class NeoCard extends StatelessWidget {
   }
 }
 
-class NeoCardTheme {
+class CustomCardTheme {
   final Color secondaryTextColor; // title || mobile || description color
   final Color backgroundColor; // card backgroundColor
-  NeoCardTheme(
+  CustomCardTheme(
       {@required this.backgroundColor, @required this.secondaryTextColor});
 }
 

@@ -1,4 +1,4 @@
-part of neo_components;
+part of bank_components;
 
 class ContactItem extends StatelessWidget {
   final IconData icon;
@@ -106,11 +106,11 @@ class ContactItem extends StatelessWidget {
 
               // button
               : button != null
-                  ? NeoButton(
+                  ? CustomButton(
                       title: button.text,
                       size: ButtonSize.medium,
                       onClick: button.onClick,
-                      style: NeoButtonTheme(
+                      style: CustomButtonTheme(
                         backgroundColor: button.style.backgroundColor,
                         foregroundColor: button.style.foregroundColor,
                         disabledColor: button.style.disabledColor,

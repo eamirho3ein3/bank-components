@@ -1,4 +1,4 @@
-library neo_components;
+library bank_components;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +17,11 @@ part 'components/bottom-sheet-view.dart';
 part 'components/button.dart';
 part 'components/segmented.dart';
 part 'components/choice-chip.dart';
-part 'components/neo-card.dart';
+part 'components/custom-card.dart';
 part 'components/zarin-id.dart';
 part 'components/toggle.dart';
 part 'components/profile-setting-item.dart';
-part 'components/neo-textfield.dart';
+part 'components/custom-textfield.dart';
 part 'components/verify-textfield.dart';
 part 'models/action.dart';
 part 'helper.dart';

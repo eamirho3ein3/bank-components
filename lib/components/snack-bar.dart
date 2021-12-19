@@ -1,13 +1,13 @@
-part of neo_components;
+part of bank_components;
 
-class NeoSnackBar extends SnackBar {
+class CustomSnackBar extends SnackBar {
   final IconData icon;
   final String message;
   final ComponentAction button;
   final SnackBarTheme style;
   final double bottomMargin;
   final BuildContext context;
-  NeoSnackBar({
+  CustomSnackBar({
     this.icon,
     @required this.message,
     @required this.style,

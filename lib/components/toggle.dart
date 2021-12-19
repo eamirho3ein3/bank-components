@@ -1,12 +1,12 @@
-part of neo_components;
+part of bank_components;
 
-class NeoToggle extends StatelessWidget {
+class CustomToggle extends StatelessWidget {
   final String title;
   final ToggleTheme style;
   final Function(bool) onToggle;
   final bool value;
   final bool rightText;
-  NeoToggle(
+  CustomToggle(
       {this.title,
       @required this.style,
       this.onToggle,

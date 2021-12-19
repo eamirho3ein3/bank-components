@@ -1,12 +1,12 @@
-part of neo_components;
+part of bank_components;
 
-class NeoChoiceChip extends StatelessWidget {
+class CustomChoiceChip extends StatelessWidget {
   final String title;
   final String numbers;
   final IconData icon;
   final Function(bool) onClick;
   final bool selected;
-  NeoChoiceChip(
+  CustomChoiceChip(
       {this.title,
       this.numbers,
       this.icon,

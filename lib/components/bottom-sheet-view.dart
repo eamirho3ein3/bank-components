@@ -1,4 +1,4 @@
-part of neo_components;
+part of bank_components;
 
 class BottomSheetView extends StatelessWidget {
   final String title;
@@ -64,11 +64,11 @@ class BottomSheetView extends StatelessWidget {
               // right button
               rightButton != null
                   ? Expanded(
-                      child: NeoButton(
+                      child: CustomButton(
                         title: rightButton.text,
                         size: ButtonSize.medium,
                         onClick: rightButton.onClick,
-                        style: NeoButtonTheme(
+                        style: CustomButtonTheme(
                           backgroundColor: rightButton.style.backgroundColor,
                           foregroundColor: rightButton.style.foregroundColor,
                           disabledColor: rightButton.style.disabledColor,
@@ -82,11 +82,11 @@ class BottomSheetView extends StatelessWidget {
               // left button
               leftButton != null
                   ? Expanded(
-                      child: NeoButton(
+                      child: CustomButton(
                         title: leftButton.text,
                         size: ButtonSize.medium,
                         onClick: leftButton.onClick,
-                        style: NeoButtonTheme(
+                        style: CustomButtonTheme(
                           backgroundColor: leftButton.style.backgroundColor,
                           foregroundColor: leftButton.style.foregroundColor,
                           disabledColor: leftButton.style.disabledColor,

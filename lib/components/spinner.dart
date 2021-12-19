@@ -1,8 +1,8 @@
-part of neo_components;
+part of bank_components;
 
-class NeoSpinner extends StatelessWidget {
+class CustomSpinner extends StatelessWidget {
   final SpinnerTheme style;
-  NeoSpinner({@required this.style});
+  CustomSpinner({@required this.style});
   @override
   Widget build(BuildContext context) {
     return _buildSpinner(

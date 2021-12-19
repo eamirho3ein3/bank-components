@@ -1,11 +1,11 @@
-part of neo_components;
+part of bank_components;
 
-class NeoBanner extends StatelessWidget {
+class CustomBanner extends StatelessWidget {
   final IconData icon;
   final String message;
   final ComponentAction action;
   final BannerTheme style;
-  NeoBanner(
+  CustomBanner(
       {@required this.icon,
       @required this.message,
       this.action,
@@ -95,11 +95,11 @@ class BannerTheme {
   BannerTheme({this.borderColor, this.backgroundColor, this.iconColor});
 }
 
-class NeoIconTheme {
+class CustomIconTheme {
   final IconData icon;
   final Color iconColor;
   final Color backgroundColor;
   final Color borderColor;
-  NeoIconTheme(
+  CustomIconTheme(
       {this.icon, this.iconColor, this.backgroundColor, this.borderColor});
 }

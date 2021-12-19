@@ -1,4 +1,4 @@
-part of neo_components;
+part of bank_components;
 
 class ProfileSettingItem extends StatelessWidget {
   final Function onTap;
@@ -50,7 +50,7 @@ class ProfileSettingItem extends StatelessWidget {
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 toggleValue != null
-                    ? NeoToggle(
+                    ? CustomToggle(
                         style: toggleTheme,
                         onToggle: onToggleChange,
                         value: toggleValue,

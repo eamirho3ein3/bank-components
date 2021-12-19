@@ -1,4 +1,4 @@
-part of neo_components;
+part of bank_components;
 
 class TransactionItem extends StatelessWidget {
   final IconData icon;

@@ -1,14 +1,14 @@
-part of neo_components;
+part of bank_components;
 
-class NeoButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final ButtonSize size;
   final String title;
   final IconData rightIcon;
   final IconData leftIcon;
   final Function onClick;
-  final NeoButtonTheme style;
+  final CustomButtonTheme style;
 
-  NeoButton(
+  CustomButton(
       {this.size,
       this.title,
       this.rightIcon,
@@ -77,11 +77,11 @@ class NeoButton extends StatelessWidget {
   }
 }
 
-class NeoButtonTheme {
+class CustomButtonTheme {
   final Color backgroundColor;
   final Color foregroundColor;
   final Color disabledColor;
-  NeoButtonTheme({
+  CustomButtonTheme({
     @required this.backgroundColor,
     @required this.foregroundColor,
     @required this.disabledColor,

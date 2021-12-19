@@ -1,6 +1,6 @@
-part of neo_components;
+part of bank_components;
 
-class NeoTextField extends StatefulWidget {
+class CustomTextField extends StatefulWidget {
   final TextfieldType type;
   final TextEditingController controller;
   final TextAlign textAlign;
@@ -14,7 +14,7 @@ class NeoTextField extends StatefulWidget {
   final Function(String) verificationOnComplete; //only use in verification code
   final Function(String) verificationOnChanged; //only use in verification code
   final Color secondaryTextColor;
-  NeoTextField(
+  CustomTextField(
       {@required this.controller,
       this.textAlign,
       this.label,
@@ -30,10 +30,10 @@ class NeoTextField extends StatefulWidget {
       this.secondaryTextColor});
 
   @override
-  _NeoTextFieldState createState() => _NeoTextFieldState();
+  _CustomTextFieldState createState() => _CustomTextFieldState();
 }
 
-class _NeoTextFieldState extends State<NeoTextField> {
+class _CustomTextFieldState extends State<CustomTextField> {
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
@@ -208,7 +208,7 @@ class HelperWidgetTheme {
 
 class TextfieldExtend {
   final TextfieldExtendType type;
-  final NeoIconTheme icon;
+  final CustomIconTheme icon;
   final String text;
   final Widget child;
   final Function onTap;
