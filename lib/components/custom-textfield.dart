@@ -1,251 +1,151 @@
 part of bank_components;
 
-class CustomTextField extends StatefulWidget {
+class CustomTextfield extends StatefulWidget {
   final TextfieldType type;
+  final Function(String) onComplete;
+  final Function(String) onValueChanged;
   final TextEditingController controller;
-  final TextAlign textAlign;
-  final String label;
-  final TextfieldHelper helper;
-  final int limit;
-  final TextfieldExtend prefix;
-  final TextfieldExtend suffix;
-  final Function(String) validator;
-  final TextInputType keyboardType;
-  final Function(String) verificationOnComplete; //only use in verification code
-  final Function(String) verificationOnChanged; //only use in verification code
-  final Color secondaryTextColor;
-  CustomTextField(
-      {@required this.controller,
-      this.textAlign,
-      this.label,
-      this.helper,
-      this.limit,
-      this.prefix,
-      this.suffix,
-      this.validator,
+  final Color
+      secondaryTextColor; // text color for unit text in amount textfield
+
+  CustomTextfield(
+      {this.onComplete,
+      this.onValueChanged,
+      @required this.controller,
       @required this.type,
-      this.keyboardType,
-      this.verificationOnComplete,
-      this.verificationOnChanged,
       this.secondaryTextColor});
 
   @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
+  _CustomTextfieldState createState() => _CustomTextfieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
-  bool showPassword = false;
+class _CustomTextfieldState extends State<CustomTextfield> {
+  TextEditingController _controller = TextEditingController();
+  FocusNode _focusNode = FocusNode();
+  String _input = "";
+
   @override
   Widget build(BuildContext context) {
-    if (widget.type == TextfieldType.Reqular ||
-        widget.type == TextfieldType.Password) {
-      // regular or password textfield
-
-      return Stack(
+    return Container(
+      height: 64,
+      decoration: BoxDecoration(
+        color: Theme.of(context).inputDecorationTheme.fillColor,
+        border: Border.all(
+            color: _focusNode.hasFocus
+                ? Theme.of(context)
+                    .inputDecorationTheme
+                    .focusedBorder
+                    .borderSide
+                    .color
+                : Theme.of(context)
+                    .inputDecorationTheme
+                    .enabledBorder
+                    .borderSide
+                    .color,
+            width: 1),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          TextFormField(
-            controller: widget.controller,
-            textAlign:
-                widget.textAlign != null ? widget.textAlign : TextAlign.start,
-            maxLength: widget.limit,
-            buildCounter: (context, {currentLength, isFocused, maxLength}) {
-              return Container(
-                child: Text(
-                  widget.limit != null
-                      ? replaceFarsiNumber(
-                          '$maxLength/${widget.controller.text.length}')
-                      : '',
-                  style: Theme.of(context).inputDecorationTheme.counterStyle,
-                ),
-              );
-            },
-            decoration: InputDecoration(
-              labelText: widget.label,
-              helperText: widget.helper != null ? '' : null,
-              prefixIcon: _buildExtendWidget(widget.prefix, context, false),
-              suffixIcon: widget.type == TextfieldType.Password
-                  ? _buildEyeIconSuffix()
-                  : _buildExtendWidget(widget.suffix, context, true),
-              contentPadding: EdgeInsets.all(12),
-            ),
-            obscureText: showPassword ? false : true,
-            validator: widget.validator,
-            keyboardType: widget.keyboardType,
-          ),
-          widget.helper != null
-              ? Positioned(
-                  bottom: 0,
-                  right: 12,
-                  child: _buildTextFieldHelperWidget(context),
-                )
-              : SizedBox(),
-        ],
-      );
-    } else if (widget.type == TextfieldType.Amount) {
-      // amount textfield
-      return CustomTextfield(
-        type: widget.type,
-        controller: widget.controller,
-        secondaryTextColor: widget.secondaryTextColor,
-      );
-    } else {
-      // code textfield
-      return CustomTextfield(
-        type: widget.type,
-        controller: widget.controller,
-        onComplete: widget.verificationOnComplete,
-        onValueChanged: widget.verificationOnChanged,
-      );
-    }
-  }
+          // The widget that shows user's inputs
+          widget.type == TextfieldType.Code
+              ? _buildNumberItem(_input)
+              : _buildAmountItem(_input),
 
-  _buildTextFieldHelperWidget(BuildContext context) {
-    if (widget.helper.type == HeplerType.Regular) {
-      // regular
-      return Text(
-        widget.helper.text,
-        style: Theme.of(context).inputDecorationTheme.helperStyle,
-      );
-    } else {
-      // success or error
-      return Row(
-        children: [
-          // TODO: change icon data with real one
-          Icon(
-            widget.helper.type == HeplerType.Success ? Icons.info : Icons.info,
-            color: widget.helper.type == HeplerType.Success
-                ? widget.helper.theme.success
-                : widget.helper.theme.error,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: Text(
-              widget.helper.text,
-              style: Theme.of(context)
-                  .inputDecorationTheme
-                  .helperStyle
-                  .copyWith(
-                      color: widget.helper.type == HeplerType.Success
-                          ? widget.helper.theme.success
-                          : widget.helper.theme.error),
+          // hiden textfield
+          Opacity(
+            opacity: 0.0,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: TextField(
+                // only digits
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
+                ],
+                keyboardType: TextInputType.number,
+                focusNode: _focusNode,
+                controller: _controller,
+                maxLength: widget.type == TextfieldType.Code ? 6 : null,
+                onTap: () {
+                  setState(() {});
+                },
+                onChanged: (String value) {
+                  _input = value;
+
+                  if (widget.onValueChanged != null) {
+                    widget.onValueChanged(_input);
+                  }
+
+                  // used only in code mode
+                  if (widget.type == TextfieldType.Code && _input.length == 6) {
+                    _focusNode.unfocus();
+                    if (widget.onComplete != null) {
+                      widget.onComplete(_input);
+                    }
+                  }
+
+                  setState(() {});
+                },
+              ),
             ),
           ),
         ],
-      );
-    }
-  }
-
-  _buildEyeIconSuffix() {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          showPassword = !showPassword;
-        });
-      },
-      child: Icon(showPassword
-          ? Icons.visibility_outlined
-          : Icons.visibility_off_outlined),
+      ),
     );
   }
 
-  _buildExtendWidget(
-      TextfieldExtend widget, BuildContext context, bool isSuffix) {
-    if (widget == null) {
-      return null;
-    } else if (widget.type == TextfieldExtendType.Icon) {
-      // icon
+  _buildNumberItem(String inputCode) {
+    List<Widget> _cells = [];
+    for (int i = 0; i < 6; i++) {
+      String _text = '';
+      // the display text
+      if (i < inputCode.length) {
+        _text = inputCode.substring(i, i + 1);
+      } else {
+        _text = "-";
+      }
 
-      return InkWell(
-        onTap: widget.onTap,
-        child: Icon(
-          widget.icon.icon,
-          color: widget.icon.iconColor,
-        ),
-      );
-    } else if (widget.type == TextfieldExtendType.Text) {
-      // text
-
-      return Padding(
-        padding:
-            EdgeInsets.only(left: isSuffix ? 4 : 8, right: !isSuffix ? 4 : 8),
-        child: Container(
-          height: 40,
-          width: 45,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(2),
-            color: widget.textBackgroundColor,
-          ),
-          child: Text(
-            widget.text,
-            style: Theme.of(context).textTheme.subtitle1,
-          ),
-        ),
-      );
-    } else {
-      // child
-      return widget.child;
+      _cells.add(Text(
+        _text,
+        style: Theme.of(context).textTheme.headline1,
+      ));
     }
+
+    return Container(
+      constraints: BoxConstraints(
+        maxWidth: 280,
+      ),
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: _cells,
+      ),
+    );
   }
-}
 
-class TextfieldHelper {
-  final HeplerType type;
-  final String text;
-  final HelperWidgetTheme theme;
-
-  TextfieldHelper(
-      {@required this.type, @required this.text, @required this.theme});
-}
-
-class HelperWidgetTheme {
-  // on regular type you don't need to pass this
-  final Color success;
-  final Color error;
-
-  HelperWidgetTheme({@required this.success, @required this.error});
-}
-
-class TextfieldExtend {
-  final TextfieldExtendType type;
-  final CustomIconTheme icon;
-  final String text;
-  final Widget child;
-  final Function onTap;
-  final Color textBackgroundColor;
-
-  TextfieldExtend({
-    @required this.type,
-    this.icon,
-    this.text,
-    this.child,
-    this.onTap,
-    this.textBackgroundColor,
-  });
-}
-
-enum HeplerType { Regular, Error, Success }
-
-enum TextfieldExtendType { Icon, Text, Child }
-
-enum TextfieldType { Reqular, Amount, Code, Password }
-
-class CodeInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    var numberIndex = oldValue.text.lastIndexOf(RegExp(r'@"^\d$"'));
-
-    if (newValue.text.length > oldValue.text.length) {
-      return TextEditingValue(
-        text: newValue.text.replaceFirst(RegExp(r'- |-'), ''),
-        selection: TextSelection.collapsed(offset: numberIndex + 2),
-      );
-    } else {
-      return TextEditingValue(
-        text: newValue.text + '- ',
-        selection: TextSelection.collapsed(offset: numberIndex + 2),
-      );
-    }
+  _buildAmountItem(String inputCode) {
+    String _text = replaceFarsiNumber(
+        addCommasToPrice(inputCode.length != 0 ? inputCode : '0'));
+    return Container(
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            _text,
+            style: Theme.of(context).textTheme.headline1.copyWith(
+                color:
+                    inputCode.length != 0 ? null : widget.secondaryTextColor),
+          ),
+          Text(
+            'ریال',
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: widget.secondaryTextColor),
+          ),
+        ],
+      ),
+    );
   }
 }
