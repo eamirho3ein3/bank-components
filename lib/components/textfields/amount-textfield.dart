@@ -1,25 +1,21 @@
 part of bank_components;
 
-class CustomTextfield extends StatefulWidget {
-  final TextfieldType type;
-  final Function(String) onComplete;
-  final Function(String) onValueChanged;
+class AmountTextField extends StatefulWidget {
   final TextEditingController controller;
-  final Color
-      secondaryTextColor; // text color for unit text in amount textfield
+  final Color secondaryTextColor;
+  final Function(String) onChanged;
 
-  CustomTextfield(
-      {this.onComplete,
-      this.onValueChanged,
-      @required this.controller,
-      @required this.type,
-      this.secondaryTextColor});
+  AmountTextField({
+    @required this.controller,
+    @required this.secondaryTextColor,
+    this.onChanged,
+  });
 
   @override
-  _CustomTextfieldState createState() => _CustomTextfieldState();
+  _AmountTextFieldState createState() => _AmountTextFieldState();
 }
 
-class _CustomTextfieldState extends State<CustomTextfield> {
+class _AmountTextFieldState extends State<AmountTextField> {
   TextEditingController _controller = TextEditingController();
   FocusNode _focusNode = FocusNode();
   String _input = "";
@@ -47,78 +43,33 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // The widget that shows user's inputs
-          widget.type == TextfieldType.Code
-              ? _buildNumberItem(_input)
-              : _buildAmountItem(_input),
+          // The widget as shown by user's input
+          _buildAmountItem(_input),
 
           // hiden textfield
           Opacity(
             opacity: 0.0,
             child: Directionality(
               textDirection: TextDirection.ltr,
-              child: TextField(
-                // only digits
+              child: MainTextField(
+                type: TextfieldType.Reqular,
+                controller: _controller,
+                focusNode: _focusNode,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
                 ],
                 keyboardType: TextInputType.number,
-                focusNode: _focusNode,
-                controller: _controller,
-                maxLength: widget.type == TextfieldType.Code ? 6 : null,
-                onTap: () {
-                  setState(() {});
-                },
                 onChanged: (String value) {
                   _input = value;
-
-                  if (widget.onValueChanged != null) {
-                    widget.onValueChanged(_input);
+                  if (widget.onChanged != null) {
+                    widget.onChanged(_input);
                   }
-
-                  // used only in code mode
-                  if (widget.type == TextfieldType.Code && _input.length == 6) {
-                    _focusNode.unfocus();
-                    if (widget.onComplete != null) {
-                      widget.onComplete(_input);
-                    }
-                  }
-
                   setState(() {});
                 },
               ),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  _buildNumberItem(String inputCode) {
-    List<Widget> _cells = [];
-    for (int i = 0; i < 6; i++) {
-      String _text = '';
-      // the display text
-      if (i < inputCode.length) {
-        _text = inputCode.substring(i, i + 1);
-      } else {
-        _text = "-";
-      }
-
-      _cells.add(Text(
-        _text,
-        style: Theme.of(context).textTheme.headline1,
-      ));
-    }
-
-    return Container(
-      constraints: BoxConstraints(
-        maxWidth: 280,
-      ),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _cells,
       ),
     );
   }

@@ -3,6 +3,7 @@ part of bank_components;
 class MainTextField extends StatefulWidget {
   final TextfieldType type;
   final TextEditingController controller;
+  final FocusNode focusNode;
   final TextAlign textAlign;
   final String label;
   final TextfieldHelper helper;
@@ -11,9 +12,8 @@ class MainTextField extends StatefulWidget {
   final TextfieldExtend suffix;
   final Function(String) validator;
   final TextInputType keyboardType;
-  final Function(String) verificationOnComplete; //only use in verification code
-  final Function(String) verificationOnChanged; //only use in verification code
-  final Color secondaryTextColor;
+  final Function(String) onChanged;
+  final List<TextInputFormatter> inputFormatters;
   MainTextField(
       {@required this.controller,
       this.textAlign,
@@ -25,9 +25,9 @@ class MainTextField extends StatefulWidget {
       this.validator,
       @required this.type,
       this.keyboardType,
-      this.verificationOnComplete,
-      this.verificationOnChanged,
-      this.secondaryTextColor});
+      this.onChanged,
+      this.inputFormatters,
+      this.focusNode});
 
   @override
   _MainTextFieldState createState() => _MainTextFieldState();
@@ -37,66 +37,49 @@ class _MainTextFieldState extends State<MainTextField> {
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
-    if (widget.type == TextfieldType.Reqular ||
-        widget.type == TextfieldType.Password) {
-      // regular or password textfield
-
-      return Stack(
-        children: [
-          TextFormField(
-            controller: widget.controller,
-            textAlign:
-                widget.textAlign != null ? widget.textAlign : TextAlign.start,
-            maxLength: widget.limit,
-            buildCounter: (context, {currentLength, isFocused, maxLength}) {
-              return Container(
-                child: Text(
-                  widget.limit != null
-                      ? replaceFarsiNumber(
-                          '$maxLength/${widget.controller.text.length}')
-                      : '',
-                  style: Theme.of(context).inputDecorationTheme.counterStyle,
-                ),
-              );
-            },
-            decoration: InputDecoration(
-              labelText: widget.label,
-              helperText: widget.helper != null ? '' : null,
-              prefixIcon: _buildExtendWidget(widget.prefix, context, false),
-              suffixIcon: widget.type == TextfieldType.Password
-                  ? _buildEyeIconSuffix()
-                  : _buildExtendWidget(widget.suffix, context, true),
-              contentPadding: EdgeInsets.all(12),
-            ),
-            obscureText: showPassword ? false : true,
-            validator: widget.validator,
-            keyboardType: widget.keyboardType,
+    return Stack(
+      children: [
+        TextFormField(
+          controller: widget.controller,
+          focusNode: widget.focusNode,
+          textAlign:
+              widget.textAlign != null ? widget.textAlign : TextAlign.start,
+          maxLength: widget.limit,
+          buildCounter: (context, {currentLength, isFocused, maxLength}) {
+            return Container(
+              child: Text(
+                widget.limit != null
+                    ? replaceFarsiNumber(
+                        '$maxLength/${widget.controller.text.length}')
+                    : '',
+                style: Theme.of(context).inputDecorationTheme.counterStyle,
+              ),
+            );
+          },
+          inputFormatters: widget.inputFormatters,
+          decoration: InputDecoration(
+            labelText: widget.label,
+            helperText: widget.helper != null ? '' : null,
+            prefixIcon: _buildExtendWidget(widget.prefix, context, false),
+            suffixIcon: widget.type == TextfieldType.Password
+                ? _buildEyeIconSuffix()
+                : _buildExtendWidget(widget.suffix, context, true),
+            contentPadding: EdgeInsets.all(12),
           ),
-          widget.helper != null
-              ? Positioned(
-                  bottom: 0,
-                  right: 12,
-                  child: _buildTextFieldHelperWidget(context),
-                )
-              : SizedBox(),
-        ],
-      );
-    } else if (widget.type == TextfieldType.Amount) {
-      // amount textfield
-      return CustomTextfield(
-        type: widget.type,
-        controller: widget.controller,
-        secondaryTextColor: widget.secondaryTextColor,
-      );
-    } else {
-      // code textfield
-      return CustomTextfield(
-        type: widget.type,
-        controller: widget.controller,
-        onComplete: widget.verificationOnComplete,
-        onValueChanged: widget.verificationOnChanged,
-      );
-    }
+          obscureText: showPassword ? false : true,
+          validator: widget.validator,
+          keyboardType: widget.keyboardType,
+          onChanged: widget.onChanged,
+        ),
+        widget.helper != null
+            ? Positioned(
+                bottom: 0,
+                right: 12,
+                child: _buildTextFieldHelperWidget(context),
+              )
+            : SizedBox(),
+      ],
+    );
   }
 
   _buildTextFieldHelperWidget(BuildContext context) {
@@ -228,7 +211,7 @@ enum HeplerType { Regular, Error, Success }
 
 enum TextfieldExtendType { Icon, Text, Child }
 
-enum TextfieldType { Reqular, Amount, Code, Password }
+enum TextfieldType { Reqular, Password }
 
 class CodeInputFormatter extends TextInputFormatter {
   @override
