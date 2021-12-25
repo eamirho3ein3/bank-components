@@ -27,6 +27,7 @@ class CustomButton extends StatelessWidget {
             vertical: size == ButtonSize.large ? 12 : 8,
             horizontal: horizontalPadding != null ? horizontalPadding : 0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             // right icon
@@ -39,13 +40,11 @@ class CustomButton extends StatelessWidget {
 
             // title
             Expanded(
-              child: Center(
-                child: Text(title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .button
-                        .copyWith(color: style.foregroundColor)),
-              ),
+              child: Text(title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .button
+                      .copyWith(color: style.foregroundColor)),
             ),
 
             // left icon
