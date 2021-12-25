@@ -39,7 +39,7 @@ class CustomButton extends StatelessWidget {
                 : SizedBox(),
 
             // title
-            Expanded(
+            Flexible(
               child: Text(title,
                   style: Theme.of(context)
                       .textTheme
