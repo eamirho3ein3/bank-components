@@ -7,7 +7,7 @@ class CustomButton extends StatelessWidget {
   final IconData leftIcon;
   final Function onClick;
   final CustomButtonTheme style;
-  final bool horizontalPadding;
+  final double horizontalPadding;
 
   CustomButton(
       {this.size,
@@ -25,7 +25,7 @@ class CustomButton extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(
             vertical: size == ButtonSize.large ? 12 : 8,
-            horizontal: horizontalPadding != null ? horizontalPadding : 0),
+            horizontal: horizontalPadding != null ? horizontalPadding : 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
