@@ -39,11 +39,13 @@ class CustomButton extends StatelessWidget {
 
             // title
             Expanded(
-              child: Text(title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .button
-                      .copyWith(color: style.foregroundColor)),
+              child: Center(
+                child: Text(title,
+                    style: Theme.of(context)
+                        .textTheme
+                        .button
+                        .copyWith(color: style.foregroundColor)),
+              ),
             ),
 
             // left icon
