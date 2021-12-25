@@ -2,7 +2,7 @@ part of bank_components;
 
 class MainAppBar extends StatelessWidget {
   final String title;
-  final List<IconButton> actions;
+  final List<CustomIconButton> actions;
 
   MainAppBar({@required this.title, @required this.actions});
   @override

@@ -35,5 +35,6 @@ part 'components/textfields/amount-textfield.dart';
 part 'components/skeleton.dart';
 part 'components/appbars/main-appbar.dart';
 part 'components/appbars/sub-appbar.dart';
+part 'components/icon-button.dart';
 part 'models/action.dart';
 part 'helper.dart';
