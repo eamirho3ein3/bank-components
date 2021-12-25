@@ -101,7 +101,7 @@ class ZarinCardBalance extends StatelessWidget {
                         foregroundColor: rightButton.style.foregroundColor,
                         disabledColor: rightButton.style.disabledColor,
                       ),
-                      rightIcon: Icons.pie_chart_outline_sharp,
+                      rightIcon: rightButton.icon.icon,
                     ),
                   )
                 : SizedBox(),
@@ -119,7 +119,7 @@ class ZarinCardBalance extends StatelessWidget {
                         foregroundColor: leftButton.style.foregroundColor,
                         disabledColor: leftButton.style.disabledColor,
                       ),
-                      rightIcon: Icons.pie_chart_outline_sharp,
+                      rightIcon: leftButton.icon.icon,
                     ),
                   )
                 : SizedBox()
