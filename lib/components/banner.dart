@@ -58,9 +58,11 @@ Widget _buildBanner(
             SizedBox(
               width: 16,
             ),
-            Text(
-              message,
-              style: Theme.of(context).textTheme.subtitle1,
+            Expanded(
+              child: Text(
+                message,
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
             ),
           ],
         ),
