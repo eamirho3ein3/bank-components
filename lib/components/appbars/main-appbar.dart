@@ -16,6 +16,7 @@ class MainAppBar extends StatelessWidget {
           width: 12,
         ));
       }
+      index++;
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
