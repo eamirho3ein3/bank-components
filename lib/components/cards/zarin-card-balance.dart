@@ -21,52 +21,22 @@ class ZarinCardBalance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Skeleton(
-      setting: setting,
-      enabled: isSkeleton,
-      child: CustomCardTypeOne(
-        header: Padding(
-          // title
-          padding: EdgeInsets.only(bottom: 24),
-          child: isSkeleton
-              ? Container(
-                  width: 104,
-                  height: 12,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    color: setting.color,
-                  ),
-                )
-              : Text(
-                  title,
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      .copyWith(color: style.secondaryTextColor),
-                ),
-        ),
-        content: Row(
-          // amount
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            isSkeleton
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: style.backgroundColor,
+      ),
+      child: Skeleton(
+        setting: setting,
+        enabled: isSkeleton,
+        child: CustomCardTypeOne(
+          header: Padding(
+            // title
+            padding: EdgeInsets.only(bottom: 24),
+            child: isSkeleton
                 ? Container(
-                    width: 176,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: setting.color,
-                    ),
-                  )
-                : Text(
-                    amount,
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
-            isSkeleton
-                ? Container(
-                    width: 40,
+                    width: 104,
                     height: 12,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2),
@@ -74,53 +44,89 @@ class ZarinCardBalance extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    ' ' + 'ریال',
-                    textAlign: TextAlign.end,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    title,
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .copyWith(color: style.secondaryTextColor),
                   ),
-          ],
-        ),
-        buttons: Padding(
-          padding: const EdgeInsets.only(top: 24),
-          child: Row(
+          ),
+          content: Row(
+            // amount
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              rightButton != null
-                  ? Expanded(
-                      child: CustomButton(
-                        title: rightButton.text,
-                        size: ButtonSize.large,
-                        onClick: rightButton.onClick,
-                        style: CustomButtonTheme(
-                          backgroundColor: rightButton.style.backgroundColor,
-                          foregroundColor: rightButton.style.foregroundColor,
-                          disabledColor: rightButton.style.disabledColor,
-                        ),
-                        rightIcon: rightButton.icon.icon,
+              isSkeleton
+                  ? Container(
+                      width: 176,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: setting.color,
                       ),
                     )
-                  : SizedBox(),
-              SizedBox(
-                width: leftButton != null ? 12 : 0,
-              ),
-              leftButton != null
-                  ? Expanded(
-                      child: CustomButton(
-                        title: leftButton.text,
-                        size: ButtonSize.large,
-                        onClick: rightButton.onClick,
-                        style: CustomButtonTheme(
-                          backgroundColor: leftButton.style.backgroundColor,
-                          foregroundColor: leftButton.style.foregroundColor,
-                          disabledColor: leftButton.style.disabledColor,
-                        ),
-                        rightIcon: leftButton.icon.icon,
+                  : Text(
+                      amount,
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
+              isSkeleton
+                  ? Container(
+                      width: 40,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: setting.color,
                       ),
                     )
-                  : SizedBox()
+                  : Text(
+                      ' ' + 'ریال',
+                      textAlign: TextAlign.end,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
             ],
           ),
+          buttons: Padding(
+            padding: const EdgeInsets.only(top: 24),
+            child: Row(
+              children: [
+                rightButton != null
+                    ? Expanded(
+                        child: CustomButton(
+                          title: rightButton.text,
+                          size: ButtonSize.large,
+                          onClick: rightButton.onClick,
+                          style: CustomButtonTheme(
+                            backgroundColor: rightButton.style.backgroundColor,
+                            foregroundColor: rightButton.style.foregroundColor,
+                            disabledColor: rightButton.style.disabledColor,
+                          ),
+                          rightIcon: rightButton.icon.icon,
+                        ),
+                      )
+                    : SizedBox(),
+                SizedBox(
+                  width: leftButton != null ? 12 : 0,
+                ),
+                leftButton != null
+                    ? Expanded(
+                        child: CustomButton(
+                          title: leftButton.text,
+                          size: ButtonSize.large,
+                          onClick: rightButton.onClick,
+                          style: CustomButtonTheme(
+                            backgroundColor: leftButton.style.backgroundColor,
+                            foregroundColor: leftButton.style.foregroundColor,
+                            disabledColor: leftButton.style.disabledColor,
+                          ),
+                          rightIcon: leftButton.icon.icon,
+                        ),
+                      )
+                    : SizedBox()
+              ],
+            ),
+          ),
         ),
-        style: style,
       ),
     );
   }

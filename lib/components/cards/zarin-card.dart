@@ -15,43 +15,49 @@ class ZarinCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCardTypeOne(
-      header: Padding(
-        padding: EdgeInsets.only(bottom: 24, top: 4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: SvgPicture.asset(
-                'svgs/zarrin-logo-type.svg',
-                height: 28,
-                width: 92,
-                alignment: Alignment.centerRight,
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: style.backgroundColor,
+      ),
+      child: CustomCardTypeOne(
+        header: Padding(
+          padding: EdgeInsets.only(bottom: 24, top: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: SvgPicture.asset(
+                  'svgs/zarrin-logo-type.svg',
+                  height: 28,
+                  width: 92,
+                  alignment: Alignment.centerRight,
+                ),
               ),
-            ),
-            SvgPicture.asset(
-              'svgs/circuit.svg',
-              color: isActive ? Colors.red : Colors.black,
-              height: 40,
-              width: 49,
-            ),
-          ],
+              SvgPicture.asset(
+                'svgs/circuit.svg',
+                color: isActive ? Colors.red : Colors.black,
+                height: 40,
+                width: 49,
+              ),
+            ],
+          ),
+        ),
+        content: //card number
+            _buildCardNumberText(context),
+        buttons: CustomButton(
+          title: button.text,
+          size: ButtonSize.large,
+          onClick: button.onClick,
+          style: CustomButtonTheme(
+            backgroundColor: button.style.backgroundColor,
+            foregroundColor: button.style.foregroundColor,
+            disabledColor: button.style.disabledColor,
+          ),
+          rightIcon: Icons.pie_chart_outline_sharp,
         ),
       ),
-      content: //card number
-          _buildCardNumberText(context),
-      buttons: CustomButton(
-        title: button.text,
-        size: ButtonSize.large,
-        onClick: button.onClick,
-        style: CustomButtonTheme(
-          backgroundColor: button.style.backgroundColor,
-          foregroundColor: button.style.foregroundColor,
-          disabledColor: button.style.disabledColor,
-        ),
-        rightIcon: Icons.pie_chart_outline_sharp,
-      ),
-      style: style,
     );
   }
 
