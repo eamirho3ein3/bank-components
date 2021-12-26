@@ -11,7 +11,6 @@ class Skeleton extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: setting.color,
       highlightColor: setting.highlightColor,
-      direction: setting.direction,
       enabled: enabled,
       child: child,
     );
@@ -21,10 +20,9 @@ class Skeleton extends StatelessWidget {
 class SkeletonSetting {
   final Color color;
   final Color highlightColor;
-  final ShimmerDirection direction;
 
-  SkeletonSetting(
-      {@required this.color,
-      @required this.highlightColor,
-      @required this.direction});
+  SkeletonSetting({
+    @required this.color,
+    @required this.highlightColor,
+  });
 }
