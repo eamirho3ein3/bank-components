@@ -1,7 +1,7 @@
 part of bank_components;
 
 class TransactionItem extends StatelessWidget {
-  final IconData icon;
+  final CustomIconTheme icon;
   final String title;
   final String subtitle;
   final String price;
@@ -21,12 +21,9 @@ class TransactionItem extends StatelessWidget {
         children: [
           // logo
           CircleAvatar(
-            backgroundColor: style.logoBackgroundColor,
+            backgroundColor: icon.backgroundColor,
             radius: 24,
-            child: Icon(
-              icon,
-              color: style.logoColor,
-            ),
+            child: Icon(icon.icon, color: icon.iconColor),
           ),
           SizedBox(
             width: 12,
@@ -84,13 +81,8 @@ class TransactionItem extends StatelessWidget {
 
 class TransactionItemTheme {
   final Color backgroundColor;
-  final Color logoColor;
-  final Color logoBackgroundColor;
   final Color subtitleColor;
 
   TransactionItemTheme(
-      {@required this.backgroundColor,
-      @required this.logoColor,
-      @required this.logoBackgroundColor,
-      @required this.subtitleColor});
+      {@required this.backgroundColor, @required this.subtitleColor});
 }
