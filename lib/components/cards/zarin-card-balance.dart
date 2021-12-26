@@ -8,6 +8,7 @@ class ZarinCardBalance extends StatelessWidget {
   final String amount;
   final bool isSkeleton;
   final SkeletonSetting setting;
+  final TooltipSetting tooltipSetting;
 
   ZarinCardBalance({
     @required this.rightButton,
@@ -17,6 +18,7 @@ class ZarinCardBalance extends StatelessWidget {
     @required this.amount,
     @required this.isSkeleton,
     @required this.setting,
+    this.tooltipSetting,
   });
 
   @override
@@ -150,16 +152,18 @@ class ZarinCardBalance extends StatelessWidget {
           children: [
             rightButton != null
                 ? Expanded(
-                    child: CustomButton(
-                      title: rightButton.text,
-                      size: ButtonSize.large,
-                      onClick: rightButton.onClick,
-                      style: CustomButtonTheme(
-                        backgroundColor: rightButton.style.backgroundColor,
-                        foregroundColor: rightButton.style.foregroundColor,
-                        disabledColor: rightButton.style.disabledColor,
+                    child: _buildRightButton(
+                      child: CustomButton(
+                        title: rightButton.text,
+                        size: ButtonSize.large,
+                        onClick: rightButton.onClick,
+                        style: CustomButtonTheme(
+                          backgroundColor: rightButton.style.backgroundColor,
+                          foregroundColor: rightButton.style.foregroundColor,
+                          disabledColor: rightButton.style.disabledColor,
+                        ),
+                        rightIcon: rightButton.icon.icon,
                       ),
-                      rightIcon: rightButton.icon.icon,
                     ),
                   )
                 : SizedBox(),
@@ -185,5 +189,14 @@ class ZarinCardBalance extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _buildRightButton({@required Widget child}) {
+    return tooltipSetting != null
+        ? CustomTooltip(
+            setting: tooltipSetting,
+            child: child,
+          )
+        : child;
   }
 }
