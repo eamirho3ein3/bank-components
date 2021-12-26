@@ -41,9 +41,11 @@ class TransactionItem extends StatelessWidget {
       children: [
         // logo
         CircleAvatar(
-          backgroundColor: icon.backgroundColor,
+          backgroundColor: icon.backgroundColor ?? setting.color,
           radius: 24,
-          child: Icon(icon.icon, color: icon.iconColor),
+          child: icon != null
+              ? Icon(icon.icon, color: icon.iconColor)
+              : SizedBox(),
         ),
         SizedBox(
           width: 12,
@@ -56,40 +58,69 @@ class TransactionItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // title
-                  Text(title, style: Theme.of(context).textTheme.subtitle1),
+                  !isSkeleton
+                      ? Text(title ?? '',
+                          style: Theme.of(context).textTheme.subtitle1)
+                      : Container(
+                          width: 120,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: setting.color,
+                          ),
+                        ),
                   SizedBox(
                     width: 12,
                   ),
                   // price
-                  Expanded(
-                    child: Text.rich(
-                      TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: price,
-                              style: Theme.of(context).textTheme.subtitle1),
-                          TextSpan(
-                            text: ' ',
+                  !isSkeleton
+                      ? Expanded(
+                          child: Text.rich(
+                            TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: price ?? '',
+                                    style:
+                                        Theme.of(context).textTheme.subtitle1),
+                                TextSpan(
+                                  text: ' ',
+                                ),
+                                TextSpan(
+                                    text: 'ریال',
+                                    style: Theme.of(context).textTheme.caption),
+                              ],
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          TextSpan(
-                              text: 'ریال',
-                              style: Theme.of(context).textTheme.caption),
-                        ],
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
+                        )
+                      : Container(
+                          width: 48,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: setting.color,
+                          ),
+                        ),
                 ],
               ),
               SizedBox(
                 height: 6,
               ),
               // subtitle
-              Text(subtitle,
-                  style: Theme.of(context)
-                      .textTheme
-                      .caption
-                      .copyWith(color: style.subtitleColor)),
+              !isSkeleton
+                  ? Text(subtitle ?? '',
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption
+                          .copyWith(color: style.subtitleColor))
+                  : Container(
+                      width: 64,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: setting.color,
+                      ),
+                    ),
             ],
           ),
         ),
