@@ -116,13 +116,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.0"
-  shimmer_animation:
+  shimmer:
     dependency: "direct main"
     description:
-      name: shimmer_animation
+      name: shimmer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0+1"
+    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
