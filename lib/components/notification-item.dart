@@ -89,7 +89,7 @@ class NotificationItem extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.cover,
                     errorBuilder: (context, exception, stackTrace) {
-                      return Image.asset('images/Image-empty.png');
+                      return Image.asset('assets/images/image-empty.png');
                     },
                   ),
                 )
