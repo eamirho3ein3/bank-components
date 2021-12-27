@@ -3,6 +3,7 @@ part of bank_components;
 class NotificationItem extends StatelessWidget {
   final IconData icon;
   final String image;
+  final String imageFailure;
   final String title;
   final String description;
   final String date;
@@ -19,6 +20,7 @@ class NotificationItem extends StatelessWidget {
     @required this.date,
     @required this.isSkeleton,
     @required this.setting,
+    this.imageFailure,
   });
   @override
   Widget build(BuildContext context) {
@@ -89,7 +91,9 @@ class NotificationItem extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.cover,
                     errorBuilder: (context, exception, stackTrace) {
-                      return Image.asset('assets/images/image-empty.png');
+                      return Image.asset(imageFailure != null
+                          ? imageFailure
+                          : 'assets/images/image-empty.png');
                     },
                   ),
                 )
