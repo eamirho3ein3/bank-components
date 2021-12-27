@@ -28,39 +28,43 @@ class NotificationItem extends StatelessWidget {
   _buildSkeleton(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Container(
-      color: style.backgroundColor,
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(bottom: 6),
-            width: size.width * 160 / 340,
-            height: 12,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2),
-              color: setting.color,
+    return Skeleton(
+      setting: setting,
+      enabled: true,
+      child: Container(
+        color: style.backgroundColor,
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.only(bottom: 6),
+              width: size.width * 160 / 340,
+              height: 12,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+                color: setting.color,
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 6),
-            width: size.width * 260 / 340,
-            height: 12,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2),
-              color: setting.color,
+            Container(
+              margin: EdgeInsets.only(bottom: 6),
+              width: size.width * 260 / 340,
+              height: 12,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+                color: setting.color,
+              ),
             ),
-          ),
-          Container(
-            width: size.width * 120 / 340,
-            height: 12,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2),
-              color: setting.color,
+            Container(
+              width: size.width * 120 / 340,
+              height: 12,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+                color: setting.color,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
