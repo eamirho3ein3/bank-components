@@ -88,6 +88,9 @@ class NotificationItem extends StatelessWidget {
                     height: 176,
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, exception, stackTrace) {
+                      return Image.asset('images/Image-empty.png');
+                    },
                   ),
                 )
               : SizedBox(),
