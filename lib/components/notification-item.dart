@@ -28,12 +28,12 @@ class NotificationItem extends StatelessWidget {
   _buildSkeleton(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Skeleton(
-      setting: setting,
-      enabled: true,
-      child: Container(
-        color: style.backgroundColor,
-        padding: EdgeInsets.all(16),
+    return Container(
+      color: style.backgroundColor,
+      padding: EdgeInsets.all(16),
+      child: Skeleton(
+        setting: setting,
+        enabled: true,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
