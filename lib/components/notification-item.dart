@@ -6,7 +6,7 @@ class NotificationItem extends StatelessWidget {
   final String title;
   final String description;
   final String date;
-  final ContactItemTheme style;
+  final NotificationItemTheme style;
   final bool isSkeleton;
   final SkeletonSetting setting;
 
@@ -96,13 +96,9 @@ class NotificationItem extends StatelessWidget {
             children: [
               // icon
               icon != null
-                  ? CircleAvatar(
-                      radius: 12,
-                      backgroundColor: style.logoBackgroundColor,
-                      child: Icon(
-                        icon,
-                        color: style.logoColor,
-                      ),
+                  ? Icon(
+                      icon,
+                      color: Theme.of(context).iconTheme.color,
                     )
                   : Container(),
               SizedBox(
@@ -136,7 +132,7 @@ class NotificationItem extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .caption
-                            .copyWith(color: style.subtitleColor)),
+                            .copyWith(color: style.secondaryColor)),
                   ],
                 ),
               ),
@@ -146,4 +142,12 @@ class NotificationItem extends StatelessWidget {
       ),
     );
   }
+}
+
+class NotificationItemTheme {
+  final Color secondaryColor;
+  final Color backgroundColor;
+
+  NotificationItemTheme(
+      {@required this.secondaryColor, @required this.backgroundColor});
 }
