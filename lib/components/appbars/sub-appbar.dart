@@ -33,6 +33,7 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () => Navigator.of(context).pop(),
             )
           : null,
+      centerTitle: true,
     );
   }
 
