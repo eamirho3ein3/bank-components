@@ -7,6 +7,9 @@ class NotificationItem extends StatelessWidget {
   final String description;
   final String date;
   final ContactItemTheme style;
+  final bool isSkeleton;
+  final SkeletonSetting setting;
+
   NotificationItem({
     this.icon,
     this.image,
@@ -14,9 +17,55 @@ class NotificationItem extends StatelessWidget {
     @required this.style,
     @required this.title,
     @required this.date,
+    @required this.isSkeleton,
+    @required this.setting,
   });
   @override
   Widget build(BuildContext context) {
+    return isSkeleton ? _buildSkeleton(context) : _buildView(context);
+  }
+
+  _buildSkeleton(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
+    return Container(
+      color: style.backgroundColor,
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 6),
+            width: size.width * 160 / 340,
+            height: 12,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              color: setting.color,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 6),
+            width: size.width * 260 / 340,
+            height: 12,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              color: setting.color,
+            ),
+          ),
+          Container(
+            width: size.width * 120 / 340,
+            height: 12,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              color: setting.color,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildView(BuildContext context) {
     return Container(
       color: style.backgroundColor,
       padding: EdgeInsets.all(16),
