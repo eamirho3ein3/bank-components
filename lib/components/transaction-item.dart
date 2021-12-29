@@ -8,6 +8,7 @@ class TransactionItem extends StatelessWidget {
   final TransactionItemTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
+  final Function(BuildContext) onClick;
 
   TransactionItem({
     @required this.icon,
@@ -17,6 +18,7 @@ class TransactionItem extends StatelessWidget {
     @required this.price,
     @required this.isSkeleton,
     @required this.setting,
+    this.onClick,
   });
 
   @override
@@ -37,94 +39,101 @@ class TransactionItem extends StatelessWidget {
   }
 
   _buildView(BuildContext context) {
-    return Row(
-      children: [
-        // logo
-        CircleAvatar(
-          backgroundColor: icon.backgroundColor ?? setting.color,
-          radius: 24,
-          child: icon != null
-              ? Icon(icon.icon, color: icon.iconColor)
-              : SizedBox(),
-        ),
-        SizedBox(
-          width: 12,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // title
-                  !isSkeleton
-                      ? Text(title ?? '',
-                          style: Theme.of(context).textTheme.subtitle1)
-                      : Container(
-                          width: 120,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: setting.color,
-                          ),
-                        ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  // price
-                  !isSkeleton
-                      ? Expanded(
-                          child: Text.rich(
-                            TextSpan(
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: price ?? '',
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1),
-                                TextSpan(
-                                  text: ' ',
-                                ),
-                                TextSpan(
-                                    text: 'ریال',
-                                    style: Theme.of(context).textTheme.caption),
-                              ],
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        )
-                      : Container(
-                          width: 48,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: setting.color,
-                          ),
-                        ),
-                ],
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              // subtitle
-              !isSkeleton
-                  ? Text(subtitle ?? '',
-                      style: Theme.of(context)
-                          .textTheme
-                          .caption
-                          .copyWith(color: style.subtitleColor))
-                  : Container(
-                      width: 64,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: setting.color,
-                      ),
-                    ),
-            ],
+    return InkWell(
+      onTap: () {
+        onClick(context);
+      },
+      child: Row(
+        children: [
+          // logo
+          CircleAvatar(
+            backgroundColor: icon.backgroundColor ?? setting.color,
+            radius: 24,
+            child: icon != null
+                ? Icon(icon.icon, color: icon.iconColor)
+                : SizedBox(),
           ),
-        ),
-      ],
+          SizedBox(
+            width: 12,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // title
+                    !isSkeleton
+                        ? Text(title ?? '',
+                            style: Theme.of(context).textTheme.subtitle1)
+                        : Container(
+                            width: 120,
+                            height: 12,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2),
+                              color: setting.color,
+                            ),
+                          ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    // price
+                    !isSkeleton
+                        ? Expanded(
+                            child: Text.rich(
+                              TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: price ?? '',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1),
+                                  TextSpan(
+                                    text: ' ',
+                                  ),
+                                  TextSpan(
+                                      text: 'ریال',
+                                      style:
+                                          Theme.of(context).textTheme.caption),
+                                ],
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          )
+                        : Container(
+                            width: 48,
+                            height: 12,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2),
+                              color: setting.color,
+                            ),
+                          ),
+                  ],
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                // subtitle
+                !isSkeleton
+                    ? Text(subtitle ?? '',
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .copyWith(color: style.subtitleColor))
+                    : Container(
+                        width: 64,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: setting.color,
+                        ),
+                      ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
