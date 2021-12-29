@@ -8,6 +8,8 @@ class CustomChoiceChip extends StatelessWidget {
   final Function onClick;
   final Function onClose;
   final bool selected;
+  final bool isSkeleton;
+  final SkeletonSetting setting;
 
   CustomChoiceChip(
       {@required this.title,
@@ -16,9 +18,15 @@ class CustomChoiceChip extends StatelessWidget {
       this.onClick,
       @required this.selected,
       @required this.type,
-      this.onClose});
+      this.onClose,
+      @required this.isSkeleton,
+      @required this.setting});
   @override
   Widget build(BuildContext context) {
+    return isSkeleton ? _buildSkeletonView(context) : _buildChip(context);
+  }
+
+  _buildChip(BuildContext context) {
     return ChoiceChip(
       label: Row(
         mainAxisSize: MainAxisSize.min,
@@ -75,6 +83,28 @@ class CustomChoiceChip extends StatelessWidget {
           bottom: 2,
           right: icon != null ? 4 : 12),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    );
+  }
+
+  _buildSkeletonView(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).chipTheme.backgroundColor,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: setting.color, width: 1),
+      ),
+      child: Skeleton(
+        setting: setting,
+        enabled: isSkeleton,
+        child: Container(
+          width: 87,
+          height: 12,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: setting.color,
+          ),
+        ),
+      ),
     );
   }
 }

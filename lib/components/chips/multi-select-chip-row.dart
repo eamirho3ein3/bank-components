@@ -5,8 +5,15 @@ class MultiSelectChips extends StatefulWidget {
   final List<CustomChoiceChip> actions;
   final List<ChipModel> filters;
   final Function(int) filterOnSelect;
+  final bool isSkeleton;
+  final SkeletonSetting setting;
   MultiSelectChips(
-      {this.mainChip, this.actions, this.filters, this.filterOnSelect});
+      {this.mainChip,
+      this.actions,
+      this.filters,
+      this.filterOnSelect,
+      @required this.isSkeleton,
+      @required this.setting});
   @override
   _MultiSelectChipsState createState() => _MultiSelectChipsState();
 }
@@ -86,6 +93,8 @@ class _MultiSelectChipsState extends State<MultiSelectChips> {
             });
             widget.filterOnSelect(i);
           },
+          isSkeleton: widget.isSkeleton,
+          setting: widget.setting,
         );
         result.add(chip);
         if (i + 1 != list.length) {

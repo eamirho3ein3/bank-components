@@ -3,7 +3,13 @@ part of bank_components;
 class SingleSelectChips extends StatefulWidget {
   final List<ChipModel> filters;
   final Function(int) onSelect;
-  SingleSelectChips({@required this.filters, @required this.onSelect});
+  final bool isSkeleton;
+  final SkeletonSetting setting;
+  SingleSelectChips(
+      {@required this.filters,
+      @required this.onSelect,
+      @required this.isSkeleton,
+      @required this.setting});
   @override
   _SingleSelectChipsState createState() => _SingleSelectChipsState();
 }
@@ -14,6 +20,7 @@ class _SingleSelectChipsState extends State<SingleSelectChips> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: widget.isSkeleton ? NeverScrollableScrollPhysics() : null,
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -39,6 +46,8 @@ class _SingleSelectChipsState extends State<SingleSelectChips> {
             });
             widget.onSelect(i);
           },
+          isSkeleton: widget.isSkeleton,
+          setting: widget.setting,
         );
         result.add(chip);
         if (i + 1 != list.length) {
