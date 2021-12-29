@@ -90,14 +90,15 @@ class CustomChoiceChip extends StatelessWidget {
 
   _buildSkeletonView(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: Theme.of(context).chipTheme.backgroundColor,
+        color: Theme.of(context).cardTheme.color,
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: setting.color, width: 1),
+        border: Border.all(color: Theme.of(context).dividerColor, width: 1),
       ),
       child: Skeleton(
         setting: setting,
-        enabled: isSkeleton,
+        enabled: false,
         child: Container(
           width: 87,
           height: 12,
