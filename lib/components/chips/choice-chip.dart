@@ -1,17 +1,22 @@
 part of bank_components;
 
 class CustomChoiceChip extends StatelessWidget {
+  final ChipType type;
   final String title;
   final String numbers;
   final IconData icon;
-  final Function(bool) onClick;
+  final Function onClick;
+  final Function onClose;
   final bool selected;
+
   CustomChoiceChip(
-      {this.title,
+      {@required this.title,
       this.numbers,
       this.icon,
       this.onClick,
-      @required this.selected});
+      @required this.selected,
+      @required this.type,
+      this.onClose});
   @override
   Widget build(BuildContext context) {
     return ChoiceChip(
@@ -19,22 +24,21 @@ class CustomChoiceChip extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            title,
+            (numbers != null ? numbers + " " : '') + title,
             style: Theme.of(context).textTheme.subtitle1.copyWith(
                 color: selected ? Theme.of(context).primaryColor : null),
           ),
-          numbers != null
-              ? Padding(
-                  padding: const EdgeInsets.only(right: 4),
+          selected && type == ChipType.Action
+              ? InkWell(
+                  onTap: onClose,
                   child: CircleAvatar(
                     backgroundColor: Theme.of(context).primaryColor,
                     radius: 12,
                     child: Center(
-                      child: Text(numbers,
-                          style: Theme.of(context).textTheme.subtitle1.copyWith(
-                              color: Theme.of(context)
-                                  .chipTheme
-                                  .secondarySelectedColor)),
+                      child: Icon(
+                        Icons.close,
+                        color: Theme.of(context).chipTheme.backgroundColor,
+                      ),
                     ),
                   ),
                 )
@@ -42,15 +46,21 @@ class CustomChoiceChip extends StatelessWidget {
         ],
       ),
       selected: selected,
-      avatar: Icon(
-        icon,
-        color: selected
-            ? Theme.of(context).primaryColor
-            : Theme.of(context).iconTheme.color,
-        size: 24,
-      ),
+      avatar: icon != null
+          ? Icon(
+              icon,
+              color: selected
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).iconTheme.color,
+              size: 24,
+            )
+          : null,
       backgroundColor: Theme.of(context).chipTheme.backgroundColor,
-      onSelected: onClick,
+      onSelected: (value) {
+        if (value) {
+          onClick();
+        }
+      },
       elevation: 0,
       selectedColor: Theme.of(context).chipTheme.selectedColor,
       shape: RoundedRectangleBorder(
@@ -59,9 +69,14 @@ class CustomChoiceChip extends StatelessWidget {
               ? BorderSide(color: Theme.of(context).primaryColor, width: 1)
               : BorderSide.none),
       padding: EdgeInsets.all(0),
-      labelPadding:
-          EdgeInsets.only(left: numbers != null ? 4 : 12, top: 2, bottom: 2),
+      labelPadding: EdgeInsets.only(
+          left: numbers != null ? 4 : 12,
+          top: 2,
+          bottom: 2,
+          right: icon != null ? 4 : 12),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     );
   }
 }
+
+enum ChipType { Action, Filter }
