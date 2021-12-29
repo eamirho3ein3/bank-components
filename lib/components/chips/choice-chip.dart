@@ -98,7 +98,7 @@ class CustomChoiceChip extends StatelessWidget {
       ),
       child: Skeleton(
         setting: setting,
-        enabled: false,
+        enabled: isSkeleton,
         child: Container(
           width: 87,
           height: 12,
