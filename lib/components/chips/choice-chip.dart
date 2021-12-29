@@ -73,9 +73,11 @@ class CustomChoiceChip extends StatelessWidget {
       selectedColor: Theme.of(context).chipTheme.selectedColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
-          side: selected
-              ? BorderSide(color: Theme.of(context).primaryColor, width: 1)
-              : BorderSide.none),
+          side: BorderSide(
+              color: selected
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).dividerColor,
+              width: 1)),
       padding: EdgeInsets.all(0),
       labelPadding: EdgeInsets.only(
           left: numbers != null ? 4 : 12,
