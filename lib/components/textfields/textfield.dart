@@ -36,7 +36,7 @@ class MainTextField extends StatefulWidget {
 }
 
 class _MainTextFieldState extends State<MainTextField> {
-  bool HidePassword = true;
+  bool hidePassword = true;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -69,8 +69,10 @@ class _MainTextFieldState extends State<MainTextField> {
                 : _buildExtendWidget(widget.suffix, context, true),
             contentPadding: EdgeInsets.all(12),
           ),
-          obscureText:
-              widget.type == TextfieldType.Password ? HidePassword : false,
+          obscureText: widget.type == TextfieldType.Password ||
+                  widget.type == TextfieldType.SecurePassword
+              ? hidePassword
+              : false,
           validator: widget.validator,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
@@ -126,10 +128,10 @@ class _MainTextFieldState extends State<MainTextField> {
     return InkWell(
       onTap: () {
         setState(() {
-          HidePassword = !HidePassword;
+          hidePassword = !hidePassword;
         });
       },
-      child: Icon(HidePassword
+      child: Icon(hidePassword
           ? Icons.visibility_off_outlined
           : Icons.visibility_outlined),
     );
@@ -215,7 +217,11 @@ enum HeplerType { Regular, Error, Success }
 
 enum TextfieldExtendType { Icon, Text, Child }
 
-enum TextfieldType { Reqular, Password }
+enum TextfieldType {
+  Reqular,
+  Password,
+  SecurePassword, // type of textfield for online shopping password that user can not see the password
+}
 
 class CodeInputFormatter extends TextInputFormatter {
   @override
