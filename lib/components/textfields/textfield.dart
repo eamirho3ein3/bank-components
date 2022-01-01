@@ -6,6 +6,7 @@ class MainTextField extends StatefulWidget {
   final FocusNode focusNode;
   final TextAlign textAlign;
   final String label;
+  final String placeholder;
   final TextfieldHelper helper;
   final int limit;
   final TextfieldExtend prefix;
@@ -27,7 +28,8 @@ class MainTextField extends StatefulWidget {
       this.keyboardType,
       this.onChanged,
       this.inputFormatters,
-      this.focusNode});
+      this.focusNode,
+      this.placeholder});
 
   @override
   _MainTextFieldState createState() => _MainTextFieldState();
@@ -58,6 +60,7 @@ class _MainTextFieldState extends State<MainTextField> {
           },
           inputFormatters: widget.inputFormatters,
           decoration: InputDecoration(
+            hintText: widget.placeholder,
             labelText: widget.label,
             helperText: widget.helper != null ? '' : null,
             prefixIcon: _buildExtendWidget(widget.prefix, context, false),
