@@ -36,7 +36,7 @@ class MainTextField extends StatefulWidget {
 }
 
 class _MainTextFieldState extends State<MainTextField> {
-  bool showPassword = false;
+  bool HidePassword = true;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -69,7 +69,8 @@ class _MainTextFieldState extends State<MainTextField> {
                 : _buildExtendWidget(widget.suffix, context, true),
             contentPadding: EdgeInsets.all(12),
           ),
-          obscureText: showPassword ? false : true,
+          obscureText:
+              widget.type == TextfieldType.Password ? HidePassword : null,
           validator: widget.validator,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
@@ -125,12 +126,12 @@ class _MainTextFieldState extends State<MainTextField> {
     return InkWell(
       onTap: () {
         setState(() {
-          showPassword = !showPassword;
+          HidePassword = !HidePassword;
         });
       },
-      child: Icon(showPassword
-          ? Icons.visibility_outlined
-          : Icons.visibility_off_outlined),
+      child: Icon(HidePassword
+          ? Icons.visibility_off_outlined
+          : Icons.visibility_outlined),
     );
   }
 
