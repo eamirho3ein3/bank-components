@@ -63,6 +63,7 @@ class ZarinAccountBalance extends StatelessWidget {
             backgroundColor: button.style.backgroundColor,
             foregroundColor: button.style.foregroundColor,
             disabledColor: button.style.disabledColor,
+            foregroundDisabledColor: button.style.foregroundDisabledColor,
           ),
           rightIcon: Icons.pie_chart_outline_sharp,
         ),

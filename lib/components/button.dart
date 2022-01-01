@@ -86,10 +86,12 @@ class CustomButtonTheme {
   final Color backgroundColor;
   final Color foregroundColor;
   final Color disabledColor;
+  final Color foregroundDisabledColor;
   CustomButtonTheme({
     @required this.backgroundColor,
     @required this.foregroundColor,
     @required this.disabledColor,
+    @required this.foregroundDisabledColor,
   });
 }
 

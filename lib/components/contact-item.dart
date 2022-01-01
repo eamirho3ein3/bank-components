@@ -114,6 +114,8 @@ class ContactItem extends StatelessWidget {
                         backgroundColor: button.style.backgroundColor,
                         foregroundColor: button.style.foregroundColor,
                         disabledColor: button.style.disabledColor,
+                        foregroundDisabledColor:
+                            button.style.foregroundDisabledColor,
                       ),
                     )
                   : SizedBox(),

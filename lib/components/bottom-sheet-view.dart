@@ -72,6 +72,8 @@ class BottomSheetView extends StatelessWidget {
                           backgroundColor: rightButton.style.backgroundColor,
                           foregroundColor: rightButton.style.foregroundColor,
                           disabledColor: rightButton.style.disabledColor,
+                          foregroundDisabledColor:
+                              rightButton.style.foregroundDisabledColor,
                         ),
                       ),
                     )
@@ -90,6 +92,8 @@ class BottomSheetView extends StatelessWidget {
                           backgroundColor: leftButton.style.backgroundColor,
                           foregroundColor: leftButton.style.foregroundColor,
                           disabledColor: leftButton.style.disabledColor,
+                          foregroundDisabledColor:
+                              leftButton.style.foregroundDisabledColor,
                         ),
                       ),
                     )

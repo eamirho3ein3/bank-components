@@ -86,6 +86,8 @@ class ZarinCardBalance extends StatelessWidget {
                           backgroundColor: rightButton.style.backgroundColor,
                           foregroundColor: rightButton.style.foregroundColor,
                           disabledColor: rightButton.style.disabledColor,
+                          foregroundDisabledColor:
+                              rightButton.style.foregroundDisabledColor,
                         ),
                         rightIcon: rightButton.icon.icon,
                       ),
@@ -104,6 +106,8 @@ class ZarinCardBalance extends StatelessWidget {
                           backgroundColor: leftButton.style.backgroundColor,
                           foregroundColor: leftButton.style.foregroundColor,
                           disabledColor: leftButton.style.disabledColor,
+                          foregroundDisabledColor:
+                              leftButton.style.foregroundDisabledColor,
                         ),
                         rightIcon: leftButton.icon.icon,
                       ),
@@ -161,6 +165,8 @@ class ZarinCardBalance extends StatelessWidget {
                           backgroundColor: rightButton.style.backgroundColor,
                           foregroundColor: rightButton.style.foregroundColor,
                           disabledColor: rightButton.style.disabledColor,
+                          foregroundDisabledColor:
+                              rightButton.style.foregroundDisabledColor,
                         ),
                         rightIcon: rightButton.icon.icon,
                       ),
@@ -180,6 +186,8 @@ class ZarinCardBalance extends StatelessWidget {
                         backgroundColor: leftButton.style.backgroundColor,
                         foregroundColor: leftButton.style.foregroundColor,
                         disabledColor: leftButton.style.disabledColor,
+                        foregroundDisabledColor:
+                            leftButton.style.foregroundDisabledColor,
                       ),
                       rightIcon: leftButton.icon.icon,
                     ),
