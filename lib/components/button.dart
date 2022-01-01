@@ -69,7 +69,15 @@ class CustomButton extends StatelessWidget {
             }
           },
         ),
-        foregroundColor: MaterialStateProperty.all(style.foregroundColor),
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return style.foregroundDisabledColor;
+            } else {
+              return style.foregroundColor;
+            }
+          },
+        ),
         minimumSize: MaterialStateProperty.all(Size.zero),
         padding: MaterialStateProperty.all(
           EdgeInsets.zero,
