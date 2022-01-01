@@ -70,7 +70,7 @@ class _MainTextFieldState extends State<MainTextField> {
             contentPadding: EdgeInsets.all(12),
           ),
           obscureText:
-              widget.type == TextfieldType.Password ? HidePassword : null,
+              widget.type == TextfieldType.Password ? HidePassword : false,
           validator: widget.validator,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
