@@ -41,10 +41,10 @@ class CustomButton extends StatelessWidget {
             // title
             Flexible(
               child: Text(title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .button
-                      .copyWith(color: style.foregroundColor)),
+                  style: Theme.of(context).textTheme.button.copyWith(
+                      color: onClick != null
+                          ? style.foregroundColor
+                          : style.foregroundDisabledColor)),
             ),
 
             // left icon
