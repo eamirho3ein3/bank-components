@@ -101,7 +101,7 @@ class ZarinCardBalance extends StatelessWidget {
                       child: CustomButton(
                         title: leftButton.text,
                         size: ButtonSize.large,
-                        onClick: rightButton.onClick,
+                        onClick: leftButton.onClick,
                         style: CustomButtonTheme(
                           backgroundColor: leftButton.style.backgroundColor,
                           foregroundColor: leftButton.style.foregroundColor,
