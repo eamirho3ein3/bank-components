@@ -154,21 +154,22 @@ class _MainTextFieldState extends State<MainTextField> {
     } else if (widget.type == TextfieldExtendType.Text) {
       // text
 
-      return Padding(
-        padding:
-            EdgeInsets.only(left: isSuffix ? 4 : 8, right: !isSuffix ? 4 : 8),
-        child: Container(
-          height: 40,
-          width: 45,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(2),
-            color: widget.textBackgroundColor,
-          ),
-          child: Text(
-            widget.text,
-            style: Theme.of(context).textTheme.subtitle1,
-          ),
+      return Container(
+        margin: EdgeInsets.only(
+            left: isSuffix ? 4 : 8,
+            right: !isSuffix ? 4 : 8,
+            top: 4,
+            bottom: 4),
+        width: 45,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(2),
+          color: widget.textBackgroundColor,
+        ),
+        child: Text(
+          widget.text,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.subtitle1,
         ),
       );
     } else {
