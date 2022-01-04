@@ -66,18 +66,12 @@ class ContactItem extends StatelessWidget {
 
                           // subtitle image
                           subtitleImage != null
-                              ? SvgPicture.network(
+                              ? SvgPicture.asset(
                                   subtitleImage,
                                   height: 16,
                                   width: 16,
                                   fit: BoxFit.contain,
                                 )
-                              // SvgPicture.asset(
-                              //     subtitleImage,
-                              //     height: 16,
-                              //     width: 16,
-                              //     fit: BoxFit.contain,
-                              //   )
                               : SizedBox(),
                         ],
                       )
@@ -90,19 +84,12 @@ class ContactItem extends StatelessWidget {
           ),
           suffixImage != null
               // suffix image
-              ? SvgPicture.network(
+              ? SvgPicture.asset(
                   suffixImage,
                   height: 24,
                   width: 24,
                   fit: BoxFit.contain,
                 )
-
-              // SvgPicture.asset(
-              //     suffixImage,
-              //     height: 24,
-              //     width: 24,
-              //     fit: BoxFit.contain,
-              //   )
 
               // button
               : button != null
