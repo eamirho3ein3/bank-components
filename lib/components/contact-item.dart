@@ -27,17 +27,14 @@ class ContactItem extends StatelessWidget {
       child: Row(
         children: [
           // logo
-          CircleAvatar(
+          CustomAvatar(
             radius: 24,
+            icon: icon,
+            iconColor: style.logoColor,
             backgroundColor: style.logoBackgroundColor,
-            child: icon != null
-                ? Icon(
-                    icon,
-                    color: style.logoColor,
-                  )
-                : Container(),
-            foregroundImage: image != null ? NetworkImage(image) : null,
+            image: image,
           ),
+
           SizedBox(
             width: 12,
           ),

@@ -29,14 +29,12 @@ class ProfileCard extends StatelessWidget {
           Stack(
             children: [
               // profile photo
-              CircleAvatar(
+              CustomAvatar(
                 radius: 40,
-                foregroundImage: NetworkImage(profileImage),
-                child: Icon(
-                  icon.icon,
-                  color: icon.iconColor,
-                ),
+                icon: icon.icon,
+                iconColor: icon.iconColor,
                 backgroundColor: icon.backgroundColor,
+                image: profileImage,
               ),
 
               // change button

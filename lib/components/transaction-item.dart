@@ -46,13 +46,13 @@ class TransactionItem extends StatelessWidget {
       child: Row(
         children: [
           // logo
-          CircleAvatar(
-            backgroundColor: icon.backgroundColor ?? setting.color,
+          CustomAvatar(
             radius: 24,
-            child: icon != null
-                ? Icon(icon.icon, color: icon.iconColor)
-                : SizedBox(),
+            icon: icon.icon,
+            iconColor: icon.iconColor,
+            backgroundColor: icon.backgroundColor ?? setting.color,
           ),
+
           SizedBox(
             width: 12,
           ),

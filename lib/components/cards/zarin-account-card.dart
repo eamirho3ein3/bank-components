@@ -26,13 +26,11 @@ class ZarinAccountCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // account icon
-            CircleAvatar(
+            CustomAvatar(
               radius: 24,
+              icon: icon.icon,
+              iconColor: icon.iconColor,
               backgroundColor: icon.backgroundColor,
-              child: Icon(
-                icon.icon,
-                color: icon.iconColor,
-              ),
             ),
 
             // more button

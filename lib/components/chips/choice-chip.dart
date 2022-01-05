@@ -39,15 +39,11 @@ class CustomChoiceChip extends StatelessWidget {
           selected && type == ChipType.Action
               ? InkWell(
                   onTap: onClose,
-                  child: CircleAvatar(
-                    backgroundColor: Theme.of(context).primaryColor,
+                  child: CustomAvatar(
                     radius: 12,
-                    child: Center(
-                      child: Icon(
-                        Icons.close,
-                        color: Theme.of(context).chipTheme.backgroundColor,
-                      ),
-                    ),
+                    icon: Icons.close,
+                    iconColor: Theme.of(context).chipTheme.backgroundColor,
+                    backgroundColor: Theme.of(context).primaryColor,
                   ),
                 )
               : SizedBox()
