@@ -24,9 +24,11 @@ class CustomAvatar extends StatelessWidget {
               color: iconColor,
             )
           : SizedBox(),
-      onForegroundImageError: (object, stackTrace) {
-        print("stackTrace = $stackTrace");
-      },
+      onForegroundImageError: image != null
+          ? (object, stackTrace) {
+              print("stackTrace = $stackTrace");
+            }
+          : null,
     );
   }
 }
