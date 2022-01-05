@@ -6,8 +6,11 @@ class CustomAvatar extends StatelessWidget {
   final Color backgroundColor;
   final Color iconColor;
   final double radius;
+  final double iconSize;
+
   CustomAvatar(
       {this.image,
+      this.iconSize,
       @required this.icon,
       @required this.backgroundColor,
       @required this.iconColor,
@@ -22,6 +25,7 @@ class CustomAvatar extends StatelessWidget {
           ? Icon(
               icon,
               color: iconColor,
+              size: iconSize ?? null,
             )
           : SizedBox(),
       onForegroundImageError: image != null
