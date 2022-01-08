@@ -11,16 +11,20 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(4),
       ),
-      child: IconButton(
-          icon: Icon(
+      child: InkWell(
+          customBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Icon(
             icon,
             color: Theme.of(context).iconTheme.color,
           ),
-          onPressed: onClick),
+          onTap: onClick),
     );
   }
 }

@@ -25,12 +25,10 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
           : SizedBox(),
       elevation: 0,
       leading: backIcon != null
-          ? IconButton(
-              icon: new Icon(
-                backIcon,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              onPressed: () => Navigator.of(context).pop(),
+          ? CustomIconButton(
+              icon: backIcon,
+              backgroundColor: Colors.transparent,
+              onClick: () => Navigator.of(context).pop(),
             )
           : null,
       centerTitle: true,
