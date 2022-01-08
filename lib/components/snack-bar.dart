@@ -5,6 +5,7 @@ class CustomSnackBar extends SnackBar {
   final String message;
   final ComponentAction button;
   final SnackBarTheme style;
+  final Duration duration;
   final double bottomMargin;
   final BuildContext context;
   CustomSnackBar({
@@ -14,6 +15,7 @@ class CustomSnackBar extends SnackBar {
     @required this.context,
     this.button,
     this.bottomMargin,
+    @required this.duration,
   }) : super(
           content: Row(
             children: [
@@ -57,7 +59,7 @@ class CustomSnackBar extends SnackBar {
             ],
           ),
           elevation: 0,
-          duration: Duration(seconds: 10),
+          duration: duration,
           backgroundColor: style.backgroundColor,
           padding: EdgeInsets.only(
             left: button != null ? 8 : 12,
