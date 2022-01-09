@@ -2,7 +2,7 @@ part of bank_components;
 
 class ZarinCard extends StatelessWidget {
   final ComponentAction button;
-  final CustomCardTheme style;
+  final ZarinCardTheme style;
   final List<String> cardNumbers;
   final bool isActive;
 
@@ -19,7 +19,7 @@ class ZarinCard extends StatelessWidget {
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: style.backgroundColor,
+        color: isActive ? style.backgroundColor : style.deactiveBackgroundColor,
       ),
       child: CustomCardTypeOne(
         header: Padding(
@@ -46,17 +46,20 @@ class ZarinCard extends StatelessWidget {
         ),
         content: //card number
             _buildCardNumberText(context),
-        buttons: CustomButton(
-          title: button.text,
-          size: ButtonSize.large,
-          onClick: button.onClick,
-          style: CustomButtonTheme(
-            backgroundColor: button.style.backgroundColor,
-            foregroundColor: button.style.foregroundColor,
-            disabledColor: button.style.disabledColor,
-            foregroundDisabledColor: button.style.foregroundDisabledColor,
+        buttons: Container(
+          width: double.infinity,
+          child: CustomButton(
+            title: button.text,
+            size: ButtonSize.large,
+            onClick: button.onClick,
+            style: CustomButtonTheme(
+              backgroundColor: button.style.backgroundColor,
+              foregroundColor: button.style.foregroundColor,
+              disabledColor: button.style.disabledColor,
+              foregroundDisabledColor: button.style.foregroundDisabledColor,
+            ),
+            rightIcon: button.icon.icon,
           ),
-          rightIcon: Icons.pie_chart_outline_sharp,
         ),
       ),
     );
@@ -85,4 +88,10 @@ class ZarinCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class ZarinCardTheme extends CustomCardTheme {
+  final Color deactiveBackgroundColor;
+
+  ZarinCardTheme({@required this.deactiveBackgroundColor});
 }
