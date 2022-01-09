@@ -29,14 +29,14 @@ class ZarinCard extends StatelessWidget {
             children: [
               Expanded(
                 child: SvgPicture.asset(
-                  'svgs/zarrin-logo-type.svg',
+                  'assets/svgs/zarrin-logo-type.svg',
                   height: 28,
                   width: 92,
                   alignment: Alignment.centerRight,
                 ),
               ),
               SvgPicture.asset(
-                'svgs/circuit.svg',
+                'assets/svgs/circuit.svg',
                 color: isActive ? Colors.red : Colors.black,
                 height: 40,
                 width: 49,
