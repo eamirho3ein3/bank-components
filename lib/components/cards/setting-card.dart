@@ -13,12 +13,12 @@ class SettingCard extends StatelessWidget {
   SettingCard({
     @required this.style,
     @required this.title,
-    @required this.description,
-    @required this.toggleValue,
+    this.description,
+    this.toggleValue,
     @required this.icon,
-    @required this.onToggleChange,
+    this.onToggleChange,
     @required this.toggleTheme,
-    @required this.onClick,
+    this.onClick,
   });
 
   @override

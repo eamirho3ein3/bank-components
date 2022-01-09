@@ -17,7 +17,12 @@ class BottomSheetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: style.backgroundColor,
+        decoration: BoxDecoration(
+          borderRadius: new BorderRadius.only(
+              topLeft: const Radius.circular(8.0),
+              topRight: const Radius.circular(8.0)),
+          color: style.backgroundColor,
+        ),
         padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
         child: Column(
           children: [
