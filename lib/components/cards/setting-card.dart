@@ -56,7 +56,7 @@ class SettingCard extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16),
             child: Text(
               title,
-              textAlign: TextAlign.end,
+              textAlign: TextAlign.start,
               style: Theme.of(context)
                   .textTheme
                   .subtitle1
@@ -70,7 +70,7 @@ class SettingCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8),
                   child: Text(
                     description,
-                    textAlign: TextAlign.end,
+                    textAlign: TextAlign.start,
                     style: Theme.of(context)
                         .textTheme
                         .subtitle1
