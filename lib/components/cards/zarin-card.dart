@@ -93,5 +93,11 @@ class ZarinCard extends StatelessWidget {
 class ZarinCardTheme extends CustomCardTheme {
   final Color deactiveBackgroundColor;
 
-  ZarinCardTheme({@required this.deactiveBackgroundColor});
+  ZarinCardTheme(
+      {@required this.deactiveBackgroundColor,
+      @required backgroundColor,
+      @required secondaryTextColor})
+      : super(
+            backgroundColor: backgroundColor,
+            secondaryTextColor: secondaryTextColor);
 }
