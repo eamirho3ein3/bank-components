@@ -2,6 +2,7 @@ part of bank_components;
 
 class ProfileSettingItem extends StatelessWidget {
   final Function onTap;
+  final String title;
   final IconData icon;
   final ProfileSettingItemTheme style;
   final ToggleTheme toggleTheme;
@@ -14,7 +15,8 @@ class ProfileSettingItem extends StatelessWidget {
       @required this.style,
       this.toggleTheme,
       this.onToggleChange,
-      this.toggleValue});
+      this.toggleValue,
+      @required this.title});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -46,7 +48,7 @@ class ProfileSettingItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'data',
+                  title,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 toggleValue != null
