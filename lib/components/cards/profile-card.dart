@@ -58,13 +58,14 @@ class ProfileCard extends StatelessWidget {
               width: 24,
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   //profile name
                   padding: const EdgeInsets.only(bottom: 12),
                   child: Text(
                     title,
-                    textAlign: TextAlign.end,
+                    textAlign: TextAlign.start,
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1
@@ -75,7 +76,7 @@ class ProfileCard extends StatelessWidget {
                 // profile mobile
                 Text(
                   mobile,
-                  textAlign: TextAlign.end,
+                  textAlign: TextAlign.start,
                   style: Theme.of(context)
                       .textTheme
                       .subtitle1
