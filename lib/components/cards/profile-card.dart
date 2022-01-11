@@ -29,8 +29,7 @@ class ProfileCard extends StatelessWidget {
       ),
       child: CustomCardTypeOne(
         header: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Stack(
               children: [
@@ -66,10 +65,7 @@ class ProfileCard extends StatelessWidget {
                   child: Text(
                     title,
                     textAlign: TextAlign.start,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: style.secondaryTextColor),
+                    style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
 
