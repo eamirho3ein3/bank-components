@@ -26,7 +26,13 @@ class CustomButton extends StatelessWidget {
       onPressed: isLoading != null && isLoading ? null : onClick,
       child: Padding(
         padding: EdgeInsets.symmetric(
-            vertical: size == ButtonSize.large ? 12 : 8,
+            vertical: isLoading != null && isLoading
+                ? size == ButtonSize.large
+                    ? 14
+                    : 10
+                : size == ButtonSize.large
+                    ? 12
+                    : 8,
             horizontal: horizontalPadding != null ? horizontalPadding : 8),
         child: isLoading != null && isLoading
             ? _buildLoading(context)
@@ -95,10 +101,14 @@ class CustomButton extends StatelessWidget {
 
   _buildLoading(BuildContext context) {
     return Center(
-      child: CircularProgressIndicator(
-        valueColor:
-            AlwaysStoppedAnimation<Color>(style.loadingButtonTheme.valueColor),
-        backgroundColor: style.loadingButtonTheme.backgroundColor,
+      child: SizedBox(
+        height: 20,
+        width: 20,
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(
+              style.loadingButtonTheme.valueColor),
+          backgroundColor: style.loadingButtonTheme.backgroundColor,
+        ),
       ),
     );
   }
