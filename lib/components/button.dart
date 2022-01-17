@@ -96,8 +96,9 @@ class CustomButton extends StatelessWidget {
   _buildLoading(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(style.loadingValueColor),
-        backgroundColor: style.loadingBackgroundColor,
+        valueColor:
+            AlwaysStoppedAnimation<Color>(style.loadingButtonTheme.valueColor),
+        backgroundColor: style.loadingButtonTheme.backgroundColor,
       ),
     );
   }
@@ -108,16 +109,24 @@ class CustomButtonTheme {
   final Color foregroundColor;
   final Color disabledColor;
   final Color foregroundDisabledColor;
-  final Color loadingValueColor;
-  final Color loadingBackgroundColor;
+  final LoadingButtonTheme loadingButtonTheme;
 
   CustomButtonTheme({
     @required this.backgroundColor,
     @required this.foregroundColor,
     @required this.disabledColor,
     @required this.foregroundDisabledColor,
-    @required this.loadingValueColor,
-    @required this.loadingBackgroundColor,
+    @required this.loadingButtonTheme,
+  });
+}
+
+class LoadingButtonTheme {
+  final Color valueColor;
+  final Color backgroundColor;
+
+  LoadingButtonTheme({
+    @required this.valueColor,
+    @required this.backgroundColor,
   });
 }
 
