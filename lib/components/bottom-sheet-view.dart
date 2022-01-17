@@ -73,13 +73,7 @@ class BottomSheetView extends StatelessWidget {
                         title: rightButton.text,
                         size: ButtonSize.medium,
                         onClick: rightButton.onClick,
-                        style: CustomButtonTheme(
-                          backgroundColor: rightButton.style.backgroundColor,
-                          foregroundColor: rightButton.style.foregroundColor,
-                          disabledColor: rightButton.style.disabledColor,
-                          foregroundDisabledColor:
-                              rightButton.style.foregroundDisabledColor,
-                        ),
+                        style: rightButton.style,
                       ),
                     )
                   : SizedBox(),
@@ -93,13 +87,7 @@ class BottomSheetView extends StatelessWidget {
                         title: leftButton.text,
                         size: ButtonSize.medium,
                         onClick: leftButton.onClick,
-                        style: CustomButtonTheme(
-                          backgroundColor: leftButton.style.backgroundColor,
-                          foregroundColor: leftButton.style.foregroundColor,
-                          disabledColor: leftButton.style.disabledColor,
-                          foregroundDisabledColor:
-                              leftButton.style.foregroundDisabledColor,
-                        ),
+                        style: leftButton.style,
                       ),
                     )
                   : SizedBox(),

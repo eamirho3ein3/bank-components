@@ -8,6 +8,7 @@ class CustomButton extends StatelessWidget {
   final Function onClick;
   final CustomButtonTheme style;
   final double horizontalPadding;
+  final bool isLoading;
 
   CustomButton(
       {this.size,
@@ -16,46 +17,49 @@ class CustomButton extends StatelessWidget {
       this.leftIcon,
       this.onClick,
       @required this.style,
-      this.horizontalPadding});
+      this.horizontalPadding,
+      this.isLoading});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onClick,
+      onPressed: isLoading != null && isLoading ? null : onClick,
       child: Padding(
         padding: EdgeInsets.symmetric(
             vertical: size == ButtonSize.large ? 12 : 8,
             horizontal: horizontalPadding != null ? horizontalPadding : 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // right icon
-            rightIcon != null
-                ? Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Icon(rightIcon),
-                  )
-                : SizedBox(),
+        child: isLoading != null && isLoading
+            ? _buildLoading(context)
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // right icon
+                  rightIcon != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Icon(rightIcon),
+                        )
+                      : SizedBox(),
 
-            // title
-            Flexible(
-              child: Text(title,
-                  style: Theme.of(context).textTheme.button.copyWith(
-                      color: onClick != null
-                          ? style.foregroundColor
-                          : style.foregroundDisabledColor)),
-            ),
+                  // title
+                  Flexible(
+                    child: Text(title,
+                        style: Theme.of(context).textTheme.button.copyWith(
+                            color: onClick != null
+                                ? style.foregroundColor
+                                : style.foregroundDisabledColor)),
+                  ),
 
-            // left icon
-            leftIcon != null
-                ? Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Icon(leftIcon),
-                  )
-                : SizedBox(),
-          ],
-        ),
+                  // left icon
+                  leftIcon != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Icon(leftIcon),
+                        )
+                      : SizedBox(),
+                ],
+              ),
       ),
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),
@@ -88,6 +92,15 @@ class CustomButton extends StatelessWidget {
       ),
     );
   }
+
+  _buildLoading(BuildContext context) {
+    return Center(
+      child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(style.loadingValueColor),
+        backgroundColor: style.loadingBackgroundColor,
+      ),
+    );
+  }
 }
 
 class CustomButtonTheme {
@@ -95,11 +108,16 @@ class CustomButtonTheme {
   final Color foregroundColor;
   final Color disabledColor;
   final Color foregroundDisabledColor;
+  final Color loadingValueColor;
+  final Color loadingBackgroundColor;
+
   CustomButtonTheme({
     @required this.backgroundColor,
     @required this.foregroundColor,
     @required this.disabledColor,
     @required this.foregroundDisabledColor,
+    @required this.loadingValueColor,
+    @required this.loadingBackgroundColor,
   });
 }
 

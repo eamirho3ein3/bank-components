@@ -52,12 +52,7 @@ class ZarinCard extends StatelessWidget {
             title: button.text,
             size: ButtonSize.large,
             onClick: button.onClick,
-            style: CustomButtonTheme(
-              backgroundColor: button.style.backgroundColor,
-              foregroundColor: button.style.foregroundColor,
-              disabledColor: button.style.disabledColor,
-              foregroundDisabledColor: button.style.foregroundDisabledColor,
-            ),
+            style: button.style,
             rightIcon: button.icon.icon,
           ),
         ),

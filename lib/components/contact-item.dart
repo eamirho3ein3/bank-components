@@ -94,13 +94,7 @@ class ContactItem extends StatelessWidget {
                       title: button.text,
                       size: ButtonSize.medium,
                       onClick: button.onClick,
-                      style: CustomButtonTheme(
-                        backgroundColor: button.style.backgroundColor,
-                        foregroundColor: button.style.foregroundColor,
-                        disabledColor: button.style.disabledColor,
-                        foregroundDisabledColor:
-                            button.style.foregroundDisabledColor,
-                      ),
+                      style: button.style,
                     )
                   : SizedBox(),
         ],

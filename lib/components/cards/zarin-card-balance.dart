@@ -82,13 +82,7 @@ class ZarinCardBalance extends StatelessWidget {
                         title: rightButton.text,
                         size: ButtonSize.large,
                         onClick: rightButton.onClick,
-                        style: CustomButtonTheme(
-                          backgroundColor: rightButton.style.backgroundColor,
-                          foregroundColor: rightButton.style.foregroundColor,
-                          disabledColor: rightButton.style.disabledColor,
-                          foregroundDisabledColor:
-                              rightButton.style.foregroundDisabledColor,
-                        ),
+                        style: rightButton.style,
                         rightIcon: rightButton.icon.icon,
                       ),
                     )
@@ -102,13 +96,7 @@ class ZarinCardBalance extends StatelessWidget {
                         title: leftButton.text,
                         size: ButtonSize.large,
                         onClick: leftButton.onClick,
-                        style: CustomButtonTheme(
-                          backgroundColor: leftButton.style.backgroundColor,
-                          foregroundColor: leftButton.style.foregroundColor,
-                          disabledColor: leftButton.style.disabledColor,
-                          foregroundDisabledColor:
-                              leftButton.style.foregroundDisabledColor,
-                        ),
+                        style: leftButton.style,
                         rightIcon: leftButton.icon.icon,
                       ),
                     )
@@ -161,13 +149,7 @@ class ZarinCardBalance extends StatelessWidget {
                         title: rightButton.text,
                         size: ButtonSize.large,
                         onClick: rightButton.onClick,
-                        style: CustomButtonTheme(
-                          backgroundColor: rightButton.style.backgroundColor,
-                          foregroundColor: rightButton.style.foregroundColor,
-                          disabledColor: rightButton.style.disabledColor,
-                          foregroundDisabledColor:
-                              rightButton.style.foregroundDisabledColor,
-                        ),
+                        style: rightButton.style,
                         rightIcon: rightButton.icon.icon,
                       ),
                     ),
@@ -182,13 +164,7 @@ class ZarinCardBalance extends StatelessWidget {
                       title: leftButton.text,
                       size: ButtonSize.large,
                       onClick: leftButton.onClick,
-                      style: CustomButtonTheme(
-                        backgroundColor: leftButton.style.backgroundColor,
-                        foregroundColor: leftButton.style.foregroundColor,
-                        disabledColor: leftButton.style.disabledColor,
-                        foregroundDisabledColor:
-                            leftButton.style.foregroundDisabledColor,
-                      ),
+                      style: leftButton.style,
                       rightIcon: leftButton.icon.icon,
                     ),
                   )
