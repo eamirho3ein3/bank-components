@@ -104,6 +104,7 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
       alignment: Alignment.center,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        textDirection: TextDirection.ltr,
         children: _cells,
       ),
     );
