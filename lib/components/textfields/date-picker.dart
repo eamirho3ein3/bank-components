@@ -15,8 +15,8 @@ class CustomDatePicker extends StatefulWidget {
       @required this.placeholder,
       @required this.minYear,
       @required this.maxYear,
-      @required this.confirmTitle,
-      @required this.cancelTitle,
+      this.confirmTitle,
+      this.cancelTitle,
       this.validator});
 
   @override
