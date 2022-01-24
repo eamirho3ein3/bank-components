@@ -16,6 +16,7 @@ dependencies:
   intl: ^0.17.0
   shimmer: ^2.0.0
   jalali_calendar: ^1.0.4
+  flutter_picker: ^2.0.2
 
 dev_dependencies:
   flutter_test:

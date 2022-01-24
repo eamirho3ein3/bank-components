@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import "package:intl/intl.dart" as intel;
 import 'package:shimmer/shimmer.dart';
 import 'package:jalali_calendar/jalali_calendar.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 
 part 'components/spinner.dart';
 part 'components/banner.dart';
