@@ -36,6 +36,7 @@ part 'components/textfields/textfield.dart';
 part 'components/textfields/verification-textfield.dart';
 part 'components/textfields/amount-textfield.dart';
 part 'components/textfields/date-picker.dart';
+part 'components/textfields/custom-picker.dart';
 part 'components/skeleton.dart';
 part 'components/appbars/main-appbar.dart';
 part 'components/appbars/sub-appbar.dart';
