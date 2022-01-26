@@ -2,7 +2,6 @@ part of bank_components;
 
 class CustomDatePicker extends StatefulWidget {
   final Function(String) onComplete;
-  final Function(String) onChanged;
   final String placeholder;
   final int minYear;
   final int maxYear;
@@ -12,7 +11,6 @@ class CustomDatePicker extends StatefulWidget {
   final String initValue;
   CustomDatePicker(
       {@required this.onComplete,
-      @required this.onChanged,
       @required this.placeholder,
       @required this.minYear,
       @required this.maxYear,
@@ -78,7 +76,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       initialYear: initials.isNotEmpty ? initials[0] : null,
       onChanged: (year, month, day) {
         dateController.text = _formatDate(year, month, day);
-        widget.onChanged(_formatDate(year, month, day));
+        widget.onComplete(_formatDate(year, month, day));
       },
       onConfirm: (year, month, day) {
         dateController.text = _formatDate(year, month, day);
