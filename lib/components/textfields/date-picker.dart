@@ -70,13 +70,21 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
             ),
       dateFormat: 'yyyy-mm-dd',
       onChanged: (year, month, day) {
-        dateController.text = '$year-$month-$day';
-        widget.onChanged('$year-$month-$day');
+        dateController.text = _formatDate(year, month, day);
+        widget.onChanged(_formatDate(year, month, day));
       },
       onConfirm: (year, month, day) {
-        dateController.text = '$year-$month-$day';
-        widget.onComplete('$year-$month-$day');
+        dateController.text = _formatDate(year, month, day);
+        widget.onComplete(_formatDate(year, month, day));
       },
     );
+  }
+
+  String _formatDate(int year, int month, int day) {
+    String _year = year < 10 ? '0$year' : '$year';
+    String _month = month < 10 ? '0$month' : '$month';
+    String _day = day < 10 ? '0$day' : '$day';
+
+    return '$_year-$_month-$_day';
   }
 }
