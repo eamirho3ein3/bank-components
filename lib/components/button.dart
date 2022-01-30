@@ -100,15 +100,13 @@ class CustomButton extends StatelessWidget {
   }
 
   _buildLoading(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        height: 20,
-        width: 20,
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(
-              style.loadingButtonTheme.valueColor),
-          backgroundColor: style.loadingButtonTheme.backgroundColor,
-        ),
+    return SizedBox(
+      height: 20,
+      width: 20,
+      child: CircularProgressIndicator(
+        valueColor:
+            AlwaysStoppedAnimation<Color>(style.loadingButtonTheme.valueColor),
+        backgroundColor: style.loadingButtonTheme.backgroundColor,
       ),
     );
   }
