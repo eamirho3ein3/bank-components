@@ -31,7 +31,7 @@ class ProfileSettingItem extends StatelessWidget {
         ),
         Expanded(
           child: RawMaterialButton(
-            onPressed: () {},
+            onPressed: onTap,
             fillColor: style.backgroundColor,
             elevation: 0,
             focusElevation: 0,
