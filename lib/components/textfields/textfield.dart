@@ -62,6 +62,8 @@ class _MainTextFieldState extends State<MainTextField> {
           },
           inputFormatters: widget.inputFormatters,
           decoration: InputDecoration(
+            alignLabelWithHint:
+                widget.keyboardType == TextInputType.multiline ? true : false,
             hintText: widget.placeholder,
             labelText: widget.label,
             helperText: widget.helper != null ? '' : null,
