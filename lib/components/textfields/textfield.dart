@@ -47,7 +47,8 @@ class _MainTextFieldState extends State<MainTextField> {
           textAlign:
               widget.textAlign != null ? widget.textAlign : TextAlign.start,
           maxLength: widget.limit,
-          maxLines: widget.keyboardType == TextInputType.multiline ? null : 1,
+          minLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
+          maxLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
           buildCounter: (context, {currentLength, isFocused, maxLength}) {
             return Container(
               child: Text(
