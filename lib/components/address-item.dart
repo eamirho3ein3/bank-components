@@ -7,6 +7,8 @@ class AddressItem extends StatelessWidget {
   final IconData icon;
   final IconData editIcon;
   final AddressItemTheme style;
+  final bool isSkeleton;
+  final SkeletonSetting setting;
   final Function(BuildContext) onEditClick;
 
   AddressItem({
@@ -17,9 +19,82 @@ class AddressItem extends StatelessWidget {
     @required this.style,
     @required this.editIcon,
     @required this.onEditClick,
+    @required this.isSkeleton,
+    @required this.setting,
   });
   @override
   Widget build(BuildContext context) {
+    return isSkeleton ? _buildSkeleton(context) : _buildView(context);
+  }
+
+  _buildSkeleton(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
+    return Container(
+      color: style.backgroundColor,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Skeleton(
+        setting: setting,
+        enabled: true,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            // icon
+            CircleAvatar(
+              radius: 24,
+              backgroundColor: setting.color,
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // title
+                  Container(
+                    margin: EdgeInsets.only(bottom: 6),
+                    width: size.width * 100 / 340,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: setting.color,
+                    ),
+                  ),
+
+                  // address + code
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 6),
+                        width: size.width * 260 / 340,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: setting.color,
+                        ),
+                      ),
+                      Container(
+                        width: size.width * 120 / 340,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: setting.color,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildView(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
@@ -88,11 +163,13 @@ class AddressItem extends StatelessWidget {
 }
 
 class AddressItemTheme {
+  final Color backgroundColor;
   final Color iconBackgroundColor;
   final Color iconColor;
   final Color addressColor;
   AddressItemTheme(
-      {@required this.addressColor,
+      {@required this.backgroundColor,
+      @required this.addressColor,
       @required this.iconColor,
       @required this.iconBackgroundColor});
 }
