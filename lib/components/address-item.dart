@@ -64,26 +64,22 @@ class AddressItem extends StatelessWidget {
                   ),
 
                   // address + code
-                  Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 6),
-                        width: size.width * 260 / 340,
-                        height: 12,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          color: setting.color,
-                        ),
-                      ),
-                      Container(
-                        width: size.width * 120 / 340,
-                        height: 12,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          color: setting.color,
-                        ),
-                      ),
-                    ],
+                  Container(
+                    margin: EdgeInsets.only(bottom: 6),
+                    width: size.width * 260 / 340,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: setting.color,
+                    ),
+                  ),
+                  Container(
+                    width: size.width * 120 / 340,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: setting.color,
+                    ),
                   ),
                 ],
               ),
