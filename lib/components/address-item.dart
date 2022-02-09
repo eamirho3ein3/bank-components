@@ -5,11 +5,10 @@ class AddressItem extends StatelessWidget {
   final String address;
   final String code;
   final IconData icon;
-  final IconData editIcon;
   final AddressItemTheme style;
   final bool isSkeleton;
   final SkeletonSetting setting;
-  final Function(BuildContext) onEditClick;
+  final List<SlidableAction> actions;
 
   AddressItem({
     @required this.title,
@@ -17,10 +16,9 @@ class AddressItem extends StatelessWidget {
     @required this.code,
     @required this.icon,
     @required this.style,
-    @required this.editIcon,
-    @required this.onEditClick,
     @required this.isSkeleton,
     @required this.setting,
+    @required this.actions,
   });
   @override
   Widget build(BuildContext context) {
@@ -30,61 +28,70 @@ class AddressItem extends StatelessWidget {
   _buildSkeleton(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Container(
-      color: style.backgroundColor,
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Skeleton(
-        setting: setting,
-        enabled: true,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            // icon
-            CircleAvatar(
-              radius: 24,
-              backgroundColor: setting.color,
-            ),
-            SizedBox(
-              width: 12,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // title
-                  Container(
-                    margin: EdgeInsets.only(bottom: 6),
-                    width: size.width * 100 / 340,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: setting.color,
-                    ),
-                  ),
-
-                  // address + code
-                  Container(
-                    margin: EdgeInsets.only(bottom: 6),
-                    width: size.width * 260 / 340,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: setting.color,
-                    ),
-                  ),
-                  Container(
-                    width: size.width * 120 / 340,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(2),
-                      color: setting.color,
-                    ),
-                  ),
-                ],
+    return Slidable(
+      key: UniqueKey(),
+      closeOnScroll: true,
+      startActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        dismissible: DismissiblePane(onDismissed: () {}),
+        children: actions,
+      ),
+      child: Container(
+        color: style.backgroundColor,
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Skeleton(
+          setting: setting,
+          enabled: true,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              // icon
+              CircleAvatar(
+                radius: 24,
+                backgroundColor: setting.color,
               ),
-            ),
-          ],
+              SizedBox(
+                width: 12,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // title
+                    Container(
+                      margin: EdgeInsets.only(bottom: 6),
+                      width: size.width * 100 / 340,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: setting.color,
+                      ),
+                    ),
+
+                    // address + code
+                    Container(
+                      margin: EdgeInsets.only(bottom: 6),
+                      width: size.width * 260 / 340,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: setting.color,
+                      ),
+                    ),
+                    Container(
+                      width: size.width * 120 / 340,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: setting.color,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -113,31 +120,16 @@ class AddressItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    // title
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 6),
-                        child: Text(title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle1
-                                .copyWith(fontWeight: FontWeight.w700)),
-                      ),
-                    ),
-
-                    // edit button
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: CustomIconButton(
-                          backgroundColor: Colors.transparent,
-                          icon: editIcon,
-                          onClick: () {
-                            onEditClick(context);
-                          }),
-                    ),
-                  ],
+                // title
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Text(title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1
+                            .copyWith(fontWeight: FontWeight.w700)),
+                  ),
                 ),
 
                 // address + code
