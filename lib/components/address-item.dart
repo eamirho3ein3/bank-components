@@ -92,6 +92,7 @@ class AddressItem extends StatelessWidget {
     return Slidable(
       key: UniqueKey(),
       closeOnScroll: true,
+      useTextDirection: false,
       startActionPane: ActionPane(
         motion: const DrawerMotion(),
         children: actions,
@@ -119,15 +120,13 @@ class AddressItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // title
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 6),
-                      child: Text(title,
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1
-                              .copyWith(fontWeight: FontWeight.w700)),
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Text(title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle1
+                            .copyWith(fontWeight: FontWeight.w700)),
                   ),
 
                   // address + code
