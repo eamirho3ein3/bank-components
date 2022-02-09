@@ -28,123 +28,122 @@ class AddressItem extends StatelessWidget {
   _buildSkeleton(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Slidable(
-      key: UniqueKey(),
-      closeOnScroll: true,
-      startActionPane: ActionPane(
-        motion: const DrawerMotion(),
-        dismissible: DismissiblePane(onDismissed: () {}),
-        children: actions,
-      ),
-      child: Container(
-        color: style.backgroundColor,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Skeleton(
-          setting: setting,
-          enabled: true,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              // icon
-              CircleAvatar(
-                radius: 24,
-                backgroundColor: setting.color,
-              ),
-              SizedBox(
-                width: 12,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // title
-                    Container(
-                      margin: EdgeInsets.only(bottom: 6),
-                      width: size.width * 100 / 340,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: setting.color,
-                      ),
+    return Container(
+      color: style.backgroundColor,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: Skeleton(
+        setting: setting,
+        enabled: true,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            // icon
+            CircleAvatar(
+              radius: 24,
+              backgroundColor: setting.color,
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // title
+                  Container(
+                    margin: EdgeInsets.only(bottom: 6),
+                    width: size.width * 100 / 340,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: setting.color,
                     ),
+                  ),
 
-                    // address + code
-                    Container(
-                      margin: EdgeInsets.only(bottom: 6),
-                      width: size.width * 260 / 340,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: setting.color,
-                      ),
+                  // address + code
+                  Container(
+                    margin: EdgeInsets.only(bottom: 6),
+                    width: size.width * 260 / 340,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: setting.color,
                     ),
-                    Container(
-                      width: size.width * 120 / 340,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
-                        color: setting.color,
-                      ),
+                  ),
+                  Container(
+                    width: size.width * 120 / 340,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: setting.color,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   _buildView(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          // icon
-          CircleAvatar(
-            radius: 24,
-            backgroundColor: style.iconBackgroundColor,
-            child: Icon(
-              icon,
-              color: style.iconColor,
+    return Slidable(
+      key: UniqueKey(),
+      closeOnScroll: true,
+      startActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        children: actions,
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            // icon
+            CircleAvatar(
+              radius: 24,
+              backgroundColor: style.iconBackgroundColor,
+              child: Icon(
+                icon,
+                color: style.iconColor,
+              ),
             ),
-          ),
-          SizedBox(
-            width: 12,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // title
-                Expanded(
-                  child: Padding(
+            SizedBox(
+              width: 12,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // title
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Text(title,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              .copyWith(fontWeight: FontWeight.w700)),
+                    ),
+                  ),
+
+                  // address + code
+                  Padding(
                     padding: const EdgeInsets.only(bottom: 6),
-                    child: Text(title,
+                    child: Text(address + ' -  کدپستی: ' + code,
                         style: Theme.of(context)
                             .textTheme
                             .subtitle1
-                            .copyWith(fontWeight: FontWeight.w700)),
+                            .copyWith(color: style.addressColor)),
                   ),
-                ),
-
-                // address + code
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
-                  child: Text(address + ' -  کدپستی: ' + code,
-                      style: Theme.of(context)
-                          .textTheme
-                          .subtitle1
-                          .copyWith(color: style.addressColor)),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
