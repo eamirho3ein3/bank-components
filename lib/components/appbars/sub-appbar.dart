@@ -7,10 +7,7 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
   SubAppBar(
-      {this.actions,
-      this.titleWidget,
-      @required this.title,
-      @required this.backIcon});
+      {this.actions, this.titleWidget, this.title, @required this.backIcon});
 
   static final _appBar = AppBar();
   @override
