@@ -3,12 +3,12 @@ part of bank_components;
 class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> actions;
   final IconData backIcon;
-  final IconData titleIcon;
+  final Widget titleWidget;
   final String title;
 
   SubAppBar(
       {this.actions,
-      this.titleIcon,
+      this.titleWidget,
       @required this.title,
       @required this.backIcon});
 
@@ -20,7 +20,7 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actions: actions,
-      title: title != null || titleIcon != null
+      title: title != null || titleWidget != null
           ? _buildTitle(context)
           : SizedBox(),
       elevation: 0,
@@ -36,17 +36,11 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   _buildTitle(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        title != null
-            ? Text(
-                title,
-                style: Theme.of(context).textTheme.headline4,
-              )
-            : SizedBox(),
-        titleIcon != null ? Icon(titleIcon) : SizedBox(),
-      ],
-    );
+    return titleWidget != null
+        ? titleWidget
+        : Text(
+            title,
+            style: Theme.of(context).textTheme.headline4,
+          );
   }
 }
