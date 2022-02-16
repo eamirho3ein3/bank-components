@@ -49,13 +49,18 @@ class CustomButton extends StatelessWidget {
                       : SizedBox(),
 
                   // title
-                  Flexible(
-                    child: Text(title,
-                        style: Theme.of(context).textTheme.button.copyWith(
-                            color: onClick != null
-                                ? style.foregroundColor
-                                : style.foregroundDisabledColor)),
-                  ),
+                  title != null
+                      ? Flexible(
+                          child: Text(title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .button
+                                  .copyWith(
+                                      color: onClick != null
+                                          ? style.foregroundColor
+                                          : style.foregroundDisabledColor)),
+                        )
+                      : SizedBox(),
 
                   // left icon
                   leftIcon != null
