@@ -43,7 +43,7 @@ class CustomButton extends StatelessWidget {
                   // right icon
                   rightIcon != null
                       ? Padding(
-                          padding: const EdgeInsets.only(left: 8),
+                          padding: EdgeInsets.only(left: title != null ? 8 : 0),
                           child: Icon(rightIcon),
                         )
                       : SizedBox(),
@@ -65,7 +65,8 @@ class CustomButton extends StatelessWidget {
                   // left icon
                   leftIcon != null
                       ? Padding(
-                          padding: const EdgeInsets.only(right: 8),
+                          padding:
+                              EdgeInsets.only(right: title != null ? 8 : 0),
                           child: Icon(leftIcon),
                         )
                       : SizedBox(),
