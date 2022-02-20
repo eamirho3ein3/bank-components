@@ -57,12 +57,15 @@ class ZarinAccountBalance extends StatelessWidget {
             ),
           ],
         ),
-        buttons: CustomButton(
-          title: button.text,
-          size: ButtonSize.large,
-          onClick: button.onClick,
-          style: button.style,
-          rightIcon: Icons.pie_chart_outline_sharp,
+        buttons: Container(
+          width: double.infinity,
+          child: CustomButton(
+            title: button.text,
+            size: ButtonSize.large,
+            onClick: button.onClick,
+            style: button.style,
+            rightIcon: Icons.pie_chart_outline_sharp,
+          ),
         ),
       ),
     );
