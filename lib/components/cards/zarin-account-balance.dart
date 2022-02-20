@@ -5,12 +5,14 @@ class ZarinAccountBalance extends StatelessWidget {
   final CustomCardTheme style;
   final String title;
   final String amount;
+  final String priceUnit;
 
   ZarinAccountBalance({
     @required this.button,
     @required this.style,
     @required this.title,
     @required this.amount,
+    @required this.priceUnit,
   });
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class ZarinAccountBalance extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              amount + '~',
+              amount,
               textAlign: TextAlign.start,
               style: Theme.of(context)
                   .textTheme
@@ -46,7 +48,7 @@ class ZarinAccountBalance extends StatelessWidget {
                   .copyWith(color: style.secondaryTextColor),
             ),
             Text(
-              ' ' + 'ریال',
+              ' ' + priceUnit,
               textAlign: TextAlign.end,
               style: Theme.of(context)
                   .textTheme
