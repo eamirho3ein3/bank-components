@@ -16,6 +16,7 @@ part 'components/spinner.dart';
 part 'components/banner.dart';
 part 'components/snack-bar.dart';
 part 'components/transaction-item.dart';
+part 'components/crypto-item.dart';
 part 'components/contact-item.dart';
 part 'components/notification-item.dart';
 part 'components/address-item.dart';
