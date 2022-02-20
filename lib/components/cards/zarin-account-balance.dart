@@ -58,6 +58,7 @@ class ZarinAccountBalance extends StatelessWidget {
           ],
         ),
         buttons: Container(
+          padding: EdgeInsets.only(top: 24),
           width: double.infinity,
           child: CustomButton(
             title: button.text,
