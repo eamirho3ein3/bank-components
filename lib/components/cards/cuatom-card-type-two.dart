@@ -4,35 +4,27 @@ class CustomCardTypeTwo extends StatelessWidget {
   final Widget header;
   final Widget title;
   final Widget subtitle;
-  final CustomCardTheme style;
 
-  CustomCardTypeTwo(
-      {@required this.header,
-      @required this.title,
-      @required this.subtitle,
-      @required this.style});
+  CustomCardTypeTwo({
+    @required this.header,
+    @required this.title,
+    @required this.subtitle,
+  });
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: style.backgroundColor,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // header
-          header,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // header
+        header,
 
-          // title
-          title,
+        // title
+        title,
 
-          // subtitle
-          subtitle,
-        ],
-      ),
+        // subtitle
+        subtitle,
+      ],
     );
   }
 }

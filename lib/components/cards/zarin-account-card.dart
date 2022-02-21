@@ -22,6 +22,11 @@ class ZarinAccountCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: style.backgroundColor,
+      ),
       constraints:
           BoxConstraints(maxWidth: MediaQuery.of(context).size.width * (0.56)),
       child: isSkeleton ? _buildSkeleton(context) : _buildView(context),
@@ -72,7 +77,6 @@ class ZarinAccountCard extends StatelessWidget {
             color: setting.color,
           ),
         ),
-        style: style,
       ),
     );
   }
@@ -121,7 +125,6 @@ class ZarinAccountCard extends StatelessWidget {
               ),
             ]),
       ),
-      style: style,
     );
   }
 }
