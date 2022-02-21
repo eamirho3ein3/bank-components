@@ -22,7 +22,6 @@ class ZarinAccountCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: style.backgroundColor,
       constraints:
           BoxConstraints(maxWidth: MediaQuery.of(context).size.width * (0.56)),
       child: isSkeleton ? _buildSkeleton(context) : _buildView(context),
