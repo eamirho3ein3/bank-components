@@ -1,16 +1,18 @@
 part of bank_components;
 
-class CryptoItem extends StatelessWidget {
+class WalletItem extends StatelessWidget {
   final CustomIconTheme icon;
   final String title;
   final String subtitle;
   final String price;
-  final CryptoItemTheme style;
+  final WalletItemTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
   final Function(BuildContext) onClick;
+  final MarketChanges changewWidget;
+  final CryptoSymbol symbolWidget;
 
-  CryptoItem({
+  WalletItem({
     @required this.icon,
     @required this.title,
     @required this.subtitle,
@@ -19,6 +21,8 @@ class CryptoItem extends StatelessWidget {
     @required this.isSkeleton,
     @required this.setting,
     this.onClick,
+    @required this.changewWidget,
+    @required this.symbolWidget,
   });
 
   @override
@@ -50,7 +54,7 @@ class CryptoItem extends StatelessWidget {
             radius: 24,
             icon: icon.icon,
             iconColor: icon.iconColor,
-            backgroundColor: icon.backgroundColor ?? setting.color,
+            backgroundColor: !isSkeleton ? icon.backgroundColor : setting.color,
           ),
 
           SizedBox(
@@ -75,24 +79,6 @@ class CryptoItem extends StatelessWidget {
                               color: setting.color,
                             ),
                           ),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    // price
-                    !isSkeleton
-                        ? Expanded(
-                            child: Text(price ?? '',
-                                textAlign: TextAlign.left,
-                                style: Theme.of(context).textTheme.subtitle1),
-                          )
-                        : Container(
-                            width: 48,
-                            height: 12,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
-                              color: setting.color,
-                            ),
-                          ),
                   ],
                 ),
                 SizedBox(
@@ -100,11 +86,19 @@ class CryptoItem extends StatelessWidget {
                 ),
                 // subtitle
                 !isSkeleton
-                    ? Text(subtitle ?? '',
-                        style: Theme.of(context)
-                            .textTheme
-                            .caption
-                            .copyWith(color: style.subtitleColor))
+                    ? Row(
+                        children: [
+                          Text(subtitle ?? '',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .caption
+                                  .copyWith(color: style.subtitleColor)),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: changewWidget,
+                          ),
+                        ],
+                      )
                     : Container(
                         width: 64,
                         height: 12,
@@ -116,13 +110,38 @@ class CryptoItem extends StatelessWidget {
               ],
             ),
           ),
+
+          SizedBox(
+            width: 12,
+          ),
+
+          !isSkeleton
+              ? Row(
+                  children: [
+                    // symbol
+                    symbolWidget,
+
+                    // price
+                    Text(price ?? '',
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.subtitle1),
+                  ],
+                )
+              : Container(
+                  width: 48,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2),
+                    color: setting.color,
+                  ),
+                ),
         ],
       ),
     );
   }
 }
 
-class CryptoItemTheme extends TransactionItemTheme {
-  CryptoItemTheme({@required backgroundColor, @required subtitleColor})
+class WalletItemTheme extends TransactionItemTheme {
+  WalletItemTheme({@required backgroundColor, @required subtitleColor})
       : super(backgroundColor: backgroundColor, subtitleColor: subtitleColor);
 }
