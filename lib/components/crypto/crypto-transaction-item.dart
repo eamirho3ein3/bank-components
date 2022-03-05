@@ -9,8 +9,8 @@ class CryptoTransactionItem extends StatelessWidget {
   final SkeletonSetting setting;
   final bool isSkeleton;
   final TransactionType type;
-  final String symbolTitle;
-  final SymbolTheme symbolTheme;
+  final CryptoSymbol symbolWidget;
+
   final Function(BuildContext) onClick;
 
   CryptoTransactionItem({
@@ -23,8 +23,7 @@ class CryptoTransactionItem extends StatelessWidget {
     @required this.setting,
     @required this.type,
     this.onClick,
-    @required this.symbolTitle,
-    @required this.symbolTheme,
+    @required this.symbolWidget,
   });
 
   @override
@@ -89,10 +88,7 @@ class CryptoTransactionItem extends StatelessWidget {
                         ? Row(
                             children: [
                               // symbol
-                              CryptoSymbol(
-                                title: symbolTitle,
-                                style: symbolTheme,
-                              ),
+                              symbolWidget,
 
                               // price
                               Padding(
