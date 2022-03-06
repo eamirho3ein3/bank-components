@@ -122,9 +122,12 @@ class WalletItem extends StatelessWidget {
                     symbolWidget,
 
                     // price
-                    Text(price ?? '',
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.subtitle1),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Text(price ?? '',
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.subtitle1),
+                    ),
                   ],
                 )
               : Container(
