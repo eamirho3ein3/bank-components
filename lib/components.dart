@@ -26,6 +26,7 @@ part 'components/notification-item.dart';
 part 'components/address-item.dart';
 part 'components/bottom-sheet-view.dart';
 part 'components/button.dart';
+part 'components/circle-button.dart';
 part 'components/segmented.dart';
 part 'components/chips/choice-chip.dart';
 part 'components/chips/single-select-chip-row.dart';
