@@ -90,15 +90,16 @@ class CryptoTransactionItem extends StatelessWidget {
                               // symbol
                               symbolWidget,
 
-                              // price
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Text(price ?? '',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1
-                                        .copyWith(color: _getColor())),
+                              SizedBox(
+                                width: 8,
                               ),
+
+                              // price
+                              Text(price ?? '',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1
+                                      .copyWith(color: _getColor())),
                             ],
                           )
                         : Container(

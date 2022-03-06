@@ -93,10 +93,10 @@ class WalletItem extends StatelessWidget {
                                   .textTheme
                                   .caption
                                   .copyWith(color: style.subtitleColor)),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: changewWidget,
+                          SizedBox(
+                            width: 8,
                           ),
+                          changewWidget,
                         ],
                       )
                     : Container(
