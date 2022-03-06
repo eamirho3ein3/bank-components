@@ -10,7 +10,7 @@ class MarketChanges extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      (isPositive ? '+' : '-') + value.toString(),
+      '%' + value.toString() + (isPositive ? '+' : '-'),
       style: Theme.of(context).textTheme.caption.copyWith(color: color),
     );
   }
