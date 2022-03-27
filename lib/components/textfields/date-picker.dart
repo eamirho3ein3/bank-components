@@ -88,10 +88,19 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   }
 
   String _formatDate(int year, int month, int day) {
-    String _year = year < 10 ? '0$year' : '$year';
-    String _month = month < 10 ? '0$month' : '$month';
-    String _day = day < 10 ? '0$day' : '$day';
+    final DateTime date = DateTime(year, month, day);
 
-    return '$_year-$_month-$_day';
+    switch (widget.dateFormat) {
+      case 'yyyy-mm':
+        final intel.DateFormat formatter = intel.DateFormat('yyyy-MM');
+        return formatter.format(date);
+      case 'yyyy':
+        final intel.DateFormat formatter = intel.DateFormat('yyyy');
+        return formatter.format(date);
+      case 'yyyy-mm-dd':
+      default:
+        final intel.DateFormat formatter = intel.DateFormat('yyyy-MM-dd');
+        return formatter.format(date);
+    }
   }
 }
