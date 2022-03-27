@@ -9,6 +9,7 @@ class CustomDatePicker extends StatefulWidget {
   final Widget cancelTitle;
   final Function(String) validator;
   final String initValue;
+  final String dateFormat;
   CustomDatePicker(
       {@required this.onComplete,
       @required this.placeholder,
@@ -17,7 +18,8 @@ class CustomDatePicker extends StatefulWidget {
       this.confirmTitle,
       this.cancelTitle,
       this.validator,
-      this.initValue});
+      this.initValue,
+      this.dateFormat});
 
   @override
   _CustomDatePickerState createState() => _CustomDatePickerState();
@@ -70,7 +72,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               'لغو',
               style: TextStyle(color: Colors.cyan),
             ),
-      dateFormat: 'yyyy-mm-dd',
+      dateFormat: widget.dateFormat != null ? widget.dateFormat : 'yyyy-mm-dd',
       initialDay: initials.isNotEmpty ? initials[2] : null,
       initialMonth: initials.isNotEmpty ? initials[1] : null,
       initialYear: initials.isNotEmpty ? initials[0] : null,
