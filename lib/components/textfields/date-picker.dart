@@ -91,6 +91,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     final DateTime date = DateTime(year, month, day);
 
     switch (widget.dateFormat) {
+      case 'mm-yyyy':
       case 'yyyy-mm':
         final intel.DateFormat formatter = intel.DateFormat('yyyy-MM');
         return formatter.format(date);
