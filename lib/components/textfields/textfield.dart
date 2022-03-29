@@ -17,6 +17,7 @@ class MainTextField extends StatefulWidget {
   final List<TextInputFormatter> inputFormatters;
   final TextStyle textFieldStyle;
   final TextDirection textDirection;
+  final EdgeInsetsGeometry contentPadding;
   MainTextField(
       {@required this.controller,
       this.textAlign,
@@ -33,7 +34,8 @@ class MainTextField extends StatefulWidget {
       this.focusNode,
       this.placeholder,
       this.textFieldStyle,
-      this.textDirection});
+      this.textDirection,
+      this.contentPadding});
 
   @override
   _MainTextFieldState createState() => _MainTextFieldState();
@@ -75,7 +77,7 @@ class _MainTextFieldState extends State<MainTextField> {
             suffixIcon: widget.type == TextfieldType.Password
                 ? _buildEyeIconSuffix()
                 : _buildExtendWidget(widget.suffix, context, true),
-            contentPadding: EdgeInsets.all(12),
+            contentPadding: widget.contentPadding ?? EdgeInsets.all(12),
           ),
           obscureText: widget.type == TextfieldType.Password ||
                   widget.type == TextfieldType.SecurePassword
