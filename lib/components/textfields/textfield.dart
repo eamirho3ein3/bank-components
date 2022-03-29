@@ -15,6 +15,8 @@ class MainTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final Function(String) onChanged;
   final List<TextInputFormatter> inputFormatters;
+  final TextStyle textFieldStyle;
+  final TextDirection textDirection;
   MainTextField(
       {@required this.controller,
       this.textAlign,
@@ -29,7 +31,9 @@ class MainTextField extends StatefulWidget {
       this.onChanged,
       this.inputFormatters,
       this.focusNode,
-      this.placeholder});
+      this.placeholder,
+      this.textFieldStyle,
+      this.textDirection});
 
   @override
   _MainTextFieldState createState() => _MainTextFieldState();
@@ -80,6 +84,8 @@ class _MainTextFieldState extends State<MainTextField> {
           validator: widget.validator,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
+          style: widget.textFieldStyle,
+          textDirection: widget.textDirection,
         ),
         widget.helper != null
             ? Positioned(
