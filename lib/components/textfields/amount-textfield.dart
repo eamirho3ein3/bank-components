@@ -2,11 +2,13 @@ part of bank_components;
 
 class AmountTextField extends StatefulWidget {
   final TextEditingController controller;
+  final FocusNode focusNode;
   final Color secondaryTextColor;
   final Function(String) onChanged;
 
   AmountTextField({
     @required this.controller,
+    @required this.focusNode,
     @required this.secondaryTextColor,
     this.onChanged,
   });
@@ -16,8 +18,6 @@ class AmountTextField extends StatefulWidget {
 }
 
 class _AmountTextFieldState extends State<AmountTextField> {
-  TextEditingController _controller = TextEditingController();
-  FocusNode _focusNode = FocusNode();
   String _input = "";
 
   @override
@@ -27,7 +27,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
       decoration: BoxDecoration(
         color: Theme.of(context).inputDecorationTheme.fillColor,
         border: Border.all(
-            color: _focusNode.hasFocus
+            color: widget.focusNode.hasFocus
                 ? Theme.of(context)
                     .inputDecorationTheme
                     .focusedBorder
@@ -53,14 +53,15 @@ class _AmountTextFieldState extends State<AmountTextField> {
               textDirection: TextDirection.ltr,
               child: MainTextField(
                 type: TextfieldType.Reqular,
-                controller: _controller,
-                focusNode: _focusNode,
+                controller: widget.controller,
+                focusNode: widget.focusNode,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
                 ],
                 keyboardType: TextInputType.number,
                 onChanged: (String value) {
                   _input = value;
+                  widget.controller.text = value;
                   if (widget.onChanged != null) {
                     widget.onChanged(_input);
                   }
