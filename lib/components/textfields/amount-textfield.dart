@@ -1,103 +1,75 @@
 part of bank_components;
 
 class AmountTextField extends StatefulWidget {
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final Color secondaryTextColor;
-  final Function(String) onChanged;
+  final TextStyle textFieldStyle;
+  final TextStyle textUnitStyle;
+  final Function(String) onTextFieldChanged;
 
-  AmountTextField({
-    @required this.controller,
-    @required this.focusNode,
-    @required this.secondaryTextColor,
-    this.onChanged,
-  });
+  AmountTextField(
+      {@required this.textFieldStyle,
+      @required this.textUnitStyle,
+      this.onTextFieldChanged});
 
   @override
   _AmountTextFieldState createState() => _AmountTextFieldState();
 }
 
 class _AmountTextFieldState extends State<AmountTextField> {
-  String _input = "";
+  TextEditingController controller;
+  @override
+  void initState() {
+    controller = RichTextController(
+      patternMatchMap: {
+        RegExp(r"\Bریال"): widget.textUnitStyle,
+      },
+      onMatch: (List<String> match) {
+        print("calll");
+      },
+      deleteOnBack: true,
+      text: 'ریال',
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 64,
-      decoration: BoxDecoration(
-        color: Theme.of(context).inputDecorationTheme.fillColor,
-        border: Border.all(
-            color: widget.focusNode.hasFocus
-                ? Theme.of(context)
-                    .inputDecorationTheme
-                    .focusedBorder
-                    .borderSide
-                    .color
-                : Theme.of(context)
-                    .inputDecorationTheme
-                    .enabledBorder
-                    .borderSide
-                    .color,
-            width: 1),
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // The widget as shown by user's input
-          _buildAmountItem(_input),
-
-          // hiden textfield
-          Opacity(
-            opacity: 0.0,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: MainTextField(
-                type: TextfieldType.Reqular,
-                controller: widget.controller,
-                focusNode: widget.focusNode,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
-                ],
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  _input = value;
-                  widget.controller.text = value;
-                  if (widget.onChanged != null) {
-                    widget.onChanged(_input);
-                  }
-                  setState(() {});
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
+    return MainTextField(
+      controller: controller,
+      inputFormatters: [PriceTextFormatter()],
+      textAlign: TextAlign.center,
+      type: TextfieldType.Reqular,
+      onChanged: (value) {
+        var result =
+            replaceToEnglishNumber(value).replaceAll(RegExp('[^0-9]'), '');
+        widget.onTextFieldChanged(result);
+      },
+      textDirection: TextDirection.ltr,
+      textFieldStyle: widget.textFieldStyle,
     );
   }
+}
 
-  _buildAmountItem(String inputCode) {
-    String _text = replaceFarsiNumber(
-        addCommasToPrice(inputCode.length != 0 ? inputCode : '0'));
-    return Container(
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            _text,
-            style: Theme.of(context).textTheme.headline1.copyWith(
-                color:
-                    inputCode.length != 0 ? null : widget.secondaryTextColor),
-          ),
-          Text(
-            'ریال',
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(color: widget.secondaryTextColor),
-          ),
-        ],
-      ),
-    );
+class PriceTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final currencySymbol = 'ریال' + '\u2067';
+    if (newValue.text.isEmpty || newValue.text.trim() == currencySymbol) {
+      return newValue.copyWith(text: '$currencySymbol');
+    } else if (newValue.text.compareTo(oldValue.text) != 0) {
+      final f = intel.NumberFormat("#,###");
+
+      var num = int.parse(replaceToEnglishNumber(newValue.text)
+          .replaceAll(RegExp('[^0-9]'), ''));
+      final newString = '$currencySymbol' + '\u2066' + f.format(num).trim();
+
+      return TextEditingValue(
+        text: replaceToFarsiNumber(newString),
+        selection:
+            TextSelection.fromPosition(TextPosition(offset: newString.length)),
+      );
+    } else {
+      return newValue;
+    }
   }
 }

@@ -10,6 +10,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:jalali_calendar/jalali_calendar.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:rich_text_controller/rich_text_controller.dart';
+
 export 'package:flutter_slidable/flutter_slidable.dart';
 
 part 'components/spinner.dart';
