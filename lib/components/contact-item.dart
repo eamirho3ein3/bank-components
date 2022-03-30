@@ -9,6 +9,9 @@ class ContactItem extends StatelessWidget {
   final String suffixImage;
   final ComponentAction button;
   final ContactItemTheme style;
+  final bool isSkeleton;
+  final SkeletonSetting setting;
+
   ContactItem({
     this.icon,
     this.image,
@@ -18,9 +21,73 @@ class ContactItem extends StatelessWidget {
     this.suffixImage,
     @required this.style,
     @required this.title,
+    @required this.isSkeleton,
+    @required this.setting,
   });
   @override
   Widget build(BuildContext context) {
+    return isSkeleton ? _buildSkeleton(context) : _buildView(context);
+  }
+
+  _buildSkeleton(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
+    return Container(
+      color: style.backgroundColor,
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      child: Skeleton(
+        setting: setting,
+        enabled: true,
+        child: Row(
+          children: [
+            // logo
+            CustomAvatar(
+              radius: 24,
+              icon: icon,
+              iconColor: style.logoColor,
+              backgroundColor: setting.color,
+            ),
+
+            SizedBox(
+              width: 12,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // title
+                  Container(
+                    margin: EdgeInsets.only(bottom: 6),
+                    width: size.width * 104 / 340,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: setting.color,
+                    ),
+                  ),
+                  SizedBox(
+                    height: subtitle != null ? 6 : 0,
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.only(bottom: 6),
+                    width: size.width * 144 / 340,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2),
+                      color: setting.color,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildView(BuildContext context) {
     return Container(
       color: style.backgroundColor,
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
