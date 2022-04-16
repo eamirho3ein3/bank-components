@@ -77,6 +77,7 @@ class ZarinCard extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints(maxWidth: 300),
         child: Row(
+          textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: _children,
         ),
