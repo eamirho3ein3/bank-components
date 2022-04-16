@@ -98,6 +98,7 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
     }
 
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 24),
       constraints: BoxConstraints(
         maxWidth: 280,
       ),
