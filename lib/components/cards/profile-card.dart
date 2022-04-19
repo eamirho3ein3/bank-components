@@ -37,20 +37,22 @@ class ProfileCard extends StatelessWidget {
                 avatar,
 
                 // change button
-                Positioned(
-                  left: 0,
-                  bottom: 0,
-                  child: InkWell(
-                    onTap: changeProfileImage,
-                    child: CircleAvatar(
-                      radius: 14,
-                      child: Icon(
-                        Icons.camera_alt_outlined,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                ),
+                changeProfileImage != null
+                    ? Positioned(
+                        left: 0,
+                        bottom: 0,
+                        child: InkWell(
+                          onTap: changeProfileImage,
+                          child: CircleAvatar(
+                            radius: 14,
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      )
+                    : SizedBox(),
               ],
             ),
             SizedBox(
