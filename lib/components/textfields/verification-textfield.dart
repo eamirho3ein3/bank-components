@@ -55,7 +55,7 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
                 focusNode: _focusNode,
                 limit: 6,
                 inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
+                  // FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
                 ],
                 keyboardType: TextInputType.number,
                 onChanged: (String value) {
