@@ -1,10 +1,10 @@
 part of bank_components;
 
-class NeoPriceWidget extends StatelessWidget {
+class PriceWidget extends StatelessWidget {
   final int price;
   final String convertedPrice;
   final PriceWidgetTheme theme;
-  NeoPriceWidget(
+  PriceWidget(
       {@required this.price,
       @required this.convertedPrice,
       @required this.theme});

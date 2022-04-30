@@ -4,7 +4,7 @@ class TransactionItem extends StatelessWidget {
   final CustomIconTheme icon;
   final String title;
   final String subtitle;
-  final NeoPriceWidget priceWidget;
+  final PriceWidget priceWidget;
   final TransactionItemTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
