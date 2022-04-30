@@ -4,7 +4,7 @@ class TransactionItem extends StatelessWidget {
   final CustomIconTheme icon;
   final String title;
   final String subtitle;
-  final String price;
+  final NeoPriceWidget priceWidget;
   final TransactionItemTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
@@ -15,7 +15,7 @@ class TransactionItem extends StatelessWidget {
     @required this.title,
     @required this.subtitle,
     @required this.style,
-    @required this.price,
+    @required this.priceWidget,
     @required this.isSkeleton,
     @required this.setting,
     this.onClick,
@@ -81,25 +81,7 @@ class TransactionItem extends StatelessWidget {
                     // price
                     !isSkeleton
                         ? Expanded(
-                            child: Text.rich(
-                              TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: price ?? '',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1),
-                                  TextSpan(
-                                    text: ' ',
-                                  ),
-                                  TextSpan(
-                                      text: 'ریال',
-                                      style:
-                                          Theme.of(context).textTheme.caption),
-                                ],
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
+                            child: priceWidget,
                           )
                         : Container(
                             width: 48,
