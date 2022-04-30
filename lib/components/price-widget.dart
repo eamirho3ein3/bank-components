@@ -12,9 +12,9 @@ class PriceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle _style;
     if (price.isNegative) {
-      _style = theme.negativeColor;
+      _style = theme.negativeStyle;
     } else {
-      _style = theme.posetiveColor;
+      _style = theme.posetiveStyle;
     }
     return Text.rich(
       TextSpan(
@@ -23,7 +23,7 @@ class PriceWidget extends StatelessWidget {
           TextSpan(
             text: ' ',
           ),
-          TextSpan(text: 'ریال', style: Theme.of(context).textTheme.bodyText1),
+          TextSpan(text: 'ریال', style: theme.unitStyle),
         ],
       ),
       textAlign: TextAlign.left,
@@ -32,9 +32,12 @@ class PriceWidget extends StatelessWidget {
 }
 
 class PriceWidgetTheme {
-  final TextStyle negativeColor;
-  final TextStyle posetiveColor;
+  final TextStyle negativeStyle;
+  final TextStyle posetiveStyle;
+  final TextStyle unitStyle;
 
   PriceWidgetTheme(
-      {@required this.negativeColor, @required this.posetiveColor});
+      {@required this.negativeStyle,
+      @required this.posetiveStyle,
+      @required this.unitStyle});
 }
