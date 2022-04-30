@@ -12,15 +12,9 @@ class PriceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle _style;
     if (price.isNegative) {
-      _style = Theme.of(context)
-          .textTheme
-          .headline1
-          .copyWith(color: theme.negativeColor);
+      _style = theme.negativeColor;
     } else {
-      _style = Theme.of(context)
-          .textTheme
-          .headline1
-          .copyWith(color: theme.posetiveColor);
+      _style = theme.posetiveColor;
     }
     return Text.rich(
       TextSpan(
@@ -38,8 +32,8 @@ class PriceWidget extends StatelessWidget {
 }
 
 class PriceWidgetTheme {
-  final Color negativeColor;
-  final Color posetiveColor;
+  final TextStyle negativeColor;
+  final TextStyle posetiveColor;
 
   PriceWidgetTheme(
       {@required this.negativeColor, @required this.posetiveColor});
