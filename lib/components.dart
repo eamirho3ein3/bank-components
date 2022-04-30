@@ -55,6 +55,8 @@ part 'components/appbars/sub-appbar.dart';
 part 'components/icon-button.dart';
 part 'components/tooltip.dart';
 part 'components/avatar.dart';
+part 'components/price-widget.dart';
+
 part 'models/action.dart';
 part 'models/chip.dart';
 part 'helper.dart';
