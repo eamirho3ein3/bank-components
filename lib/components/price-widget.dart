@@ -4,10 +4,12 @@ class PriceWidget extends StatelessWidget {
   final int price;
   final String convertedPrice;
   final PriceWidgetTheme theme;
+  final String unit;
   PriceWidget(
       {@required this.price,
       @required this.convertedPrice,
-      @required this.theme});
+      @required this.theme,
+      @required this.unit});
   @override
   Widget build(BuildContext context) {
     TextStyle _style;
@@ -23,7 +25,7 @@ class PriceWidget extends StatelessWidget {
           TextSpan(
             text: ' ',
           ),
-          TextSpan(text: 'ریال', style: theme.unitStyle),
+          TextSpan(text: unit, style: theme.unitStyle),
         ],
       ),
       textAlign: TextAlign.left,
