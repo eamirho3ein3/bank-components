@@ -21,11 +21,11 @@ class PriceWidget extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: <TextSpan>[
-          TextSpan(text: convertedPrice, style: _style),
+          TextSpan(text: unit, style: theme.unitStyle),
           TextSpan(
             text: ' ',
           ),
-          TextSpan(text: unit, style: theme.unitStyle),
+          TextSpan(text: convertedPrice, style: _style),
         ],
       ),
       textAlign: TextAlign.left,
