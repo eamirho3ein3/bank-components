@@ -2,6 +2,7 @@ part of bank_components;
 
 class CustomAvatar extends StatelessWidget {
   final String image;
+  final String placeholderImage;
   final IconData icon;
   final Color backgroundColor;
   final Color iconColor;
@@ -14,20 +15,23 @@ class CustomAvatar extends StatelessWidget {
       @required this.icon,
       @required this.backgroundColor,
       @required this.iconColor,
-      @required this.radius});
+      @required this.radius,
+      this.placeholderImage});
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: radius,
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? Colors.white,
       foregroundImage: image != null ? NetworkImage(image) : null,
-      child: icon != null
-          ? Icon(
-              icon,
-              color: iconColor,
-              size: iconSize ?? null,
-            )
-          : SizedBox(),
+      child: placeholderImage != null
+          ? AssetImage(placeholderImage)
+          : icon != null
+              ? Icon(
+                  icon,
+                  color: iconColor ?? Colors.grey,
+                  size: iconSize ?? null,
+                )
+              : SizedBox(),
       onForegroundImageError: image != null
           ? (object, stackTrace) {
               print("stackTrace = $stackTrace");

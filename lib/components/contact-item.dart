@@ -1,8 +1,7 @@
 part of bank_components;
 
 class ContactItem extends StatelessWidget {
-  final IconData icon;
-  final String image;
+  final CustomAvatar avatar;
   final String title;
   final String subtitle;
   final String subtitleImage;
@@ -13,12 +12,11 @@ class ContactItem extends StatelessWidget {
   final SkeletonSetting setting;
 
   ContactItem({
-    this.icon,
-    this.image,
     this.subtitle,
     this.subtitleImage,
     this.button,
     this.suffixImage,
+    @required this.avatar,
     @required this.style,
     @required this.title,
     @required this.isSkeleton,
@@ -40,13 +38,8 @@ class ContactItem extends StatelessWidget {
         enabled: true,
         child: Row(
           children: [
-            // logo
-            CustomAvatar(
-              radius: 24,
-              icon: icon,
-              iconColor: style.logoColor,
-              backgroundColor: setting.color,
-            ),
+            // avatar
+            avatar,
 
             SizedBox(
               width: 12,
@@ -93,14 +86,8 @@ class ContactItem extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       child: Row(
         children: [
-          // logo
-          CustomAvatar(
-            radius: 24,
-            icon: icon,
-            iconColor: style.logoColor,
-            backgroundColor: style.logoBackgroundColor,
-            image: image,
-          ),
+          // avatar
+          avatar,
 
           SizedBox(
             width: 12,
@@ -172,14 +159,10 @@ class ContactItem extends StatelessWidget {
 
 class ContactItemTheme {
   final Color backgroundColor;
-  final Color logoColor;
-  final Color logoBackgroundColor;
   final Color subtitleColor;
 
   ContactItemTheme({
     @required this.backgroundColor,
-    @required this.logoColor,
-    @required this.logoBackgroundColor,
     @required this.subtitleColor,
   });
 }
