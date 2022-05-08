@@ -24,7 +24,7 @@ class CustomAvatar extends StatelessWidget {
       backgroundColor: backgroundColor ?? Colors.white,
       foregroundImage: image != null ? NetworkImage(image) : null,
       child: placeholderImage != null
-          ? AssetImage(placeholderImage)
+          ? Image.asset(placeholderImage)
           : icon != null
               ? Icon(
                   icon,
