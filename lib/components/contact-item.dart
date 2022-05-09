@@ -87,10 +87,10 @@ class ContactItem extends StatelessWidget {
       child: Row(
         children: [
           // avatar
-          avatar,
+          avatar != null ? avatar : SizedBox(),
 
           SizedBox(
-            width: 12,
+            width: avatar != null ? 12 : 0,
           ),
           Expanded(
             child: Column(

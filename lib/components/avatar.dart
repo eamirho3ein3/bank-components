@@ -34,7 +34,7 @@ class CustomAvatar extends StatelessWidget {
               : SizedBox(),
       onForegroundImageError: image != null
           ? (object, stackTrace) {
-              print("stackTrace = $stackTrace");
+              print("error in avatar network image");
             }
           : null,
     );
