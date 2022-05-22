@@ -65,8 +65,13 @@ class TransactionItem extends StatelessWidget {
                   children: [
                     // title
                     !isSkeleton
-                        ? Text(title ?? '',
-                            style: Theme.of(context).textTheme.subtitle1)
+                        ? Expanded(
+                            child: Text(title ?? '',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: false,
+                                style: Theme.of(context).textTheme.subtitle1),
+                          )
                         : Container(
                             width: 120,
                             height: 12,
@@ -80,9 +85,7 @@ class TransactionItem extends StatelessWidget {
                     ),
                     // price
                     !isSkeleton
-                        ? Expanded(
-                            child: priceWidget,
-                          )
+                        ? priceWidget
                         : Container(
                             width: 48,
                             height: 12,
