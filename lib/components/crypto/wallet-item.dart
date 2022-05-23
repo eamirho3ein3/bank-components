@@ -1,9 +1,9 @@
 part of bank_components;
 
 class WalletItem extends StatelessWidget {
-  final CustomIconTheme icon;
   final String title;
   final String subtitle;
+  final String image;
   final String price;
   final WalletItemTheme style;
   final SkeletonSetting setting;
@@ -13,8 +13,8 @@ class WalletItem extends StatelessWidget {
   final CryptoSymbol symbolWidget;
 
   WalletItem({
-    @required this.icon,
     @required this.title,
+    @required this.image,
     @required this.subtitle,
     @required this.style,
     @required this.price,
@@ -50,11 +50,15 @@ class WalletItem extends StatelessWidget {
       child: Row(
         children: [
           // logo
-          CustomAvatar(
+          CircleAvatar(
             radius: 24,
-            icon: icon.icon,
-            iconColor: icon.iconColor,
-            backgroundColor: !isSkeleton ? icon.backgroundColor : setting.color,
+            backgroundColor: Colors.transparent,
+            child: SvgPicture.asset(
+              image,
+              placeholderBuilder: (_) {
+                return SizedBox();
+              },
+            ),
           ),
 
           SizedBox(
