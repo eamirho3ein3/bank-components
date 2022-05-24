@@ -52,17 +52,15 @@ class WalletItem extends StatelessWidget {
           // logo
           CircleAvatar(
             radius: 24,
-            backgroundColor: Colors.transparent,
+            backgroundColor: image == null || image.isEmpty
+                ? setting.color
+                : Colors.transparent,
             child: image == null || image.isEmpty
-                ? Container(
-                    color: setting.color,
-                  )
+                ? SizedBox()
                 : SvgPicture.asset(
                     image,
                     placeholderBuilder: (_) {
-                      return Container(
-                        color: setting.color,
-                      );
+                      return SizedBox();
                     },
                   ),
           ),
