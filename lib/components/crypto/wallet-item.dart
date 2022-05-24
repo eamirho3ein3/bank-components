@@ -54,11 +54,15 @@ class WalletItem extends StatelessWidget {
             radius: 24,
             backgroundColor: Colors.transparent,
             child: image == null || image.isEmpty
-                ? SizedBox()
+                ? Container(
+                    color: setting.color,
+                  )
                 : SvgPicture.asset(
                     image,
                     placeholderBuilder: (_) {
-                      return SizedBox();
+                      return Container(
+                        color: setting.color,
+                      );
                     },
                   ),
           ),
