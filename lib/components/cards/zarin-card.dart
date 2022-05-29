@@ -3,64 +3,104 @@ part of bank_components;
 class ZarinCard extends StatelessWidget {
   final ComponentAction button;
   final ZarinCardTheme style;
+  final String backgroundImage;
   final List<String> cardNumbers;
   final bool isActive;
 
   ZarinCard({
     @required this.button,
     @required this.style,
-    @required this.cardNumbers,
+    this.cardNumbers,
     @required this.isActive,
+    @required this.backgroundImage,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: isActive ? style.backgroundColor : style.deactiveBackgroundColor,
-      ),
-      child: CustomCardTypeOne(
-        header: Padding(
-          padding: EdgeInsets.only(bottom: 24, top: 4),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: SvgPicture.asset(
-                  'assets/svgs/zarrin-logo-type.svg',
-                  height: 28,
-                  width: 92,
-                  alignment: Alignment.centerRight,
-                ),
-              ),
-              SvgPicture.asset(
-                'assets/svgs/circuit.svg',
-                color: isActive ? Colors.red : Colors.black,
-                height: 40,
-                width: 49,
-              ),
-            ],
-          ),
+    return LayoutBuilder(builder: (context, constraints) {
+      return Container(
+        alignment: Alignment.center,
+        // padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: style.borderColor),
+          color:
+              isActive ? style.backgroundColor : style.deactiveBackgroundColor,
         ),
-        content: //card number
-            _buildCardNumberText(context),
-        buttons: Container(
-          width: double.infinity,
-          child: CustomButton(
-            title: button.text,
-            size: ButtonSize.large,
-            onClick: button.onClick,
-            style: button.style,
-            rightIcon: button.icon.icon,
-          ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            SvgPicture.asset(
+              backgroundImage,
+              height: constraints.maxWidth / 1.65,
+              width: constraints.maxWidth,
+              fit: BoxFit.fitWidth,
+            ),
+            Positioned(
+                bottom: 16,
+                right: 16,
+                left: 16,
+                child: Container(
+                  width: double.infinity,
+                  child: CustomButton(
+                    title: button.text,
+                    size: ButtonSize.large,
+                    onClick: button.onClick,
+                    style: button.style,
+                    rightIcon: button.icon.icon,
+                  ),
+                )),
+            // CustomCardTypeOne(
+            //   header: SizedBox(
+            //     height: 28,
+            //   ),
+            //   // Padding(
+            //   //   padding: EdgeInsets.only(bottom: 24, top: 4),
+            //   //   child: Row(
+            //   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   //     children: [
+            //   //       Expanded(
+            //   //         child: SvgPicture.asset(
+            //   //           'assets/svgs/zarrin-logo-type.svg',
+            //   //           height: 28,
+            //   //           width: 92,
+            //   //           alignment: Alignment.centerRight,
+            //   //         ),
+            //   //       ),
+            //   //       SvgPicture.asset(
+            //   //         'assets/svgs/circuit.svg',
+            //   //         color: isActive ? Colors.red : Colors.black,
+            //   //         height: 40,
+            //   //         width: 49,
+            //   //       ),
+            //   //     ],
+            //   //   ),
+            //   // ),
+            //   content: //card number
+            //       _buildCardNumberText(context),
+            //   buttons: Container(
+            //     width: double.infinity,
+            //     child: CustomButton(
+            //       title: button.text,
+            //       size: ButtonSize.large,
+            //       onClick: button.onClick,
+            //       style: button.style,
+            //       rightIcon: button.icon.icon,
+            //     ),
+            //   ),
+            // ),
+          ],
         ),
-      ),
-    );
+      );
+    });
   }
 
   _buildCardNumberText(BuildContext context) {
+    if (cardNumbers == null) {
+      return SizedBox(
+        height: 28,
+      );
+    }
     List<Widget> _children = [];
     for (var item in cardNumbers) {
       var widget = Text(
@@ -88,9 +128,11 @@ class ZarinCard extends StatelessWidget {
 
 class ZarinCardTheme extends CustomCardTheme {
   final Color deactiveBackgroundColor;
+  final Color borderColor;
 
   ZarinCardTheme(
       {@required this.deactiveBackgroundColor,
+      @required this.borderColor,
       @required backgroundColor,
       @required secondaryTextColor})
       : super(
