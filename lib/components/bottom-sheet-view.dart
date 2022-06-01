@@ -1,20 +1,42 @@
 part of bank_components;
 
+typedef ScrollableContentWidgetBuilder = Widget Function(
+  BuildContext context,
+  ScrollController scrollController,
+);
+
 class BottomSheetView extends StatelessWidget {
   final String title;
   final Widget content;
   final ComponentAction rightButton;
   final ComponentAction leftButton;
   final BottomSheetTheme style;
+  final ScrollableContentWidgetBuilder builder;
   BottomSheetView({
     this.title,
     this.content,
     this.rightButton,
     this.leftButton,
     @required this.style,
+    this.builder,
   });
   @override
   Widget build(BuildContext context) {
+    return builder != null
+        ? ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height - kToolbarHeight),
+            child: DraggableScrollableSheet(
+                initialChildSize: 0.6,
+                builder:
+                    (BuildContext context, ScrollController scrollController) {
+                  return _buidDragableView(context, scrollController);
+                }),
+          )
+        : _buildView(context);
+  }
+
+  _buildView(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         decoration: BoxDecoration(
@@ -32,6 +54,35 @@ class BottomSheetView extends StatelessWidget {
             _buildButtons(context),
           ],
         ),
+      ),
+    );
+  }
+
+  _buidDragableView(BuildContext context, ScrollController scrollController) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: new BorderRadius.only(
+            topLeft: const Radius.circular(8.0),
+            topRight: const Radius.circular(8.0)),
+        color: style.backgroundColor,
+      ),
+      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+      child: Column(
+        children: [
+          _buildHandle(context),
+          _buildTitle(context),
+          Expanded(
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: Column(
+                children: [
+                  builder(context, scrollController),
+                ],
+              ),
+            ),
+          ),
+          _buildButtons(context),
+        ],
       ),
     );
   }
