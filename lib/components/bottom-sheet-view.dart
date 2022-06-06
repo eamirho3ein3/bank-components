@@ -23,21 +23,15 @@ class BottomSheetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return builder != null
-        ? GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                  maxHeight:
-                      MediaQuery.of(context).size.height - kToolbarHeight),
-              child: DraggableScrollableSheet(
-                  initialChildSize: 0.6,
-                  builder: (BuildContext context,
-                      ScrollController scrollController) {
-                    return _buidDragableView(context, scrollController);
-                  }),
-            ),
+        ? ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height - kToolbarHeight),
+            child: DraggableScrollableSheet(
+                initialChildSize: 0.6,
+                builder:
+                    (BuildContext context, ScrollController scrollController) {
+                  return _buidDragableView(context, scrollController);
+                }),
           )
         : _buildView(context);
   }

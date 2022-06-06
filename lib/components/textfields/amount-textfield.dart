@@ -22,9 +22,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
       patternMatchMap: {
         RegExp(r"\Bریال"): widget.textUnitStyle,
       },
-      onMatch: (List<String> match) {
-        print("calll");
-      },
+      onMatch: (List<String> match) {},
       deleteOnBack: true,
       text: 'ریال',
     );
@@ -37,6 +35,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
       controller: controller,
       inputFormatters: [PriceTextFormatter()],
       textAlign: TextAlign.center,
+      keyboardType: TextInputType.number,
       type: TextfieldType.Reqular,
       onChanged: (value) {
         var result =
@@ -58,17 +57,26 @@ class PriceTextFormatter extends TextInputFormatter {
     if (newValue.text.isEmpty || newValue.text.trim() == currencySymbol) {
       return newValue.copyWith(text: '$currencySymbol');
     } else if (newValue.text.compareTo(oldValue.text) != 0) {
-      final f = intel.NumberFormat("#,###");
+      var newString = replaceToEnglishNumber(newValue.text)
+          .replaceAll(RegExp('[^0-9]'), '');
+      if (newString.trim().isEmpty) {
+        return TextEditingValue(
+          text: currencySymbol,
+          selection: TextSelection.fromPosition(
+              TextPosition(offset: currencySymbol.length)),
+        );
+      } else {
+        final f = intel.NumberFormat("#,###");
+        var num = int.parse(replaceToEnglishNumber(newValue.text)
+            .replaceAll(RegExp('[^0-9]'), ''));
+        final newString = '$currencySymbol' + '\u2066' + f.format(num).trim();
 
-      var num = int.parse(replaceToEnglishNumber(newValue.text)
-          .replaceAll(RegExp('[^0-9]'), ''));
-      final newString = '$currencySymbol' + '\u2066' + f.format(num).trim();
-
-      return TextEditingValue(
-        text: replaceToFarsiNumber(newString),
-        selection:
-            TextSelection.fromPosition(TextPosition(offset: newString.length)),
-      );
+        return TextEditingValue(
+          text: replaceToFarsiNumber(newString),
+          selection: TextSelection.fromPosition(
+              TextPosition(offset: newString.length)),
+        );
+      }
     } else {
       return newValue;
     }
