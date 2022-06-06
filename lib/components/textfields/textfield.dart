@@ -40,7 +40,7 @@ class MainTextField extends StatefulWidget {
     this.textDirection,
     this.contentPadding,
     this.showCursor,
-    this.readOnly,
+    this.readOnly = false,
   });
 
   @override
