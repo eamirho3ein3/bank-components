@@ -18,24 +18,30 @@ class MainTextField extends StatefulWidget {
   final TextStyle textFieldStyle;
   final TextDirection textDirection;
   final EdgeInsetsGeometry contentPadding;
-  MainTextField(
-      {@required this.controller,
-      this.textAlign,
-      this.label,
-      this.helper,
-      this.limit,
-      this.prefix,
-      this.suffix,
-      this.validator,
-      @required this.type,
-      this.keyboardType,
-      this.onChanged,
-      this.inputFormatters,
-      this.focusNode,
-      this.placeholder,
-      this.textFieldStyle,
-      this.textDirection,
-      this.contentPadding});
+  final bool showCursor;
+  final bool readOnly;
+
+  MainTextField({
+    @required this.controller,
+    this.textAlign,
+    this.label,
+    this.helper,
+    this.limit,
+    this.prefix,
+    this.suffix,
+    this.validator,
+    @required this.type,
+    this.keyboardType,
+    this.onChanged,
+    this.inputFormatters,
+    this.focusNode,
+    this.placeholder,
+    this.textFieldStyle,
+    this.textDirection,
+    this.contentPadding,
+    this.showCursor,
+    this.readOnly,
+  });
 
   @override
   _MainTextFieldState createState() => _MainTextFieldState();
@@ -67,6 +73,8 @@ class _MainTextFieldState extends State<MainTextField> {
             );
           },
           inputFormatters: widget.inputFormatters,
+          showCursor: widget.showCursor,
+          readOnly: widget.readOnly,
           decoration: InputDecoration(
             alignLabelWithHint:
                 widget.keyboardType == TextInputType.multiline ? true : false,
