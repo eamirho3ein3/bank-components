@@ -20,6 +20,7 @@ class MainTextField extends StatefulWidget {
   final EdgeInsetsGeometry contentPadding;
   final bool showCursor;
   final bool readOnly;
+  final bool enabled;
 
   MainTextField({
     @required this.controller,
@@ -41,6 +42,7 @@ class MainTextField extends StatefulWidget {
     this.contentPadding,
     this.showCursor,
     this.readOnly = false,
+    this.enabled,
   });
 
   @override
@@ -75,6 +77,7 @@ class _MainTextFieldState extends State<MainTextField> {
           inputFormatters: widget.inputFormatters,
           showCursor: widget.showCursor,
           readOnly: widget.readOnly,
+          enabled: widget.enabled,
           decoration: InputDecoration(
             alignLabelWithHint:
                 widget.keyboardType == TextInputType.multiline ? true : false,
