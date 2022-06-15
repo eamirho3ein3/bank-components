@@ -65,15 +65,16 @@ class _MainTextFieldState extends State<MainTextField> {
           minLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
           maxLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
           buildCounter: (context, {currentLength, isFocused, maxLength}) {
-            return Container(
-              child: Text(
-                widget.limit != null
-                    ? replaceToFarsiNumber(
-                        '$maxLength/${widget.controller.text.length}')
-                    : '',
-                style: Theme.of(context).inputDecorationTheme.counterStyle,
-              ),
-            );
+            return widget.limit != null
+                ? Container(
+                    child: Text(
+                      replaceToFarsiNumber(
+                          '$maxLength/${widget.controller.text.length}'),
+                      style:
+                          Theme.of(context).inputDecorationTheme.counterStyle,
+                    ),
+                  )
+                : null;
           },
           inputFormatters: widget.inputFormatters,
           showCursor: widget.showCursor,
