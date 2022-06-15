@@ -53,7 +53,8 @@ class _MainTextFieldState extends State<MainTextField> {
   bool hidePassword = true;
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
           controller: widget.controller,
@@ -83,7 +84,6 @@ class _MainTextFieldState extends State<MainTextField> {
                 widget.keyboardType == TextInputType.multiline ? true : false,
             hintText: widget.placeholder,
             labelText: widget.label,
-            helperText: widget.helper != null ? '' : null,
             prefixIcon: _buildExtendWidget(widget.prefix, context, false),
             suffixIcon: widget.type == TextfieldType.Password
                 ? _buildEyeIconSuffix()
@@ -101,9 +101,8 @@ class _MainTextFieldState extends State<MainTextField> {
           textDirection: widget.textDirection,
         ),
         widget.helper != null
-            ? Positioned(
-                bottom: 0,
-                right: 12,
+            ? Padding(
+                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
                 child: widget.helper,
               )
             : SizedBox(),
