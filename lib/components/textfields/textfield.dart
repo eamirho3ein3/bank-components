@@ -7,7 +7,7 @@ class MainTextField extends StatefulWidget {
   final TextAlign textAlign;
   final String label;
   final String placeholder;
-  final TextfieldHelper helper;
+  final Widget helper;
   final int limit;
   final TextfieldExtend prefix;
   final TextfieldExtend suffix;
@@ -104,47 +104,11 @@ class _MainTextFieldState extends State<MainTextField> {
             ? Positioned(
                 bottom: 0,
                 right: 12,
-                child: _buildTextFieldHelperWidget(context),
+                child: widget.helper,
               )
             : SizedBox(),
       ],
     );
-  }
-
-  _buildTextFieldHelperWidget(BuildContext context) {
-    if (widget.helper.type == HeplerType.Regular) {
-      // regular
-      return Text(
-        widget.helper.text,
-        style: Theme.of(context).inputDecorationTheme.helperStyle,
-      );
-    } else {
-      // success or error
-      return Row(
-        children: [
-          // TODO: change icon data with real one
-          Icon(
-            widget.helper.type == HeplerType.Success ? Icons.info : Icons.info,
-            color: widget.helper.type == HeplerType.Success
-                ? widget.helper.theme.success
-                : widget.helper.theme.error,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: Text(
-              widget.helper.text,
-              style: Theme.of(context)
-                  .inputDecorationTheme
-                  .helperStyle
-                  .copyWith(
-                      color: widget.helper.type == HeplerType.Success
-                          ? widget.helper.theme.success
-                          : widget.helper.theme.error),
-            ),
-          ),
-        ],
-      );
-    }
   }
 
   _buildEyeIconSuffix() {
@@ -202,13 +166,48 @@ class _MainTextFieldState extends State<MainTextField> {
   }
 }
 
-class TextfieldHelper {
+class TextfieldHelper extends StatelessWidget {
   final HeplerType type;
   final String text;
   final HelperWidgetTheme theme;
 
   TextfieldHelper(
       {@required this.type, @required this.text, @required this.theme});
+
+  @override
+  Widget build(BuildContext context) {
+    if (type == HeplerType.Regular) {
+      // regular
+      return Text(
+        text,
+        style: Theme.of(context).inputDecorationTheme.helperStyle,
+      );
+    } else {
+      // success or error
+      return Row(
+        children: [
+          // TODO: change icon data with real one
+          Icon(
+            type == HeplerType.Success ? Icons.info : Icons.info,
+            color: type == HeplerType.Success ? theme.success : theme.error,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 4),
+            child: Text(
+              text,
+              style: Theme.of(context)
+                  .inputDecorationTheme
+                  .helperStyle
+                  .copyWith(
+                      color: type == HeplerType.Success
+                          ? theme.success
+                          : theme.error),
+            ),
+          ),
+        ],
+      );
+    }
+  }
 }
 
 class HelperWidgetTheme {
