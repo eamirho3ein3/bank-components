@@ -19,6 +19,7 @@ dependencies:
   flutter_picker: ^2.0.2
   flutter_slidable: ^1.2.0
   rich_text_controller: ^1.4.0
+  persian_number_utility: ^1.1.2
 
 dev_dependencies:
   flutter_test:

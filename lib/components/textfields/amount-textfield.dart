@@ -16,6 +16,8 @@ class AmountTextField extends StatefulWidget {
 
 class _AmountTextFieldState extends State<AmountTextField> {
   TextEditingController controller;
+  var wordPrice = '';
+
   @override
   void initState() {
     controller = RichTextController(
@@ -40,8 +42,20 @@ class _AmountTextFieldState extends State<AmountTextField> {
       onChanged: (value) {
         var result =
             replaceToEnglishNumber(value).replaceAll(RegExp('[^0-9]'), '');
+
+        setState(() {
+          final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
+          wordPrice = result.replaceAll(regexp, '');
+        });
+
         widget.onTextFieldChanged(result);
       },
+      helper: wordPrice == null || wordPrice.isEmpty
+          ? SizedBox()
+          : Text(
+              wordPrice.toWord() + " ریال",
+              style: Theme.of(context).textTheme.caption,
+            ),
       textDirection: TextDirection.ltr,
       textFieldStyle: widget.textFieldStyle,
       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),

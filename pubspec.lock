@@ -137,6 +137,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.1"
+  persian_number_utility:
+    dependency: "direct main"
+    description:
+      name: persian_number_utility
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2"
   petitparser:
     dependency: transitive
     description:
