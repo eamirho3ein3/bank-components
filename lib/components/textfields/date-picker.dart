@@ -64,13 +64,14 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           ? widget.confirmTitle
           : Text(
               'تایید',
-              style: TextStyle(color: Colors.red),
+              style:
+                  TextStyle(color: Theme.of(context).textTheme.bodyText1.color),
             ),
       cancel: widget.cancelTitle != null
           ? widget.cancelTitle
           : Text(
               'لغو',
-              style: TextStyle(color: Colors.cyan),
+              style: TextStyle(color: Colors.red),
             ),
       dateFormat: widget.dateFormat != null ? widget.dateFormat : 'yyyy-mm-dd',
       initialDay: initials.isNotEmpty ? initials[2] : null,
