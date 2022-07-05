@@ -56,36 +56,36 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   void _showDatePicker(BuildContext context) {
     List initials = widget.initValue != null ? widget.initValue.split('-') : [];
 
-    DatePicker.showDatePicker(
-      context,
-      minYear: widget.minYear,
-      maxYear: widget.maxYear,
-      confirm: widget.confirmTitle != null
-          ? widget.confirmTitle
-          : Text(
-              'تایید',
-              style:
-                  TextStyle(color: Theme.of(context).textTheme.bodyText1.color),
-            ),
-      cancel: widget.cancelTitle != null
-          ? widget.cancelTitle
-          : Text(
-              'لغو',
-              style: TextStyle(color: Colors.red),
-            ),
-      dateFormat: widget.dateFormat != null ? widget.dateFormat : 'yyyy-mm-dd',
-      initialDay: initials.isNotEmpty ? initials[2] : null,
-      initialMonth: initials.isNotEmpty ? initials[1] : null,
-      initialYear: initials.isNotEmpty ? initials[0] : null,
-      onChanged: (year, month, day) {
-        dateController.text = _formatDate(year, month, day);
-        widget.onComplete(_formatDate(year, month, day));
-      },
-      onConfirm: (year, month, day) {
-        dateController.text = _formatDate(year, month, day);
-        widget.onComplete(_formatDate(year, month, day));
-      },
-    );
+    // DatePicker.showDatePicker(
+    //   context,
+    //   minYear: widget.minYear,
+    //   maxYear: widget.maxYear,
+    //   confirm: widget.confirmTitle != null
+    //       ? widget.confirmTitle
+    //       : Text(
+    //           'تایید',
+    //           style:
+    //               TextStyle(color: Theme.of(context).textTheme.bodyText1.color),
+    //         ),
+    //   cancel: widget.cancelTitle != null
+    //       ? widget.cancelTitle
+    //       : Text(
+    //           'لغو',
+    //           style: TextStyle(color: Colors.red),
+    //         ),
+    //   dateFormat: widget.dateFormat != null ? widget.dateFormat : 'yyyy-mm-dd',
+    //   initialDay: initials.isNotEmpty ? initials[2] : null,
+    //   initialMonth: initials.isNotEmpty ? initials[1] : null,
+    //   initialYear: initials.isNotEmpty ? initials[0] : null,
+    //   onChanged: (year, month, day) {
+    //     dateController.text = _formatDate(year, month, day);
+    //     widget.onComplete(_formatDate(year, month, day));
+    //   },
+    //   onConfirm: (year, month, day) {
+    //     dateController.text = _formatDate(year, month, day);
+    //     widget.onComplete(_formatDate(year, month, day));
+    //   },
+    // );
   }
 
   String _formatDate(int year, int month, int day) {
