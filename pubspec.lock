@@ -130,13 +130,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.1"
-  persian_datetime_picker:
-    dependency: "direct main"
-    description:
-      name: persian_datetime_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.5.0"
   persian_number_utility:
     dependency: "direct main"
     description:

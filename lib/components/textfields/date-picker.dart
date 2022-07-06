@@ -53,9 +53,72 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     );
   }
 
-  void _showDatePicker(BuildContext context) {
-    List initials = widget.initValue != null ? widget.initValue.split('-') : [];
-
+  void _showDatePicker(BuildContext context) async {
+    // List initials = widget.initValue != null ? widget.initValue.split('-') : [];
+    // Jalali pickedDate = await showModalBottomSheet<Jalali>(
+    //   context: context,
+    //   builder: (context) {
+    //     Jalali tempPickedDate;
+    //     return Container(
+    //       height: 250,
+    //       child: Column(
+    //         children: <Widget>[
+    //           Container(
+    //             child: Row(
+    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //               children: <Widget>[
+    //                 CupertinoButton(
+    //                   child: Text(
+    //                     'لغو',
+    //                     style: Theme.of(context).textTheme.button,
+    //                   ),
+    //                   onPressed: () {
+    //                     Navigator.of(context).pop();
+    //                   },
+    //                 ),
+    //                 CupertinoButton(
+    //                   child: Text(
+    //                     'تایید',
+    //                     style: Theme.of(context).textTheme.button,
+    //                   ),
+    //                   onPressed: () {
+    //                     dateController.text = _formatDate(tempPickedDate.year,
+    //                         tempPickedDate.month, tempPickedDate.day);
+    //                     widget.onComplete(_formatDate(tempPickedDate.year,
+    //                         tempPickedDate.month, tempPickedDate.day));
+    //                     // Navigator.of(context).pop(tempPickedDate ?? Jalali.now());
+    //                   },
+    //                 ),
+    //               ],
+    //             ),
+    //           ),
+    //           Divider(
+    //             height: 0,
+    //             thickness: 1,
+    //           ),
+    //           Expanded(
+    //             child: Container(
+    //               child: CupertinoTheme(
+    //                 data: CupertinoThemeData(
+    //                   textTheme: CupertinoTextThemeData(
+    //                     dateTimePickerTextStyle:
+    //                         Theme.of(context).textTheme.subtitle1,
+    //                   ),
+    //                 ),
+    //                 child: PCupertinoDatePicker(
+    //                   mode: PCupertinoDatePickerMode.dateAndTime,
+    //                   onDateTimeChanged: (Jalali dateTime) {
+    //                     tempPickedDate = dateTime;
+    //                   },
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
     // DatePicker.showDatePicker(
     //   context,
     //   minYear: widget.minYear,

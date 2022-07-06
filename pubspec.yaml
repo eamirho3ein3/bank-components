@@ -16,7 +16,7 @@ dependencies:
   intl: ^0.17.0
   shimmer: ^2.0.0
   # jalali_calendar: ^1.0.4
-  persian_datetime_picker: ^2.5.0
+  # persian_datetime_picker: ^2.5.0
   flutter_picker: ^2.0.2
   flutter_slidable: ^1.2.0
   rich_text_controller: ^1.4.0
