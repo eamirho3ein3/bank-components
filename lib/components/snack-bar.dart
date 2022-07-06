@@ -62,9 +62,7 @@ class CustomSnackBar extends SnackBar {
           duration: duration,
           backgroundColor: style.backgroundColor,
           padding: EdgeInsets.only(
-            left: button != null ? 8 : 12,
-            right: 12,
-          ),
+              left: button != null ? 8 : 12, right: 12, top: 12, bottom: 12),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.only(
               left: 16,
