@@ -38,6 +38,8 @@ class BottomSheetView extends StatelessWidget {
 
   _buildView(BuildContext context) {
     return SingleChildScrollView(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: new BorderRadius.only(
@@ -67,22 +69,26 @@ class BottomSheetView extends StatelessWidget {
         color: style.backgroundColor,
       ),
       padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-      child: Column(
-        children: [
-          _buildHandle(context),
-          _buildTitle(context),
-          Expanded(
-            child: SingleChildScrollView(
-              controller: scrollController,
-              child: Column(
-                children: [
-                  builder(context, scrollController),
-                ],
+      child: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Column(
+          children: [
+            _buildHandle(context),
+            _buildTitle(context),
+            Expanded(
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  children: [
+                    builder(context, scrollController),
+                  ],
+                ),
               ),
             ),
-          ),
-          _buildButtons(context),
-        ],
+            _buildButtons(context),
+          ],
+        ),
       ),
     );
   }
