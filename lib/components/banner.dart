@@ -75,7 +75,10 @@ class CustomBanner extends StatelessWidget {
                           action.text,
                           style: Theme.of(context).textTheme.button,
                         ),
-                        Icon(Icons.chevron_left)
+                        action.icon != null
+                            ? Icon(action.icon.icon,
+                                color: action.icon?.iconColor)
+                            : SizedBox(),
                       ],
                     ),
                   ),
