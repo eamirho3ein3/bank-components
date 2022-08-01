@@ -6,13 +6,15 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget titleWidget;
   final String title;
   final Color backgroundColor;
+  final Color backIconColor;
 
   SubAppBar(
       {this.actions,
       this.titleWidget,
       this.title,
       @required this.backIcon,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.backIconColor});
 
   static final _appBar = AppBar();
   @override
@@ -30,6 +32,7 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? CustomIconButton(
               icon: backIcon,
               backgroundColor: Colors.transparent,
+              iconColor: backIconColor,
               onClick: () => Navigator.of(context).pop(),
             )
           : null,
