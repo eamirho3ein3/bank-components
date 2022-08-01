@@ -8,7 +8,7 @@ class ZarinCard extends StatelessWidget {
   final bool isActive;
 
   ZarinCard({
-    @required this.button,
+    this.button,
     @required this.style,
     this.cardNumbers,
     @required this.isActive,
@@ -36,20 +36,22 @@ class ZarinCard extends StatelessWidget {
               width: constraints.maxWidth,
               fit: BoxFit.fitWidth,
             ),
-            Positioned(
-                bottom: 16,
-                right: 16,
-                left: 16,
-                child: Container(
-                  width: double.infinity,
-                  child: CustomButton(
-                    title: button.text,
-                    size: ButtonSize.large,
-                    onClick: button.onClick,
-                    style: button.style,
-                    rightIcon: button.icon.icon,
-                  ),
-                )),
+            button != null
+                ? Positioned(
+                    bottom: 16,
+                    right: 16,
+                    left: 16,
+                    child: Container(
+                      width: double.infinity,
+                      child: CustomButton(
+                        title: button.text,
+                        size: ButtonSize.large,
+                        onClick: button.onClick,
+                        style: button.style,
+                        rightIcon: button.icon.icon,
+                      ),
+                    ))
+                : SizedBox(),
             // CustomCardTypeOne(
             //   header: SizedBox(
             //     height: 28,
