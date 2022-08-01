@@ -5,9 +5,14 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData backIcon;
   final Widget titleWidget;
   final String title;
+  final Color backgroundColor;
 
   SubAppBar(
-      {this.actions, this.titleWidget, this.title, @required this.backIcon});
+      {this.actions,
+      this.titleWidget,
+      this.title,
+      @required this.backIcon,
+      this.backgroundColor});
 
   static final _appBar = AppBar();
   @override
@@ -29,6 +34,7 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       centerTitle: true,
+      backgroundColor: backgroundColor,
     );
   }
 
