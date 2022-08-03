@@ -5,9 +5,12 @@ class ComponentAction {
   final Function onClick;
   final CustomButtonTheme style;
   final CustomIconTheme icon;
-  ComponentAction(
-      {@required this.text,
-      @required this.onClick,
-      @required this.style,
-      this.icon});
+  final bool isLoading;
+  ComponentAction({
+    @required this.text,
+    @required this.onClick,
+    @required this.style,
+    this.icon,
+    this.isLoading,
+  });
 }

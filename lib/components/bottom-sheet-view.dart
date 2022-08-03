@@ -131,6 +131,7 @@ class BottomSheetView extends StatelessWidget {
                         size: ButtonSize.medium,
                         onClick: rightButton.onClick,
                         style: rightButton.style,
+                        isLoading: rightButton.isLoading,
                       ),
                     )
                   : SizedBox(),
@@ -145,6 +146,7 @@ class BottomSheetView extends StatelessWidget {
                         size: ButtonSize.medium,
                         onClick: leftButton.onClick,
                         style: leftButton.style,
+                        isLoading: leftButton.isLoading,
                       ),
                     )
                   : SizedBox(),
