@@ -5,6 +5,7 @@ class CustomPicker extends StatefulWidget {
   ///
 
   final Function(String) onComplete;
+  final Function(String) onSelect;
   final String placeholder;
   final List<String> itemList;
   final String selectedValue;
@@ -19,6 +20,7 @@ class CustomPicker extends StatefulWidget {
     this.cancelTitle,
     this.validator,
     @required this.selectedValue,
+    this.onSelect,
   });
 
   @override
@@ -104,11 +106,14 @@ class _CustomPickerState extends State<CustomPicker> {
       selecteds: selected,
       textStyle: Theme.of(context).textTheme.caption,
       selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
-      onConfirm: (picker, value) {},
+      onConfirm: (picker, value) {
+        dateController.text = widget.itemList[value.first];
+        widget.onComplete(widget.itemList[value.first]);
+      },
       onCancel: () {},
       onSelect: (Picker picker, int selected, List value) {
         dateController.text = widget.itemList[value.first];
-        widget.onComplete(widget.itemList[value.first]);
+        widget.onSelect(widget.itemList[value.first]);
       },
     ).showModal(context);
   }
