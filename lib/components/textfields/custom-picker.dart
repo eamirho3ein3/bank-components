@@ -39,10 +39,13 @@ class _CustomPickerState extends State<CustomPicker> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _showPicker(context);
+        if (widget.itemList.isNotEmpty) {
+          _showPicker(context);
+        }
       },
       child: AbsorbPointer(
         child: MainTextField(
+          enabled: widget.itemList.isEmpty ? false : true,
           controller: dateController,
           type: TextfieldType.Reqular,
           label: widget.placeholder,
