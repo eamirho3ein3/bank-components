@@ -12,6 +12,7 @@ class CustomPicker extends StatefulWidget {
   final Widget confirmTitle;
   final Widget cancelTitle;
   final Function(String) validator;
+  final TextEditingController controller;
   CustomPicker({
     @required this.onComplete,
     @required this.placeholder,
@@ -21,6 +22,7 @@ class CustomPicker extends StatefulWidget {
     this.validator,
     @required this.selectedValue,
     this.onSelect,
+    @required this.controller,
   });
 
   @override
@@ -28,12 +30,8 @@ class CustomPicker extends StatefulWidget {
 }
 
 class _CustomPickerState extends State<CustomPicker> {
-  TextEditingController dateController = TextEditingController();
-
   @override
   void dispose() {
-    dateController.dispose();
-
     super.dispose();
   }
 
@@ -48,7 +46,7 @@ class _CustomPickerState extends State<CustomPicker> {
       child: AbsorbPointer(
         child: MainTextField(
           enabled: widget.itemList.isEmpty ? false : true,
-          controller: dateController,
+          controller: widget.controller,
           type: TextfieldType.Reqular,
           label: widget.placeholder,
           keyboardType: TextInputType.text,
@@ -62,7 +60,7 @@ class _CustomPickerState extends State<CustomPicker> {
     List<int> selected = widget.selectedValue == ''
         ? [0]
         : [widget.itemList.indexOf(widget.selectedValue)];
-    dateController.text = widget.itemList[selected.first];
+    widget.controller.text = widget.itemList[selected.first];
     Picker(
       adapter: PickerDataAdapter<String>(pickerdata: widget.itemList),
       changeToFirst: false,
@@ -107,12 +105,12 @@ class _CustomPickerState extends State<CustomPicker> {
       textStyle: Theme.of(context).textTheme.caption,
       selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
       onConfirm: (picker, value) {
-        dateController.text = widget.itemList[value.first];
+        widget.controller.text = widget.itemList[value.first];
         widget.onComplete(widget.itemList[value.first]);
       },
       onCancel: () {},
       onSelect: (Picker picker, int selected, List value) {
-        dateController.text = widget.itemList[value.first];
+        widget.controller.text = widget.itemList[value.first];
         if (widget.onSelect != null) {
           widget.onSelect(widget.itemList[value.first]);
         }
