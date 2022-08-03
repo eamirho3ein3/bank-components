@@ -113,7 +113,9 @@ class _CustomPickerState extends State<CustomPicker> {
       onCancel: () {},
       onSelect: (Picker picker, int selected, List value) {
         dateController.text = widget.itemList[value.first];
-        widget.onSelect(widget.itemList[value.first]);
+        if (widget.onSelect != null) {
+          widget.onSelect(widget.itemList[value.first]);
+        }
       },
     ).showModal(context);
   }
