@@ -61,6 +61,7 @@ class _CustomPickerState extends State<CustomPicker> {
         ? [0]
         : [widget.itemList.indexOf(widget.selectedValue)];
     widget.controller.text = widget.itemList[selected.first];
+    widget.onSelect(widget.itemList[selected.first]);
     Picker(
       adapter: PickerDataAdapter<String>(pickerdata: widget.itemList),
       changeToFirst: false,
