@@ -13,6 +13,7 @@ class CustomPicker extends StatefulWidget {
   final Widget cancelTitle;
   final Function(String) validator;
   final TextEditingController controller;
+  final CustomPickerStyle style;
   CustomPicker({
     @required this.onComplete,
     @required this.placeholder,
@@ -23,6 +24,7 @@ class CustomPicker extends StatefulWidget {
     @required this.selectedValue,
     this.onSelect,
     @required this.controller,
+    @required this.style,
   });
 
   @override
@@ -98,12 +100,16 @@ class _CustomPickerState extends State<CustomPicker> {
                   style: Theme.of(context)
                       .textTheme
                       .button
-                      .copyWith(color: Colors.red),
+                      .copyWith(color: widget.style.cancelColor),
                 ),
         ),
       ),
       selecteds: selected,
-      textStyle: Theme.of(context).textTheme.caption,
+      backgroundColor: widget.style.backgroundColor,
+      textStyle: Theme.of(context)
+          .textTheme
+          .caption
+          .copyWith(color: widget.style.textColor),
       selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
       onConfirm: (picker, value) {
         widget.controller.text = widget.itemList[value.first];
@@ -118,4 +124,15 @@ class _CustomPickerState extends State<CustomPicker> {
       },
     ).showModal(context);
   }
+}
+
+class CustomPickerStyle {
+  final Color backgroundColor;
+  final Color cancelColor;
+  final Color textColor;
+
+  CustomPickerStyle(
+      {@required this.backgroundColor,
+      @required this.cancelColor,
+      @required this.textColor});
 }
