@@ -33,7 +33,7 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: backIcon,
               backgroundColor: Colors.transparent,
               iconColor: backIconColor,
-              onClick: () => Navigator.of(context).pop(),
+              onClick: () => Navigator.of(context).maybePop(),
             )
           : null,
       centerTitle: true,
