@@ -21,6 +21,7 @@ class MainTextField extends StatefulWidget {
   final bool showCursor;
   final bool readOnly;
   final bool enabled;
+  final Function(String) onFieldSubmitted;
 
   MainTextField({
     @required this.controller,
@@ -43,6 +44,7 @@ class MainTextField extends StatefulWidget {
     this.showCursor,
     this.readOnly = false,
     this.enabled,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -100,6 +102,9 @@ class _MainTextFieldState extends State<MainTextField> {
           onChanged: widget.onChanged,
           style: widget.textFieldStyle,
           textDirection: widget.textDirection,
+          onFieldSubmitted: (value) {
+            print('save this value = $value');
+          },
         ),
         widget.helper != null
             ? Padding(
