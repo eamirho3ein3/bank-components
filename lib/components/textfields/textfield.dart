@@ -102,9 +102,7 @@ class _MainTextFieldState extends State<MainTextField> {
           onChanged: widget.onChanged,
           style: widget.textFieldStyle,
           textDirection: widget.textDirection,
-          onFieldSubmitted: (value) {
-            print('save this value = $value');
-          },
+          onFieldSubmitted: widget.onFieldSubmitted,
         ),
         widget.helper != null
             ? Padding(
