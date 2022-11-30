@@ -8,7 +8,7 @@ class ComponentAction {
   final bool isLoading;
   ComponentAction({
     @required this.text,
-    @required this.onClick,
+    this.onClick,
     @required this.style,
     this.icon,
     this.isLoading,
