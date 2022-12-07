@@ -38,23 +38,10 @@ String replaceToFarsiNumber(String input) {
   return input;
 }
 
-String addCommasToPrice<T>(String input) {
+String addCommasToPrice(String input) {
   if (input != null && input.isNotEmpty) {
     try {
-      var number;
-      var formatter = intel.NumberFormat('#,###');
-      switch (T) {
-        case double:
-          print("call double");
-          number = double.parse(input);
-          break;
-        case int:
-        default:
-          print("call int");
-          number = int.parse(input);
-      }
-
-      input = formatter.format(number);
+      input = input.seRagham();
     } catch (e) {
       print("e = $e");
     }
