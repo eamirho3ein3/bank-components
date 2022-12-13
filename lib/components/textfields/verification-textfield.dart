@@ -4,10 +4,12 @@ class VerificationTextField extends StatefulWidget {
   final TextEditingController controller;
   final Function(String) onComplete;
   final Function(String) onChanged;
+  final int otpLength;
   VerificationTextField(
       {@required this.controller,
       @required this.onComplete,
-      @required this.onChanged});
+      @required this.onChanged,
+      this.otpLength = 6});
 
   @override
   _VerificationTextFieldState createState() => _VerificationTextFieldState();
@@ -53,7 +55,7 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
                 type: TextfieldType.Reqular,
                 controller: _controller,
                 focusNode: _focusNode,
-                limit: 6,
+                limit: widget.otpLength,
                 inputFormatters: [
                   // FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
                 ],
@@ -64,7 +66,7 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
                     widget.onChanged(_input);
                   }
 
-                  if (_input.length == 6) {
+                  if (_input.length == widget.otpLength) {
                     _focusNode.unfocus();
                     if (widget.onComplete != null) {
                       widget.onComplete(_input);
@@ -82,7 +84,7 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
 
   _buildNumberItem(String inputCode) {
     List<Widget> _cells = [];
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < widget.otpLength; i++) {
       String _text = '';
       // the display text
       if (i < inputCode.length) {
