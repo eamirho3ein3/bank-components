@@ -44,6 +44,7 @@ class CustomSnackBar extends SnackBar {
               ),
               Expanded(
                   child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     message,
