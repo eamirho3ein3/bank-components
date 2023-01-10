@@ -2,7 +2,10 @@ part of bank_components;
 
 class CustomSnackBar extends SnackBar {
   final IconData icon;
+  final String assetsImage;
+  final DismissDirection dismissDirection;
   final String message;
+  final String subMessage;
   final ComponentAction button;
   final SnackBarTheme style;
   final Duration duration;
@@ -10,7 +13,10 @@ class CustomSnackBar extends SnackBar {
   final BuildContext context;
   CustomSnackBar({
     this.icon,
+    this.assetsImage,
+    this.dismissDirection,
     @required this.message,
+    this.subMessage,
     @required this.style,
     @required this.context,
     this.button,
@@ -26,18 +32,37 @@ class CustomSnackBar extends SnackBar {
                       size: 24,
                     )
                   : SizedBox(),
+              assetsImage != null
+                  ? Image.asset(
+                      assetsImage,
+                      height: 24,
+                      width: 24,
+                    )
+                  : SizedBox(),
               SizedBox(
                 width: icon != null ? 8 : 0,
               ),
               Expanded(
-                child: Text(
-                  message,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      .copyWith(color: style.textColor),
-                ),
-              ),
+                  child: Column(
+                children: [
+                  Text(
+                    message,
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1
+                        .copyWith(color: style.textColor),
+                  ),
+                  subMessage != null
+                      ? Text(
+                          subMessage,
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption
+                              .copyWith(color: style.textColor),
+                        )
+                      : SizedBox(),
+                ],
+              )),
               SizedBox(
                 width: button != null ? 8 : 0,
               ),
@@ -61,6 +86,7 @@ class CustomSnackBar extends SnackBar {
           elevation: 0,
           duration: duration,
           backgroundColor: style.backgroundColor,
+          dismissDirection: dismissDirection ?? DismissDirection.down,
           padding: EdgeInsets.only(
               left: button != null ? 8 : 12, right: 12, top: 12, bottom: 12),
           behavior: SnackBarBehavior.floating,
@@ -73,11 +99,13 @@ class CustomSnackBar extends SnackBar {
 
 class SnackBarTheme {
   final Color textColor;
+  final Color secondaryTextColor;
   final Color backgroundColor;
   final MaterialStateProperty<Color> buttonBackgroundColor;
   SnackBarTheme({
     @required this.backgroundColor,
     @required this.textColor,
+    @required this.secondaryTextColor,
     @required this.buttonBackgroundColor,
   });
 }
