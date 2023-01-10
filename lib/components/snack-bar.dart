@@ -40,11 +40,12 @@ class CustomSnackBar extends SnackBar {
                     )
                   : SizedBox(),
               SizedBox(
-                width: icon != null ? 8 : 0,
+                width: icon != null || assetsImage != null ? 8 : 0,
               ),
               Expanded(
                   child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     message,
