@@ -69,10 +69,8 @@ class CustomSnackBar extends SnackBar {
                       onPressed: button.onClick,
                       child: Text(
                         button.text,
-                        style: Theme.of(context)
-                            .textTheme
-                            .button
-                            .copyWith(color: style.textColor),
+                        style: Theme.of(context).textTheme.button.copyWith(
+                            color: style.buttonTextColor ?? style.textColor),
                       ),
                       style: ButtonStyle(
                         backgroundColor: style.buttonBackgroundColor,
