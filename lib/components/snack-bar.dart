@@ -2,7 +2,7 @@ part of bank_components;
 
 class CustomSnackBar extends SnackBar {
   final IconData icon;
-  final String assetsImage;
+  final Widget image;
   final DismissDirection dismissDirection;
   final String message;
   final String subMessage;
@@ -10,10 +10,11 @@ class CustomSnackBar extends SnackBar {
   final SnackBarTheme style;
   final Duration duration;
   final double bottomMargin;
+  final double horizontalMargin;
   final BuildContext context;
   CustomSnackBar({
     this.icon,
-    this.assetsImage,
+    this.image,
     this.dismissDirection,
     @required this.message,
     this.subMessage,
@@ -21,6 +22,7 @@ class CustomSnackBar extends SnackBar {
     @required this.context,
     this.button,
     this.bottomMargin,
+    this.horizontalMargin = 16,
     @required this.duration,
   }) : super(
           content: Row(
@@ -32,15 +34,9 @@ class CustomSnackBar extends SnackBar {
                       size: 24,
                     )
                   : SizedBox(),
-              assetsImage != null
-                  ? Image.asset(
-                      assetsImage,
-                      height: 24,
-                      width: 24,
-                    )
-                  : SizedBox(),
+              image != null ? image : SizedBox(),
               SizedBox(
-                width: icon != null || assetsImage != null ? 8 : 0,
+                width: icon != null || image != null ? 8 : 0,
               ),
               Expanded(
                   child: Column(
@@ -93,14 +89,15 @@ class CustomSnackBar extends SnackBar {
               left: button != null ? 8 : 12, right: 12, top: 12, bottom: 12),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: horizontalMargin,
+              right: horizontalMargin,
               bottom: bottomMargin != null ? bottomMargin : 16),
         );
 }
 
 class SnackBarTheme {
   final Color textColor;
+  final Color buttonTextColor;
   final Color secondaryTextColor;
   final Color backgroundColor;
   final MaterialStateProperty<Color> buttonBackgroundColor;
@@ -109,5 +106,6 @@ class SnackBarTheme {
     @required this.textColor,
     @required this.secondaryTextColor,
     @required this.buttonBackgroundColor,
+    this.buttonTextColor,
   });
 }
