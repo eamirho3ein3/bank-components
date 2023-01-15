@@ -4,11 +4,17 @@ class AmountTextField extends StatefulWidget {
   final TextStyle textFieldStyle;
   final TextStyle textUnitStyle;
   final Function(String) onTextFieldChanged;
+  final dynamic Function(String) validator;
 
-  AmountTextField(
-      {@required this.textFieldStyle,
-      @required this.textUnitStyle,
-      this.onTextFieldChanged});
+  final GlobalKey<FormState> formKey;
+
+  AmountTextField({
+    @required this.textFieldStyle,
+    @required this.textUnitStyle,
+    this.onTextFieldChanged,
+    this.validator,
+    this.formKey,
+  });
 
   @override
   _AmountTextFieldState createState() => _AmountTextFieldState();
@@ -43,13 +49,22 @@ class _AmountTextFieldState extends State<AmountTextField> {
         var result =
             replaceToEnglishNumber(value).replaceAll(RegExp('[^0-9]'), '');
 
-        setState(() {
-          final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
+        final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
+        if (widget.formKey != null) {
+          if (!widget.formKey.currentState.validate()) {
+            wordPrice = null;
+          } else {
+            wordPrice = result.replaceAll(regexp, '');
+          }
+        } else {
           wordPrice = result.replaceAll(regexp, '');
-        });
+        }
+
+        setState(() {});
 
         widget.onTextFieldChanged(result);
       },
+      validator: widget.validator,
       helper: wordPrice == null || wordPrice.isEmpty
           ? SizedBox()
           : Text(
