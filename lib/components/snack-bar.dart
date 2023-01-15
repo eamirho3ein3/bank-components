@@ -73,6 +73,7 @@ class CustomSnackBar extends SnackBar {
                             color: style.buttonTextColor ?? style.textColor),
                       ),
                       style: ButtonStyle(
+                        elevation: MaterialStateProperty.all(0),
                         backgroundColor: style.buttonBackgroundColor,
                       ),
                     )
