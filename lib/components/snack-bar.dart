@@ -4,7 +4,12 @@ class CustomSnackBar extends SnackBar {
   final IconData icon;
   final Widget image;
   final DismissDirection dismissDirection;
+
+  /// use when you want show text as message
   final String message;
+
+  /// use when you want show custom widget as message
+  final Widget messageWidget;
   final String subMessage;
   final ComponentAction button;
   final SnackBarTheme style;
@@ -17,7 +22,8 @@ class CustomSnackBar extends SnackBar {
     this.icon,
     this.image,
     this.dismissDirection,
-    @required this.message,
+    this.message,
+    this.messageWidget,
     this.subMessage,
     @required this.style,
     @required this.context,
@@ -45,20 +51,21 @@ class CustomSnackBar extends SnackBar {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    message,
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle1
-                        .copyWith(color: style.textColor),
-                  ),
+                  message == null
+                      ? (messageWidget ?? SizedBox())
+                      : Text(
+                          message,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              .copyWith(color: style.textColor),
+                        ),
                   subMessage != null
                       ? Text(
                           subMessage,
-                          style: Theme.of(context)
-                              .textTheme
-                              .caption
-                              .copyWith(color: style.textColor),
+                          style: Theme.of(context).textTheme.caption.copyWith(
+                              color:
+                                  style.secondaryTextColor ?? style.textColor),
                         )
                       : SizedBox(),
                 ],
@@ -100,8 +107,13 @@ class CustomSnackBar extends SnackBar {
 }
 
 class SnackBarTheme {
+  /// use for message color
   final Color textColor;
+
+  /// use for button color
   final Color buttonTextColor;
+
+  /// use for subMessage color
   final Color secondaryTextColor;
   final Color backgroundColor;
   final MaterialStateProperty<Color> buttonBackgroundColor;
