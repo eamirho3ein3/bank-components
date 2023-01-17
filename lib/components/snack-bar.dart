@@ -17,7 +17,7 @@ class CustomSnackBar extends SnackBar {
   final double bottomMargin;
   final double horizontalMargin;
   final BuildContext context;
-  final double radius;
+  final BorderRadius radius;
   CustomSnackBar({
     this.icon,
     this.image,
@@ -31,8 +31,9 @@ class CustomSnackBar extends SnackBar {
     this.bottomMargin,
     this.horizontalMargin = 16,
     @required this.duration,
-    this.radius = 4,
-  }) : super(
+    BorderRadius radius,
+  })  : this.radius = radius ?? BorderRadius.circular(4),
+        super(
           content: Row(
             children: [
               icon != null
@@ -92,7 +93,7 @@ class CustomSnackBar extends SnackBar {
           elevation: 0,
           duration: duration,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius),
+            borderRadius: radius,
           ),
           backgroundColor: style.backgroundColor,
           dismissDirection: dismissDirection ?? DismissDirection.down,
