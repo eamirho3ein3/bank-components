@@ -3,8 +3,12 @@ part of bank_components;
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<CustomIconButton> actions;
+  final Color backgroundColor;
 
-  MainAppBar({@required this.title, @required this.actions});
+  MainAppBar(
+      {@required this.title,
+      @required this.actions,
+      this.backgroundColor = Colors.transparent});
   static final _appBar = AppBar();
 
   @override
@@ -16,7 +20,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: false,
       actions: actions,
-      backgroundColor: Colors.transparent,
+      backgroundColor: backgroundColor,
       title: Text(
         title,
         style: Theme.of(context).textTheme.headline2,
