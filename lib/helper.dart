@@ -28,7 +28,7 @@ String replaceToEnglishNumber(String input) {
       ',',
       '.'
     ];
-    const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '،', '٫'];
+    const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', ',', '٫'];
 
     for (int i = 0; i < farsi.length; i++) {
       input = input.replaceAll(farsi[i], english[i]);
