@@ -54,7 +54,7 @@ String replaceToFarsiNumber(String input) {
       ',',
       '.'
     ];
-    const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '،', '٫'];
+    const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', ',', '٫'];
 
     for (int i = 0; i < english.length; i++) {
       input = input.replaceAll(english[i], farsi[i]);
