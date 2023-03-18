@@ -13,6 +13,7 @@ import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:rich_text_controller/rich_text_controller.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
+import 'dart:io' show Platform;
 
 export 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -58,6 +59,7 @@ part 'components/icon-button.dart';
 part 'components/tooltip.dart';
 part 'components/avatar.dart';
 part 'components/price-widget.dart';
+part 'components/custom-safe-area.dart';
 
 part 'models/action.dart';
 part 'models/chip.dart';
