@@ -22,6 +22,7 @@ class MainTextField extends StatefulWidget {
   final bool readOnly;
   final bool enabled;
   final Function(String) onFieldSubmitted;
+  final Function onTap;
 
   MainTextField({
     @required this.controller,
@@ -45,6 +46,7 @@ class MainTextField extends StatefulWidget {
     this.readOnly = false,
     this.enabled,
     this.onFieldSubmitted,
+    this.onTap,
   });
 
   @override
@@ -97,6 +99,7 @@ class _MainTextFieldState extends State<MainTextField> {
                   widget.type == TextfieldType.SecurePassword
               ? hidePassword
               : false,
+          onTap: widget.onTap,
           validator: widget.validator,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
