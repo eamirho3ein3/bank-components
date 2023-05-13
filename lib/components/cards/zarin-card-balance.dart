@@ -81,7 +81,7 @@ class ZarinCardBalance extends StatelessWidget {
                       child: CustomButton(
                         title: rightButton.text,
                         size: ButtonSize.large,
-                        onClick: rightButton.onClick,
+                        onClick: () {},
                         style: rightButton.style,
                         rightIcon: rightButton.icon.icon,
                       ),
@@ -95,7 +95,7 @@ class ZarinCardBalance extends StatelessWidget {
                       child: CustomButton(
                         title: leftButton.text,
                         size: ButtonSize.large,
-                        onClick: leftButton.onClick,
+                        onClick: () {},
                         style: leftButton.style,
                         rightIcon: leftButton.icon.icon,
                       ),
