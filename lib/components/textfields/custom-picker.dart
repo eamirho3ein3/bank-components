@@ -40,9 +40,10 @@ class _CustomPickerState extends State<CustomPicker> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (widget.itemList.isNotEmpty) {
-          _showPicker(context);
+          var result = await _showPicker(context);
+          widget.onComplete(result);
         }
       },
       child: AbsorbPointer(
@@ -58,13 +59,13 @@ class _CustomPickerState extends State<CustomPicker> {
     );
   }
 
-  _showPicker(BuildContext context) {
+  Future _showPicker(BuildContext context) async {
     List<int> selected = widget.selectedValue == ''
         ? [0]
         : [widget.itemList.indexOf(widget.selectedValue)];
     widget.controller.text = widget.itemList[selected.first];
     widget.onSelect(widget.itemList[selected.first]);
-    Picker(
+    await Picker(
       adapter: PickerDataAdapter<String>(pickerdata: widget.itemList),
       changeToFirst: false,
       looping: false,
@@ -72,7 +73,7 @@ class _CustomPickerState extends State<CustomPicker> {
       itemExtent: 36,
       confirm: InkWell(
         onTap: () {
-          Navigator.of(context).pop();
+          Navigator.of(context).pop(widget.controller.text);
         },
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
