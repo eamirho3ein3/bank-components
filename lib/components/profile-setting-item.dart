@@ -8,6 +8,7 @@ class ProfileSettingItem extends StatelessWidget {
   final ToggleTheme toggleTheme;
   final Function(bool) onToggleChange;
   final bool toggleValue;
+  final double size;
 
   ProfileSettingItem(
       {this.onTap,
@@ -16,6 +17,7 @@ class ProfileSettingItem extends StatelessWidget {
       this.toggleTheme,
       this.onToggleChange,
       this.toggleValue,
+      this.size,
       @required this.title});
   @override
   Widget build(BuildContext context) {
@@ -24,9 +26,13 @@ class ProfileSettingItem extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 16),
-          child: Icon(
-            icon,
-            color: Theme.of(context).iconTheme.color,
+          child: SizedBox(
+            width: 24,
+            child: Icon(
+              icon,
+              color: Theme.of(context).iconTheme.color,
+              size: size ?? 24,
+            ),
           ),
         ),
         Expanded(
