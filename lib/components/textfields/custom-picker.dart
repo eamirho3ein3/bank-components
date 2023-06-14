@@ -114,7 +114,7 @@ class _CustomPickerState extends State<CustomPicker> {
       selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
       onConfirm: (picker, value) {
         widget.controller.text = widget.itemList[value.first];
-        widget.onComplete(widget.itemList[value.first]);
+        // widget.onComplete(widget.itemList[value.first]);
       },
       onCancel: () {},
       onSelect: (Picker picker, int selected, List value) {
