@@ -41,7 +41,9 @@ class TransactionItem extends StatelessWidget {
   _buildView(BuildContext context) {
     return InkWell(
       onTap: () {
-        onClick(context);
+        if (!isSkeleton) {
+          onClick(context);
+        }
       },
       child: Row(
         children: [
