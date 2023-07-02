@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final CustomButtonTheme style;
   final double horizontalPadding;
   final bool isLoading;
+  final MainAxisAlignment buttonAlignment;
 
   CustomButton(
       {this.size,
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
       this.onClick,
       @required this.style,
       this.horizontalPadding,
+      this.buttonAlignment = MainAxisAlignment.center,
       this.isLoading});
 
   @override
@@ -37,7 +39,7 @@ class CustomButton extends StatelessWidget {
         child: isLoading != null && isLoading
             ? _buildLoading(context)
             : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: buttonAlignment,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // right icon
