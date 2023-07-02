@@ -9,7 +9,6 @@ class CustomButton extends StatelessWidget {
   final CustomButtonTheme style;
   final double horizontalPadding;
   final bool isLoading;
-  final MainAxisAlignment buttonAlignment;
 
   CustomButton(
       {this.size,
@@ -19,7 +18,6 @@ class CustomButton extends StatelessWidget {
       this.onClick,
       @required this.style,
       this.horizontalPadding,
-      this.buttonAlignment = MainAxisAlignment.center,
       this.isLoading});
 
   @override
@@ -39,7 +37,7 @@ class CustomButton extends StatelessWidget {
         child: isLoading != null && isLoading
             ? _buildLoading(context)
             : Row(
-                mainAxisAlignment: buttonAlignment,
+                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // right icon
@@ -76,6 +74,7 @@ class CustomButton extends StatelessWidget {
               ),
       ),
       style: ButtonStyle(
+        alignment: style.alignment,
         elevation: MaterialStateProperty.all(0),
         overlayColor: MaterialStateProperty.all(Colors.black.withOpacity(0.08)),
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -126,6 +125,7 @@ class CustomButtonTheme {
   final Color disabledColor;
   final Color foregroundDisabledColor;
   final LoadingButtonTheme loadingButtonTheme;
+  final AlignmentGeometry alignment;
 
   CustomButtonTheme({
     @required this.backgroundColor,
@@ -133,6 +133,7 @@ class CustomButtonTheme {
     @required this.disabledColor,
     @required this.foregroundDisabledColor,
     @required this.loadingButtonTheme,
+    this.alignment,
   });
 }
 
