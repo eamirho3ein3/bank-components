@@ -5,6 +5,7 @@ class ZarinCardBalance extends StatelessWidget {
   final ComponentAction leftButton;
   final CustomCardTheme style;
   final String title;
+  final String subtitle;
   final String amount;
   final bool isSkeleton;
   final SkeletonSetting setting;
@@ -15,6 +16,7 @@ class ZarinCardBalance extends StatelessWidget {
     @required this.leftButton,
     @required this.style,
     @required this.title,
+    @required this.subtitle,
     @required this.amount,
     @required this.isSkeleton,
     @required this.setting,
@@ -111,15 +113,26 @@ class ZarinCardBalance extends StatelessWidget {
   _buildView(BuildContext context) {
     return CustomCardTypeOne(
       header: Padding(
-        // title
         padding: EdgeInsets.only(bottom: 24),
-        child: Text(
-          title,
-          textAlign: TextAlign.start,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2
-              .copyWith(color: style.secondaryTextColor),
+        child: Column(
+          children: [
+            // title
+            Text(title,
+                textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.bodyText2),
+
+            // subtitle
+            subtitle != null
+                ? Text(
+                    subtitle,
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption
+                        .copyWith(color: style.secondaryTextColor),
+                  )
+                : SizedBox(),
+          ],
         ),
       ),
       content: Row(
