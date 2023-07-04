@@ -115,6 +115,7 @@ class ZarinCardBalance extends StatelessWidget {
       header: Padding(
         padding: EdgeInsets.only(bottom: 24),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // title
             Text(title,
