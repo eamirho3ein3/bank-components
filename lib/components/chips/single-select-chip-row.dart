@@ -48,6 +48,7 @@ class _SingleSelectChipsState extends State<SingleSelectChips> {
 
       for (var i = 0; i < list.length; i++) {
         CustomChoiceChip chip = CustomChoiceChip(
+          titleColor: list[i].color,
           selected: selected == i,
           title: list[i].title,
           type: ChipType.Filter,

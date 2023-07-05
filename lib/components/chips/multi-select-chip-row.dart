@@ -82,6 +82,7 @@ class _MultiSelectChipsState extends State<MultiSelectChips> {
 
       for (var i = 0; i < list.length; i++) {
         CustomChoiceChip chip = CustomChoiceChip(
+          titleColor: list[i].color,
           selected: filtersSelected.contains(i),
           title: list[i].title,
           type: ChipType.Filter,

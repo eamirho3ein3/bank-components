@@ -10,12 +10,14 @@ class CustomChoiceChip extends StatelessWidget {
   final bool selected;
   final bool isSkeleton;
   final SkeletonSetting setting;
+  final Color titleColor;
 
   CustomChoiceChip(
       {@required this.title,
       this.numbers,
       this.icon,
       this.onClick,
+      this.titleColor,
       @required this.selected,
       @required this.type,
       this.onClose,
@@ -34,7 +36,7 @@ class CustomChoiceChip extends StatelessWidget {
           Text(
             (numbers != null ? numbers + " " : '') + title,
             style: Theme.of(context).textTheme.subtitle1.copyWith(
-                color: selected ? Theme.of(context).primaryColor : null),
+                color: selected ? Theme.of(context).primaryColor : titleColor),
           ),
           selected && type == ChipType.Action
               ? InkWell(
