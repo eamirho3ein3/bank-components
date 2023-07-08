@@ -12,7 +12,7 @@ List<String> getCorrectCardNumber(String number) {
   return numbers;
 }
 
-String replaceToEnglishNumber(String input) {
+String replaceToEnglishNumber(String input, {bool onlyNumber = false}) {
   if (input != null && input.isNotEmpty) {
     const english = [
       '0',
@@ -31,14 +31,21 @@ String replaceToEnglishNumber(String input) {
     const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', ',', '٫'];
 
     for (int i = 0; i < farsi.length; i++) {
-      input = input.replaceAll(farsi[i], english[i]);
+      if (onlyNumber) {
+        var isInt = int.tryParse(english[i]);
+        if (isInt != null) {
+          input = input.replaceAll(farsi[i], english[i]);
+        }
+      } else {
+        input = input.replaceAll(farsi[i], english[i]);
+      }
     }
   }
 
   return input;
 }
 
-String replaceToFarsiNumber(String input) {
+String replaceToFarsiNumber(String input, {bool onlyNumber = false}) {
   if (input != null && input.isNotEmpty) {
     const english = [
       '0',
@@ -57,7 +64,14 @@ String replaceToFarsiNumber(String input) {
     const farsi = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', ',', '٫'];
 
     for (int i = 0; i < english.length; i++) {
-      input = input.replaceAll(english[i], farsi[i]);
+      if (onlyNumber) {
+        var isInt = int.tryParse(english[i]);
+        if (isInt != null) {
+          input = input.replaceAll(english[i], farsi[i]);
+        }
+      } else {
+        input = input.replaceAll(english[i], farsi[i]);
+      }
     }
   }
 
