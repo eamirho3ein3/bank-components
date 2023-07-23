@@ -24,17 +24,19 @@ class ProfileSettingItem extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16),
-          child: SizedBox(
-            width: 24,
-            child: Icon(
-              icon,
-              color: Theme.of(context).iconTheme.color,
-              size: size ?? 24,
-            ),
-          ),
-        ),
+        icon != null
+            ? Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: SizedBox(
+                  width: 24,
+                  child: Icon(
+                    icon,
+                    color: Theme.of(context).iconTheme.color,
+                    size: size ?? 24,
+                  ),
+                ),
+              )
+            : SizedBox(),
         Expanded(
           child: RawMaterialButton(
             onPressed: onTap,
