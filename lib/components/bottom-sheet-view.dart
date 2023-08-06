@@ -8,6 +8,7 @@ typedef ScrollableContentWidgetBuilder = Widget Function(
 class BottomSheetView extends StatelessWidget {
   final String title;
   final Widget content;
+  final Widget contentWithSelfScroll;
   final ComponentAction rightButton;
   final ComponentAction leftButton;
   final BottomSheetTheme style;
@@ -15,6 +16,7 @@ class BottomSheetView extends StatelessWidget {
   BottomSheetView({
     this.title,
     this.content,
+    this.contentWithSelfScroll,
     this.rightButton,
     this.leftButton,
     @required this.style,
@@ -33,30 +35,37 @@ class BottomSheetView extends StatelessWidget {
                   return _buidDragableView(context, scrollController);
                 }),
           )
-        : _buildView(context);
+        : _checkSelfScroll(context);
+  }
+
+  _checkSelfScroll(BuildContext context) {
+    return contentWithSelfScroll != null
+        ? _buildView(context)
+        : SingleChildScrollView(
+            child: _buildView(context),
+          );
   }
 
   _buildView(BuildContext context) {
-    return SingleChildScrollView(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: new BorderRadius.only(
-              topLeft: const Radius.circular(8.0),
-              topRight: const Radius.circular(8.0)),
-          color: style.backgroundColor,
-        ),
-        padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-        child: CustomSafeArea(
-          child: Column(
-            children: [
-              _buildHandle(context),
-              _buildTitle(context),
-              content != null ? content : SizedBox(),
-              _buildButtons(context),
-            ],
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: new BorderRadius.only(
+            topLeft: const Radius.circular(8.0),
+            topRight: const Radius.circular(8.0)),
+        color: style.backgroundColor,
+      ),
+      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+      child: CustomSafeArea(
+        child: Column(
+          children: [
+            _buildHandle(context),
+            _buildTitle(context),
+            contentWithSelfScroll != null
+                ? Expanded(child: contentWithSelfScroll)
+                : SizedBox(),
+            content != null ? content : SizedBox(),
+            _buildButtons(context),
+          ],
         ),
       ),
     );
