@@ -8,6 +8,8 @@ typedef ScrollableContentWidgetBuilder = Widget Function(
 class BottomSheetView extends StatelessWidget {
   final String title;
   final Widget content;
+
+  /// content that contains scrollview and padding
   final Widget contentWithSelfScroll;
   final ComponentAction rightButton;
   final ComponentAction leftButton;
@@ -47,6 +49,9 @@ class BottomSheetView extends StatelessWidget {
   }
 
   _buildView(BuildContext context) {
+    var bottomPadding = rightButton != null || leftButton != null
+        ? 16 + MediaQuery.of(context).viewInsets.bottom
+        : MediaQuery.of(context).viewInsets.bottom;
     return Container(
       decoration: BoxDecoration(
         borderRadius: new BorderRadius.only(
@@ -54,7 +59,10 @@ class BottomSheetView extends StatelessWidget {
             topRight: const Radius.circular(8.0)),
         color: style.backgroundColor,
       ),
-      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+      padding: EdgeInsets.only(
+          left: contentWithSelfScroll != null ? 0 : 16,
+          right: contentWithSelfScroll != null ? 0 : 16,
+          bottom: bottomPadding),
       child: CustomSafeArea(
         child: Column(
           children: [
