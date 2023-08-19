@@ -1,13 +1,11 @@
 part of bank_components;
 
 class VerificationTextField extends StatefulWidget {
-  final TextEditingController controller;
   final Function(String) onComplete;
   final Function(String) onChanged;
   final int otpLength;
   VerificationTextField(
-      {@required this.controller,
-      @required this.onComplete,
+      {@required this.onComplete,
       @required this.onChanged,
       this.otpLength = 6});
 
@@ -16,100 +14,69 @@ class VerificationTextField extends StatefulWidget {
 }
 
 class _VerificationTextFieldState extends State<VerificationTextField> {
-  TextEditingController _controller = TextEditingController();
+  TextEditingController _controller;
   FocusNode _focusNode = FocusNode();
   String _input = "";
 
   @override
+  void initState() {
+    super.initState();
+    _controller = VerificationTextEditingController(limit: widget.otpLength);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 64,
-      decoration: BoxDecoration(
-        color: Theme.of(context).inputDecorationTheme.fillColor,
-        border: Border.all(
-            color: _focusNode.hasFocus
-                ? Theme.of(context)
-                    .inputDecorationTheme
-                    .focusedBorder
-                    .borderSide
-                    .color
-                : Theme.of(context)
-                    .inputDecorationTheme
-                    .enabledBorder
-                    .borderSide
-                    .color,
-            width: 1),
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // The widget that shows user's inputs
-          _buildNumberItem(_input),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: MainTextField(
+        showCursor: false,
+        textAlign: TextAlign.center,
+        type: TextfieldType.Reqular,
+        controller: _controller,
+        focusNode: _focusNode,
+        limit: widget.otpLength,
+        textFieldStyle: Theme.of(context).textTheme.headline1,
+        keyboardType: TextInputType.number,
+        contentPadding: EdgeInsets.symmetric(vertical: 8),
+        showCounter: false,
+        onChanged: (String value) {
+          _input = value;
+          if (widget.onChanged != null) {
+            widget.onChanged(_input);
+          }
 
-          // hiden textfield
-          Opacity(
-            opacity: 0.0,
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: MainTextField(
-                type: TextfieldType.Reqular,
-                controller: _controller,
-                focusNode: _focusNode,
-                limit: widget.otpLength,
-                inputFormatters: [
-                  // FilteringTextInputFormatter.allow(RegExp(r"[0-9]"))
-                ],
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  _input = value;
-                  if (widget.onChanged != null) {
-                    widget.onChanged(_input);
-                  }
-
-                  if (_input.length == widget.otpLength) {
-                    _focusNode.unfocus();
-                    if (widget.onComplete != null) {
-                      widget.onComplete(_input);
-                    }
-                  }
-                  setState(() {});
-                },
-              ),
-            ),
-          ),
-        ],
+          if (_input.length == widget.otpLength) {
+            _focusNode.unfocus();
+            if (widget.onComplete != null) {
+              widget.onComplete(_input);
+            }
+          }
+          setState(() {});
+        },
       ),
     );
   }
+}
 
-  _buildNumberItem(String inputCode) {
-    List<Widget> _cells = [];
-    for (int i = 0; i < widget.otpLength; i++) {
-      String _text = '';
-      // the display text
-      if (i < inputCode.length) {
-        _text = inputCode.substring(i, i + 1);
-      } else {
-        _text = "-";
-      }
-
-      _cells.add(Text(
-        _text,
-        style: Theme.of(context).textTheme.headline1,
-      ));
-    }
-
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24),
-      constraints: BoxConstraints(
-        maxWidth: 280,
-      ),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        textDirection: TextDirection.ltr,
-        children: _cells,
-      ),
-    );
+class VerificationTextEditingController extends TextEditingController {
+  final int limit;
+  VerificationTextEditingController({@required this.limit});
+  @override
+  TextSpan buildTextSpan(
+      {@required BuildContext context,
+      TextStyle style,
+      @required bool withComposing}) {
+    TextSpan original = super.buildTextSpan(
+        context: context, style: style, withComposing: withComposing);
+    String text = original.toPlainText();
+    const dashCode = 45;
+    List<int> codes = List.filled(6, dashCode);
+    String result = String.fromCharCodes(codes);
+    // If the text is empty, show "------", otherwise show the text with "-" appended until it reaches 6 characters
+    String newText = text.isEmpty ? result : text.padRight(limit, '-');
+    // Add spaces between each character to looks better
+    newText = newText.split('').join('  ');
+    TextSpan newSpan = TextSpan(text: newText, style: original.style);
+    return newSpan;
   }
 }

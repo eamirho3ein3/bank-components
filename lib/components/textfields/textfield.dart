@@ -21,6 +21,7 @@ class MainTextField extends StatefulWidget {
   final bool showCursor;
   final bool readOnly;
   final bool enabled;
+  final bool showCounter;
   final Function(String) onFieldSubmitted;
   final Function onTap;
 
@@ -43,6 +44,7 @@ class MainTextField extends StatefulWidget {
     this.textDirection,
     this.contentPadding,
     this.showCursor,
+    this.showCounter = true,
     this.readOnly = false,
     this.enabled,
     this.onFieldSubmitted,
@@ -69,7 +71,7 @@ class _MainTextFieldState extends State<MainTextField> {
           minLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
           maxLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
           buildCounter: (context, {currentLength, isFocused, maxLength}) {
-            return widget.limit != null
+            return widget.limit != null && widget.showCounter
                 ? Container(
                     child: Text(
                       replaceToFarsiNumber(
