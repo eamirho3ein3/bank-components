@@ -35,6 +35,9 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
         controller: _controller,
         focusNode: _focusNode,
         limit: widget.otpLength,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
+        ],
         textFieldStyle: Theme.of(context).textTheme.headline1,
         keyboardType: TextInputType.number,
         contentPadding: EdgeInsets.symmetric(vertical: 8),
