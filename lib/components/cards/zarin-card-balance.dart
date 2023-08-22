@@ -7,6 +7,7 @@ class ZarinCardBalance extends StatelessWidget {
   final String title;
   final String subtitle;
   final String amount;
+  final String currency;
   final bool isSkeleton;
   final SkeletonSetting setting;
   final TooltipSetting tooltipSetting;
@@ -16,6 +17,7 @@ class ZarinCardBalance extends StatelessWidget {
     @required this.leftButton,
     @required this.style,
     @required this.title,
+    @required this.currency,
     @required this.subtitle,
     @required this.amount,
     @required this.isSkeleton,
@@ -146,7 +148,7 @@ class ZarinCardBalance extends StatelessWidget {
             style: Theme.of(context).textTheme.headline1,
           ),
           Text(
-            ' ' + 'ریال',
+            currency ?? ' ' + 'ریال',
             textAlign: TextAlign.end,
             style: Theme.of(context).textTheme.bodyText1,
           ),
