@@ -5,12 +5,14 @@ class AmountTextField extends StatefulWidget {
   final TextStyle textUnitStyle;
   final Function(String) onTextFieldChanged;
   final dynamic Function(String) validator;
+  final String currency;
 
   final GlobalKey<FormState> formKey;
 
   AmountTextField({
     @required this.textFieldStyle,
     @required this.textUnitStyle,
+    @required this.currency,
     this.onTextFieldChanged,
     this.validator,
     this.formKey,
@@ -26,13 +28,14 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
   @override
   void initState() {
+    var regExp = "\B${widget.currency.trim()}";
     controller = RichTextController(
       patternMatchMap: {
-        RegExp(r"\Bریال"): widget.textUnitStyle,
+        RegExp(regExp): widget.textUnitStyle,
       },
       onMatch: (List<String> match) {},
       deleteOnBack: true,
-      text: 'ریال',
+      text: widget.currency.trim(),
     );
     super.initState();
   }
@@ -41,7 +44,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
   Widget build(BuildContext context) {
     return MainTextField(
       controller: controller,
-      inputFormatters: [PriceTextFormatter()],
+      inputFormatters: [PriceTextFormatter(currency: widget.currency)],
       textAlign: TextAlign.center,
       keyboardType: TextInputType.number,
       type: TextfieldType.Reqular,
@@ -49,7 +52,9 @@ class _AmountTextFieldState extends State<AmountTextField> {
         var result =
             replaceToEnglishNumber(value).replaceAll(RegExp('[^0-9]'), '');
 
-        final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
+        // final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
+        final regexp = RegExp(
+            '(?:${widget.currency.trim()}\u2067)|(?:${widget.currency.trim()})');
         if (widget.formKey != null) {
           if (!widget.formKey.currentState.validate()) {
             wordPrice = null;
@@ -68,7 +73,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
       helper: wordPrice == null || wordPrice.isEmpty
           ? SizedBox()
           : Text(
-              wordPrice.toWord() + " ریال",
+              wordPrice.toWord() + widget.currency,
               style: Theme.of(context).textTheme.caption,
             ),
       textDirection: TextDirection.ltr,
@@ -79,10 +84,12 @@ class _AmountTextFieldState extends State<AmountTextField> {
 }
 
 class PriceTextFormatter extends TextInputFormatter {
+  final String currency;
+  PriceTextFormatter({@required this.currency});
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    final currencySymbol = 'ریال' + '\u2067';
+    final currencySymbol = currency.trim() + '\u2067';
     if (newValue.text.isEmpty || newValue.text.trim() == currencySymbol) {
       return newValue.copyWith(text: '$currencySymbol');
     } else if (newValue.text.compareTo(oldValue.text) != 0) {
