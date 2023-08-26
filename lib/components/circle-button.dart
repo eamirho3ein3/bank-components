@@ -7,7 +7,7 @@ class CircleButton extends StatelessWidget {
   final CustomButtonTheme style;
   CircleButton(
       {@required this.onClick,
-      @required this.label,
+      this.label,
       @required this.icon,
       @required this.style});
 
