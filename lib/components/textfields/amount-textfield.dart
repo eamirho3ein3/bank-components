@@ -28,14 +28,14 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
   @override
   void initState() {
-    var regExp = "\B${widget.currency.trim()}";
+    var regExp = "\B${widget.currency}";
     controller = RichTextController(
       patternMatchMap: {
         RegExp(regExp): widget.textUnitStyle,
       },
       onMatch: (List<String> match) {},
       deleteOnBack: true,
-      text: widget.currency.trim(),
+      text: widget.currency,
     );
     super.initState();
   }
@@ -53,8 +53,8 @@ class _AmountTextFieldState extends State<AmountTextField> {
             replaceToEnglishNumber(value).replaceAll(RegExp('[^0-9]'), '');
 
         // final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
-        final regexp = RegExp(
-            '(?:${widget.currency.trim()}\u2067)|(?:${widget.currency.trim()})');
+        final regexp =
+            RegExp('(?:${widget.currency}\u2067)|(?:${widget.currency})');
         if (widget.formKey != null) {
           if (!widget.formKey.currentState.validate()) {
             wordPrice = null;
@@ -89,8 +89,9 @@ class PriceTextFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    final currencySymbol = currency.trim() + '\u2067';
-    if (newValue.text.isEmpty || newValue.text.trim() == currencySymbol) {
+    final currencySymbol = currency + '\u2067';
+    if (newValue.text.isEmpty ||
+        newValue.text.trim() == currencySymbol.trim()) {
       return newValue.copyWith(text: '$currencySymbol');
     } else if (newValue.text.compareTo(oldValue.text) != 0) {
       var newString = replaceToEnglishNumber(newValue.text)
