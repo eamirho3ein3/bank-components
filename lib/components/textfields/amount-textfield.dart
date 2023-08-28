@@ -28,14 +28,14 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
   @override
   void initState() {
-    var regExp = "\B${widget.currency}";
+    var regExp = "\B${widget.currency.trim() + '\u2066' + ' '}";
     controller = RichTextController(
       patternMatchMap: {
         RegExp(regExp): widget.textUnitStyle,
       },
       onMatch: (List<String> match) {},
       deleteOnBack: true,
-      text: widget.currency,
+      text: widget.currency.trim() + '\u2066' + ' ',
     );
     super.initState();
   }
@@ -53,8 +53,8 @@ class _AmountTextFieldState extends State<AmountTextField> {
             replaceToEnglishNumber(value).replaceAll(RegExp('[^0-9]'), '');
 
         // final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
-        final regexp =
-            RegExp('(?:${widget.currency}\u2067)|(?:${widget.currency})');
+        final regexp = RegExp(
+            '(?:${widget.currency.trim() + '\u2066' + ' '}\u2067)|(?:${widget.currency.trim() + '\u2066' + ' '})');
         if (widget.formKey != null) {
           if (!widget.formKey.currentState.validate()) {
             wordPrice = null;
@@ -89,7 +89,7 @@ class PriceTextFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    final currencySymbol = currency + '\u2067';
+    final currencySymbol = currency.trim();
     if (newValue.text.isEmpty ||
         newValue.text.trim() == currencySymbol.trim()) {
       return newValue.copyWith(text: '$currencySymbol');
@@ -98,7 +98,7 @@ class PriceTextFormatter extends TextInputFormatter {
           .replaceAll(RegExp('[^0-9]'), '');
       if (newString.trim().isEmpty) {
         return TextEditingValue(
-          text: currencySymbol,
+          text: currencySymbol + '\u2066' + ' ',
           selection: TextSelection.fromPosition(
               TextPosition(offset: currencySymbol.length)),
         );
@@ -106,7 +106,8 @@ class PriceTextFormatter extends TextInputFormatter {
         final f = intel.NumberFormat("#,###");
         var num = int.parse(replaceToEnglishNumber(newValue.text)
             .replaceAll(RegExp('[^0-9]'), ''));
-        final newString = '$currencySymbol' + '\u2066' + f.format(num).trim();
+        final newString =
+            '$currencySymbol' + '\u2066' + ' ' + f.format(num).trim();
 
         return TextEditingValue(
           text: replaceToFarsiNumber(newString),
