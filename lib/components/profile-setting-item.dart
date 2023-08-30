@@ -4,21 +4,24 @@ class ProfileSettingItem extends StatelessWidget {
   final Function onTap;
   final String title;
   final IconData icon;
+  final Widget suffixWidget;
   final ProfileSettingItemTheme style;
   final ToggleTheme toggleTheme;
   final Function(bool) onToggleChange;
   final bool toggleValue;
   final double size;
 
-  ProfileSettingItem(
-      {this.onTap,
-      this.icon,
-      @required this.style,
-      this.toggleTheme,
-      this.onToggleChange,
-      this.toggleValue,
-      this.size,
-      @required this.title});
+  ProfileSettingItem({
+    this.onTap,
+    this.icon,
+    @required this.style,
+    this.toggleTheme,
+    this.onToggleChange,
+    this.toggleValue,
+    this.size,
+    @required this.title,
+    this.suffixWidget,
+  });
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -65,7 +68,7 @@ class ProfileSettingItem extends StatelessWidget {
                         onToggle: onToggleChange,
                         value: toggleValue,
                       )
-                    : Icon(Icons.chevron_right_rounded),
+                    : (suffixWidget ?? Icon(Icons.chevron_right_rounded)),
               ],
             ),
           ),
