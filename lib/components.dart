@@ -60,6 +60,7 @@ part 'components/tooltip.dart';
 part 'components/avatar.dart';
 part 'components/price-widget.dart';
 part 'components/custom-safe-area.dart';
+part 'components/personal-setting-item.dart';
 
 part 'models/action.dart';
 part 'models/chip.dart';
