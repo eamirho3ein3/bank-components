@@ -4,7 +4,7 @@ class AddressItem extends StatelessWidget {
   final String title;
   final String address;
   final String code;
-  final IconData icon;
+  final IconData? icon;
   final AddressItemTheme style;
   final bool isSkeleton;
   final SkeletonSetting setting;
@@ -14,7 +14,7 @@ class AddressItem extends StatelessWidget {
     required this.title,
     required this.address,
     required this.code,
-    required this.icon,
+    this.icon,
     required this.style,
     required this.isSkeleton,
     required this.setting,
