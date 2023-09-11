@@ -1,25 +1,25 @@
 part of bank_components;
 
 class ProfileSettingItem extends StatelessWidget {
-  final Function onTap;
+  final Function()? onTap;
   final String title;
-  final IconData icon;
-  final Widget suffixWidget;
+  final IconData? icon;
+  final Widget? suffixWidget;
   final ProfileSettingItemTheme style;
-  final ToggleTheme toggleTheme;
-  final Function(bool) onToggleChange;
-  final bool toggleValue;
-  final double size;
+  final ToggleTheme? toggleTheme;
+  final Function(bool)? onToggleChange;
+  final bool? toggleValue;
+  final double? size;
 
   ProfileSettingItem({
     this.onTap,
     this.icon,
-    @required this.style,
+    required this.style,
     this.toggleTheme,
     this.onToggleChange,
     this.toggleValue,
     this.size,
-    @required this.title,
+    required this.title,
     this.suffixWidget,
   });
   @override
@@ -62,11 +62,11 @@ class ProfileSettingItem extends StatelessWidget {
                   title,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
-                toggleValue != null
+                toggleValue != null && toggleTheme != null
                     ? CustomToggle(
-                        style: toggleTheme,
+                        style: toggleTheme!,
                         onToggle: onToggleChange,
-                        value: toggleValue,
+                        value: toggleValue!,
                       )
                     : (suffixWidget ?? Icon(Icons.chevron_right_rounded)),
               ],
@@ -79,6 +79,6 @@ class ProfileSettingItem extends StatelessWidget {
 }
 
 class ProfileSettingItemTheme {
-  final Color backgroundColor;
+  final Color? backgroundColor;
   ProfileSettingItemTheme({this.backgroundColor});
 }

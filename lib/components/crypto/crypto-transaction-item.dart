@@ -2,28 +2,28 @@ part of bank_components;
 
 class CryptoTransactionItem extends StatelessWidget {
   final CustomIconTheme icon;
-  final String title;
-  final String subtitle;
-  final String price;
+  final String? title;
+  final String? subtitle;
+  final String? price;
   final CryptoTransactionItemTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
   final TransactionType type;
   final CryptoSymbol symbolWidget;
 
-  final Function(BuildContext) onClick;
+  final Function(BuildContext)? onClick;
 
   CryptoTransactionItem({
-    @required this.icon,
-    @required this.title,
-    @required this.subtitle,
-    @required this.style,
-    @required this.price,
-    @required this.isSkeleton,
-    @required this.setting,
-    @required this.type,
+    required this.icon,
+    this.title,
+    this.subtitle,
+    required this.style,
+    this.price,
+    required this.isSkeleton,
+    required this.setting,
+    required this.type,
     this.onClick,
-    @required this.symbolWidget,
+    required this.symbolWidget,
   });
 
   @override
@@ -46,7 +46,9 @@ class CryptoTransactionItem extends StatelessWidget {
   _buildView(BuildContext context) {
     return InkWell(
       onTap: () {
-        onClick(context);
+        if (onClick != null) {
+          onClick!(context);
+        }
       },
       child: Row(
         children: [
@@ -98,7 +100,7 @@ class CryptoTransactionItem extends StatelessWidget {
                               Text(price ?? '',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle1
+                                      .subtitle1!
                                       .copyWith(color: _getColor())),
                             ],
                           )
@@ -120,7 +122,7 @@ class CryptoTransactionItem extends StatelessWidget {
                     ? Text(subtitle ?? '',
                         style: Theme.of(context)
                             .textTheme
-                            .caption
+                            .caption!
                             .copyWith(color: style.subtitleColor))
                     : Container(
                         width: 64,
@@ -152,10 +154,10 @@ class CryptoTransactionItemTheme extends TransactionItemTheme {
   final Color outgoingColor;
 
   CryptoTransactionItemTheme(
-      {@required backgroundColor,
-      @required subtitleColor,
-      @required this.incomeColor,
-      @required this.outgoingColor})
+      {required backgroundColor,
+      required subtitleColor,
+      required this.incomeColor,
+      required this.outgoingColor})
       : super(backgroundColor: backgroundColor, subtitleColor: subtitleColor);
 }
 

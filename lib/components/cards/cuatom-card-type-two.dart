@@ -6,9 +6,9 @@ class CustomCardTypeTwo extends StatelessWidget {
   final Widget subtitle;
 
   CustomCardTypeTwo({
-    @required this.header,
-    @required this.title,
-    @required this.subtitle,
+    required this.header,
+    required this.title,
+    required this.subtitle,
   });
   @override
   Widget build(BuildContext context) {
@@ -33,5 +33,5 @@ class CustomCardTheme {
   final Color secondaryTextColor; // title || mobile || description color
   final Color backgroundColor; // card backgroundColor
   CustomCardTheme(
-      {@required this.backgroundColor, @required this.secondaryTextColor});
+      {required this.backgroundColor, required this.secondaryTextColor});
 }

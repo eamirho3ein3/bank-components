@@ -2,14 +2,14 @@ part of bank_components;
 
 class CustomSegmented extends StatefulWidget {
   final CustomSegmentedTheme style;
-  final int initIndex;
-  final Function(int) onTabClick;
+  final int? initIndex;
+  final Function(int)? onTabClick;
   final List<String> tabs;
   CustomSegmented(
-      {@required this.style,
+      {required this.style,
       this.initIndex,
       this.onTabClick,
-      @required this.tabs});
+      required this.tabs});
 
   @override
   _CustomSegmentedState createState() => _CustomSegmentedState();
@@ -54,7 +54,7 @@ class _CustomSegmentedState extends State<CustomSegmented> {
               _selectedIndex = index;
             });
             if (widget.onTabClick != null) {
-              widget.onTabClick(index);
+              widget.onTabClick!(index);
             }
           },
           child: AnimatedContainer(
@@ -72,7 +72,7 @@ class _CustomSegmentedState extends State<CustomSegmented> {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .subtitle1
+                  .subtitle1!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
           ),
@@ -83,8 +83,8 @@ class _CustomSegmentedState extends State<CustomSegmented> {
 }
 
 class CustomSegmentedTheme {
-  final Color backgroundColor;
-  final Color selectedBackgroundColor;
+  final Color? backgroundColor;
+  final Color? selectedBackgroundColor;
 
   CustomSegmentedTheme({this.selectedBackgroundColor, this.backgroundColor});
 }

@@ -3,12 +3,12 @@ part of bank_components;
 class CustomIconButton extends StatelessWidget {
   final Color backgroundColor;
   final IconData icon;
-  final Function onClick;
-  final Color iconColor;
+  final Function() onClick;
+  final Color? iconColor;
   CustomIconButton(
-      {@required this.backgroundColor,
-      @required this.icon,
-      @required this.onClick,
+      {required this.backgroundColor,
+      required this.icon,
+      required this.onClick,
       this.iconColor});
   @override
   Widget build(BuildContext context) {

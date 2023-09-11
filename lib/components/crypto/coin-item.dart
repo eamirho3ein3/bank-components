@@ -2,27 +2,27 @@ part of bank_components;
 
 class CoinItem extends StatelessWidget {
   final CustomIconTheme icon;
-  final String title;
+  final String? title;
   final ConinTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
   final String symbolTitle;
   final SymbolTheme symbolTheme;
-  final Function(BuildContext) onClick;
+  final Function(BuildContext)? onClick;
   final CoinStatus status;
   final Widget spinner;
 
   CoinItem({
-    @required this.icon,
-    @required this.title,
-    @required this.style,
-    @required this.isSkeleton,
-    @required this.setting,
+    required this.icon,
+    this.title,
+    required this.style,
+    required this.isSkeleton,
+    required this.setting,
     this.onClick,
-    @required this.symbolTitle,
-    @required this.symbolTheme,
-    @required this.status,
-    @required this.spinner,
+    required this.symbolTitle,
+    required this.symbolTheme,
+    required this.status,
+    required this.spinner,
   });
 
   @override
@@ -45,7 +45,9 @@ class CoinItem extends StatelessWidget {
   _buildView(BuildContext context) {
     return InkWell(
       onTap: () {
-        onClick(context);
+        if (onClick != null) {
+          onClick!(context);
+        }
       },
       child: Row(
         children: [
@@ -67,7 +69,7 @@ class CoinItem extends StatelessWidget {
                 // title
                 !isSkeleton
                     ? Text(title ?? '',
-                        style: Theme.of(context).textTheme.subtitle1.copyWith(
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
                             color: status == CoinStatus.selected
                                 ? style.colorDisable
                                 : null))
@@ -139,9 +141,9 @@ class ConinTheme extends TransactionItemTheme {
   ConinTheme({
     @required backgroundColor,
     @required subtitleColor,
-    @required this.defaultIcon,
-    @required this.selectedIcon,
-    @required this.colorDisable,
+    required this.defaultIcon,
+    required this.selectedIcon,
+    required this.colorDisable,
   }) : super(backgroundColor: backgroundColor, subtitleColor: subtitleColor);
 }
 

@@ -3,10 +3,10 @@ part of bank_components;
 class ContactItem extends StatelessWidget {
   final CustomAvatar avatar;
   final String title;
-  final String subtitle;
-  final String subtitleImage;
-  final String suffixImage;
-  final ComponentAction button;
+  final String? subtitle;
+  final String? subtitleImage;
+  final String? suffixImage;
+  final ComponentAction? button;
   final ContactItemTheme style;
   final bool isSkeleton;
   final SkeletonSetting setting;
@@ -16,11 +16,11 @@ class ContactItem extends StatelessWidget {
     this.subtitleImage,
     this.button,
     this.suffixImage,
-    @required this.avatar,
-    @required this.style,
-    @required this.title,
-    @required this.isSkeleton,
-    @required this.setting,
+    required this.avatar,
+    required this.style,
+    required this.title,
+    required this.isSkeleton,
+    required this.setting,
   });
   @override
   Widget build(BuildContext context) {
@@ -106,10 +106,10 @@ class ContactItem extends StatelessWidget {
                     ? Row(
                         children: [
                           // subtitle
-                          Text(subtitle,
+                          Text(subtitle!,
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption
+                                  .caption!
                                   .copyWith(color: style.subtitleColor)),
                           SizedBox(
                             width: subtitleImage != null ? 8 : 0,
@@ -118,7 +118,7 @@ class ContactItem extends StatelessWidget {
                           // subtitle image
                           subtitleImage != null
                               ? SvgPicture.asset(
-                                  subtitleImage,
+                                  subtitleImage!,
                                   height: 16,
                                   width: 16,
                                   fit: BoxFit.contain,
@@ -136,7 +136,7 @@ class ContactItem extends StatelessWidget {
           suffixImage != null
               // suffix image
               ? SvgPicture.asset(
-                  suffixImage,
+                  suffixImage!,
                   height: 24,
                   width: 24,
                   fit: BoxFit.contain,
@@ -145,10 +145,10 @@ class ContactItem extends StatelessWidget {
               // button
               : button != null
                   ? CustomButton(
-                      title: button.text,
+                      title: button!.text,
                       size: ButtonSize.medium,
-                      onClick: button.onClick,
-                      style: button.style,
+                      onClick: button!.onClick,
+                      style: button!.style,
                     )
                   : SizedBox(),
         ],
@@ -162,7 +162,7 @@ class ContactItemTheme {
   final Color subtitleColor;
 
   ContactItemTheme({
-    @required this.backgroundColor,
-    @required this.subtitleColor,
+    required this.backgroundColor,
+    required this.subtitleColor,
   });
 }

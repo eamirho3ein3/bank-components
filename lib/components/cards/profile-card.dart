@@ -5,18 +5,18 @@ class ProfileCard extends StatelessWidget {
   final String title;
   final String profileImage;
   final String mobile;
-  final Function changeProfileImage;
+  final Function()? changeProfileImage;
   final CustomAvatar avatar;
   final ComponentAction button;
 
   ProfileCard({
-    @required this.style,
-    @required this.title,
-    @required this.profileImage,
-    @required this.mobile,
-    @required this.avatar,
-    @required this.changeProfileImage,
-    @required this.button,
+    required this.style,
+    required this.title,
+    required this.profileImage,
+    required this.mobile,
+    required this.avatar,
+    this.changeProfileImage,
+    required this.button,
   });
 
   @override
@@ -42,7 +42,7 @@ class ProfileCard extends StatelessWidget {
                         left: 0,
                         bottom: 0,
                         child: InkWell(
-                          onTap: changeProfileImage,
+                          onTap: changeProfileImage!,
                           child: CircleAvatar(
                             radius: 14,
                             child: Icon(
@@ -77,7 +77,7 @@ class ProfileCard extends StatelessWidget {
                   textAlign: TextAlign.start,
                   style: Theme.of(context)
                       .textTheme
-                      .subtitle1
+                      .subtitle1!
                       .copyWith(color: style.secondaryTextColor),
                 )
               ],
@@ -93,7 +93,7 @@ class ProfileCard extends StatelessWidget {
             size: ButtonSize.large,
             onClick: button.onClick,
             style: button.style,
-            rightIcon: button.icon.icon,
+            rightIcon: button.icon?.icon,
           ),
         ),
       ),

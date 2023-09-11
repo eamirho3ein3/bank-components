@@ -4,19 +4,19 @@ class ZarinAccountCard extends StatelessWidget {
   final CustomCardTheme style;
   final String title;
   final String amount;
-  final Function onMoreClick;
+  final Function() onMoreClick;
   final CustomIconTheme icon;
   final bool isSkeleton;
   final SkeletonSetting setting;
 
   ZarinAccountCard({
-    @required this.style,
-    @required this.title,
-    @required this.amount,
-    @required this.onMoreClick,
-    @required this.icon,
-    @required this.isSkeleton,
-    @required this.setting,
+    required this.style,
+    required this.title,
+    required this.amount,
+    required this.onMoreClick,
+    required this.icon,
+    required this.isSkeleton,
+    required this.setting,
   });
 
   @override

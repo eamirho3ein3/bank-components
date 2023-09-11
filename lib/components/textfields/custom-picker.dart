@@ -5,26 +5,26 @@ class CustomPicker extends StatefulWidget {
   ///
 
   final Function(String) onComplete;
-  final Function(String) onSelect;
+  final Function(String)? onSelect;
   final String placeholder;
   final List<String> itemList;
   final String selectedValue;
-  final Widget confirmTitle;
-  final Widget cancelTitle;
-  final Function(String) validator;
+  final Widget? confirmTitle;
+  final Widget? cancelTitle;
+  final String? Function(String?)? validator;
   final TextEditingController controller;
   final CustomPickerStyle style;
   CustomPicker({
-    @required this.onComplete,
-    @required this.placeholder,
-    @required this.itemList,
+    required this.onComplete,
+    required this.placeholder,
+    required this.itemList,
     this.confirmTitle,
     this.cancelTitle,
     this.validator,
-    @required this.selectedValue,
+    required this.selectedValue,
     this.onSelect,
-    @required this.controller,
-    @required this.style,
+    required this.controller,
+    required this.style,
   });
 
   @override
@@ -59,14 +59,16 @@ class _CustomPickerState extends State<CustomPicker> {
     );
   }
 
-  Future _showPicker(BuildContext context) async {
+  Future<String> _showPicker(BuildContext context) async {
     List<int> selected = widget.selectedValue == ''
         ? [0]
         : [widget.itemList.indexOf(widget.selectedValue)];
     widget.controller.text = widget.itemList[selected.first];
-    widget.onSelect(widget.itemList[selected.first]);
-    await Picker(
-      adapter: PickerDataAdapter<String>(pickerdata: widget.itemList),
+    if (widget.onSelect != null) {
+      widget.onSelect!(widget.itemList[selected.first]);
+    }
+    return await Picker(
+      adapter: PickerDataAdapter<String>(pickerData: widget.itemList),
       changeToFirst: false,
       looping: false,
       height: 200,
@@ -83,7 +85,7 @@ class _CustomPickerState extends State<CustomPicker> {
                   'تایید',
                   style: Theme.of(context)
                       .textTheme
-                      .button
+                      .button!
                       .copyWith(color: Theme.of(context).primaryColor),
                 ),
         ),
@@ -100,7 +102,7 @@ class _CustomPickerState extends State<CustomPicker> {
                   'لغو',
                   style: Theme.of(context)
                       .textTheme
-                      .button
+                      .button!
                       .copyWith(color: widget.style.cancelColor),
                 ),
         ),
@@ -109,7 +111,7 @@ class _CustomPickerState extends State<CustomPicker> {
       backgroundColor: widget.style.backgroundColor,
       textStyle: Theme.of(context)
           .textTheme
-          .caption
+          .caption!
           .copyWith(color: widget.style.textColor),
       selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
       onConfirm: (picker, value) {
@@ -120,7 +122,7 @@ class _CustomPickerState extends State<CustomPicker> {
       onSelect: (Picker picker, int selected, List value) {
         widget.controller.text = widget.itemList[value.first];
         if (widget.onSelect != null) {
-          widget.onSelect(widget.itemList[value.first]);
+          widget.onSelect!(widget.itemList[value.first]);
         }
       },
     ).showModal(context);
@@ -133,7 +135,7 @@ class CustomPickerStyle {
   final Color textColor;
 
   CustomPickerStyle(
-      {@required this.backgroundColor,
-      @required this.cancelColor,
-      @required this.textColor});
+      {required this.backgroundColor,
+      required this.cancelColor,
+      required this.textColor});
 }

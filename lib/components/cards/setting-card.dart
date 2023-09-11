@@ -3,21 +3,21 @@ part of bank_components;
 class SettingCard extends StatelessWidget {
   final CustomCardTheme style;
   final String title;
-  final String description;
+  final String? description;
   final bool toggleValue;
   final CustomIconTheme icon;
   final Function(bool) onToggleChange;
-  final Function onClick;
+  final Function()? onClick;
   final ToggleTheme toggleTheme;
 
   SettingCard({
-    @required this.style,
-    @required this.title,
+    required this.style,
+    required this.title,
     this.description,
-    this.toggleValue,
-    @required this.icon,
-    this.onToggleChange,
-    @required this.toggleTheme,
+    required this.toggleValue,
+    required this.icon,
+    required this.onToggleChange,
+    required this.toggleTheme,
     this.onClick,
   });
 
@@ -63,7 +63,7 @@ class SettingCard extends StatelessWidget {
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle1
+                    .subtitle1!
                     .copyWith(fontWeight: FontWeight.w500),
               ),
             ),
@@ -73,11 +73,11 @@ class SettingCard extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
-                      description,
+                      description!,
                       textAlign: TextAlign.start,
                       style: Theme.of(context)
                           .textTheme
-                          .subtitle1
+                          .subtitle1!
                           .copyWith(color: style.secondaryTextColor),
                     ),
                   )

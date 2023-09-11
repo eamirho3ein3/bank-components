@@ -3,7 +3,7 @@ part of bank_components;
 class CryptoSymbol extends StatelessWidget {
   final String title;
   final SymbolTheme style;
-  CryptoSymbol({@required this.title, @required this.style});
+  CryptoSymbol({required this.title, required this.style});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +16,7 @@ class CryptoSymbol extends StatelessWidget {
         title,
         style: Theme.of(context)
             .textTheme
-            .caption
+            .caption!
             .copyWith(color: style.titleColor),
       ),
     );
@@ -27,5 +27,5 @@ class SymbolTheme {
   final Color titleColor;
   final Color backgroundColor;
 
-  SymbolTheme({@required this.titleColor, @required this.backgroundColor});
+  SymbolTheme({required this.titleColor, required this.backgroundColor});
 }

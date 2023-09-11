@@ -1,37 +1,35 @@
 part of bank_components;
 
 class CustomSnackBar extends SnackBar {
-  final IconData icon;
-  final Widget image;
-  final DismissDirection dismissDirection;
+  final IconData? icon;
+  final Widget? image;
 
   /// use when you want show text as message
-  final String message;
+  final String? message;
 
   /// use when you want show custom widget as message
-  final Widget messageWidget;
-  final String subMessage;
-  final ComponentAction button;
+  final Widget? messageWidget;
+  final String? subMessage;
+  final ComponentAction? button;
   final SnackBarTheme style;
   final Duration duration;
-  final double bottomMargin;
+  final double? bottomMargin;
   final double horizontalMargin;
   final BuildContext context;
   final BorderRadius radius;
   CustomSnackBar({
     this.icon,
     this.image,
-    this.dismissDirection,
     this.message,
     this.messageWidget,
     this.subMessage,
-    @required this.style,
-    @required this.context,
+    required this.style,
+    required this.context,
     this.button,
     this.bottomMargin,
     this.horizontalMargin = 16,
-    @required this.duration,
-    BorderRadius radius,
+    required this.duration,
+    BorderRadius? radius,
   })  : this.radius = radius ?? BorderRadius.circular(4),
         super(
           content: Row(
@@ -58,13 +56,13 @@ class CustomSnackBar extends SnackBar {
                           message,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1
+                              .subtitle1!
                               .copyWith(color: style.textColor),
                         ),
                   subMessage != null
                       ? Text(
                           subMessage,
-                          style: Theme.of(context).textTheme.caption.copyWith(
+                          style: Theme.of(context).textTheme.caption!.copyWith(
                               color:
                                   style.secondaryTextColor ?? style.textColor),
                         )
@@ -79,7 +77,7 @@ class CustomSnackBar extends SnackBar {
                       onPressed: button.onClick,
                       child: Text(
                         button.text,
-                        style: Theme.of(context).textTheme.button.copyWith(
+                        style: Theme.of(context).textTheme.button!.copyWith(
                             color: style.buttonTextColor ?? style.textColor),
                       ),
                       style: ButtonStyle(
@@ -93,10 +91,10 @@ class CustomSnackBar extends SnackBar {
           elevation: 0,
           duration: duration,
           shape: RoundedRectangleBorder(
-            borderRadius: radius,
+            borderRadius: radius!,
           ),
           backgroundColor: style.backgroundColor,
-          dismissDirection: dismissDirection ?? DismissDirection.down,
+          dismissDirection: DismissDirection.down,
           padding: EdgeInsets.only(
               left: button != null ? 8 : 12, right: 12, top: 12, bottom: 12),
           behavior: SnackBarBehavior.floating,
@@ -112,17 +110,17 @@ class SnackBarTheme {
   final Color textColor;
 
   /// use for button color
-  final Color buttonTextColor;
+  final Color? buttonTextColor;
 
   /// use for subMessage color
-  final Color secondaryTextColor;
+  final Color? secondaryTextColor;
   final Color backgroundColor;
   final MaterialStateProperty<Color> buttonBackgroundColor;
   SnackBarTheme({
-    @required this.backgroundColor,
-    @required this.textColor,
-    @required this.secondaryTextColor,
-    @required this.buttonBackgroundColor,
+    required this.backgroundColor,
+    required this.textColor,
+    this.secondaryTextColor,
+    required this.buttonBackgroundColor,
     this.buttonTextColor,
   });
 }

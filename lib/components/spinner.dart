@@ -3,7 +3,7 @@ part of bank_components;
 class CustomSpinner extends StatelessWidget {
   final SpinnerTheme style;
   final SpinerSize size;
-  CustomSpinner({@required this.style, @required this.size});
+  CustomSpinner({required this.style, required this.size});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +23,7 @@ class SpinnerTheme {
   final Color color;
   final Color backgroundColor;
 
-  SpinnerTheme({this.color, this.backgroundColor});
+  SpinnerTheme({required this.color, required this.backgroundColor});
 }
 
 enum SpinerSize { Small, Large }

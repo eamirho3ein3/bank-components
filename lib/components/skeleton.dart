@@ -4,8 +4,7 @@ class Skeleton extends StatelessWidget {
   final Widget child;
   final bool enabled;
   final SkeletonSetting setting;
-  Skeleton(
-      {@required this.child, @required this.setting, @required this.enabled});
+  Skeleton({required this.child, required this.setting, required this.enabled});
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
@@ -22,7 +21,7 @@ class SkeletonSetting {
   final Color highlightColor;
 
   SkeletonSetting({
-    @required this.color,
-    @required this.highlightColor,
+    required this.color,
+    required this.highlightColor,
   });
 }

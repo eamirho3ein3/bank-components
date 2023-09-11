@@ -1,14 +1,14 @@
 part of bank_components;
 
 class CustomButton extends StatelessWidget {
-  final ButtonSize size;
-  final String title;
-  final IconData rightIcon;
-  final IconData leftIcon;
-  final Function onClick;
+  final ButtonSize? size;
+  final String? title;
+  final IconData? rightIcon;
+  final IconData? leftIcon;
+  final Function()? onClick;
   final CustomButtonTheme style;
-  final double horizontalPadding;
-  final bool isLoading;
+  final double? horizontalPadding;
+  final bool? isLoading;
 
   CustomButton(
       {this.size,
@@ -16,25 +16,25 @@ class CustomButton extends StatelessWidget {
       this.rightIcon,
       this.leftIcon,
       this.onClick,
-      @required this.style,
+      required this.style,
       this.horizontalPadding,
       this.isLoading});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: isLoading != null && isLoading ? null : onClick,
+      onPressed: isLoading != null && isLoading! ? null : onClick,
       child: Padding(
         padding: EdgeInsets.symmetric(
-            vertical: isLoading != null && isLoading
+            vertical: isLoading != null && isLoading!
                 ? size == ButtonSize.large
                     ? 14
                     : 10
                 : size == ButtonSize.large
                     ? 12
                     : 8,
-            horizontal: horizontalPadding != null ? horizontalPadding : 8),
-        child: isLoading != null && isLoading
+            horizontal: horizontalPadding ?? 8),
+        child: isLoading != null && isLoading!
             ? _buildLoading(context)
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -51,10 +51,10 @@ class CustomButton extends StatelessWidget {
                   // title
                   title != null
                       ? Flexible(
-                          child: Text(title,
+                          child: Text(title!,
                               style: Theme.of(context)
                                   .textTheme
-                                  .button
+                                  .button!
                                   .copyWith(
                                       color: onClick != null
                                           ? style.foregroundColor
@@ -125,14 +125,14 @@ class CustomButtonTheme {
   final Color disabledColor;
   final Color foregroundDisabledColor;
   final LoadingButtonTheme loadingButtonTheme;
-  final AlignmentGeometry alignment;
+  final AlignmentGeometry? alignment;
 
   CustomButtonTheme({
-    @required this.backgroundColor,
-    @required this.foregroundColor,
-    @required this.disabledColor,
-    @required this.foregroundDisabledColor,
-    @required this.loadingButtonTheme,
+    required this.backgroundColor,
+    required this.foregroundColor,
+    required this.disabledColor,
+    required this.foregroundDisabledColor,
+    required this.loadingButtonTheme,
     this.alignment,
   });
 }
@@ -142,8 +142,8 @@ class LoadingButtonTheme {
   final Color backgroundColor;
 
   LoadingButtonTheme({
-    @required this.valueColor,
-    @required this.backgroundColor,
+    required this.valueColor,
+    required this.backgroundColor,
   });
 }
 

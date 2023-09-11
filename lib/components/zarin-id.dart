@@ -2,8 +2,8 @@ part of bank_components;
 
 class ZarinId extends StatelessWidget {
   final ZarinIdTheme style;
-  final String id;
-  ZarinId({@required this.style, this.id});
+  final String? id;
+  ZarinId({required this.style, this.id});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +18,7 @@ class ZarinId extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            id,
+            id ?? '',
             style: Theme.of(context).textTheme.subtitle1,
           ),
           style.backgroundStatusColor != null
@@ -51,7 +51,7 @@ class ZarinIdTheme {
   final Color backgroundStatusColor;
   final Color foregroundStatusColor;
   ZarinIdTheme(
-      {@required this.borderColor,
-      @required this.backgroundStatusColor,
-      @required this.foregroundStatusColor});
+      {required this.borderColor,
+      required this.backgroundStatusColor,
+      required this.foregroundStatusColor});
 }

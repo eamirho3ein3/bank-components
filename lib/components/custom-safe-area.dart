@@ -3,7 +3,7 @@ part of bank_components;
 class CustomSafeArea extends SafeArea {
   final Widget child;
 
-  CustomSafeArea({@required this.child})
+  CustomSafeArea({required this.child})
       : super(
           bottom: false,
           child: child,

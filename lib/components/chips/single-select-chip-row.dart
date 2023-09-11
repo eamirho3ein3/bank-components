@@ -5,12 +5,12 @@ class SingleSelectChips extends StatefulWidget {
   final Function(int) onSelect;
   final bool isSkeleton;
   final SkeletonSetting setting;
-  final int initSelected;
+  final int? initSelected;
   SingleSelectChips(
-      {@required this.filters,
-      @required this.onSelect,
-      @required this.isSkeleton,
-      @required this.setting,
+      {required this.filters,
+      required this.onSelect,
+      required this.isSkeleton,
+      required this.setting,
       this.initSelected});
   @override
   _SingleSelectChipsState createState() => _SingleSelectChipsState();
@@ -25,7 +25,7 @@ class _SingleSelectChipsState extends State<SingleSelectChips> {
 
     if (widget.initSelected != null) {
       setState(() {
-        selected = widget.initSelected;
+        selected = widget.initSelected!;
       });
     }
   }

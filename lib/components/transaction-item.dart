@@ -2,22 +2,22 @@ part of bank_components;
 
 class TransactionItem extends StatelessWidget {
   final CustomIconTheme icon;
-  final String title;
-  final String subtitle;
+  final String? title;
+  final String? subtitle;
   final PriceWidget priceWidget;
   final TransactionItemTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
-  final Function(BuildContext) onClick;
+  final Function(BuildContext)? onClick;
 
   TransactionItem({
-    @required this.icon,
-    @required this.title,
-    @required this.subtitle,
-    @required this.style,
-    @required this.priceWidget,
-    @required this.isSkeleton,
-    @required this.setting,
+    required this.icon,
+    this.title,
+    this.subtitle,
+    required this.style,
+    required this.priceWidget,
+    required this.isSkeleton,
+    required this.setting,
     this.onClick,
   });
 
@@ -41,8 +41,8 @@ class TransactionItem extends StatelessWidget {
   _buildView(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (!isSkeleton) {
-          onClick(context);
+        if (!isSkeleton && onClick != null) {
+          onClick!(context);
         }
       },
       child: Row(
@@ -106,7 +106,7 @@ class TransactionItem extends StatelessWidget {
                     ? Text(subtitle ?? '',
                         style: Theme.of(context)
                             .textTheme
-                            .caption
+                            .caption!
                             .copyWith(color: style.subtitleColor))
                     : Container(
                         width: 64,
@@ -130,5 +130,5 @@ class TransactionItemTheme {
   final Color subtitleColor;
 
   TransactionItemTheme(
-      {@required this.backgroundColor, @required this.subtitleColor});
+      {required this.backgroundColor, required this.subtitleColor});
 }

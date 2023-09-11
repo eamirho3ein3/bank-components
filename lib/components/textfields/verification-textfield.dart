@@ -5,16 +5,14 @@ class VerificationTextField extends StatefulWidget {
   final Function(String) onChanged;
   final int otpLength;
   VerificationTextField(
-      {@required this.onComplete,
-      @required this.onChanged,
-      this.otpLength = 6});
+      {required this.onComplete, required this.onChanged, this.otpLength = 6});
 
   @override
   _VerificationTextFieldState createState() => _VerificationTextFieldState();
 }
 
 class _VerificationTextFieldState extends State<VerificationTextField> {
-  TextEditingController _controller;
+  late TextEditingController _controller;
   FocusNode _focusNode = FocusNode();
   String _input = "";
 
@@ -63,12 +61,12 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
 
 class VerificationTextEditingController extends TextEditingController {
   final int limit;
-  VerificationTextEditingController({@required this.limit});
+  VerificationTextEditingController({required this.limit});
   @override
   TextSpan buildTextSpan(
-      {@required BuildContext context,
-      TextStyle style,
-      @required bool withComposing}) {
+      {required BuildContext context,
+      TextStyle? style,
+      required bool withComposing}) {
     TextSpan original = super.buildTextSpan(
         context: context, style: style, withComposing: withComposing);
     String text = original.toPlainText();

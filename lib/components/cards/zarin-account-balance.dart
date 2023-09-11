@@ -6,14 +6,14 @@ class ZarinAccountBalance extends StatelessWidget {
   final String title;
   final String amount;
   final String priceUnit;
-  final Function() cardTap;
+  final Function()? cardTap;
 
   ZarinAccountBalance({
-    @required this.button,
-    @required this.style,
-    @required this.title,
-    @required this.amount,
-    @required this.priceUnit,
+    required this.button,
+    required this.style,
+    required this.title,
+    required this.amount,
+    required this.priceUnit,
     this.cardTap,
   });
   @override
@@ -35,7 +35,7 @@ class ZarinAccountBalance extends StatelessWidget {
               textAlign: TextAlign.start,
               style: Theme.of(context)
                   .textTheme
-                  .bodyText2
+                  .bodyText2!
                   .copyWith(color: style.secondaryTextColor),
             ),
           ),
@@ -48,7 +48,7 @@ class ZarinAccountBalance extends StatelessWidget {
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .textTheme
-                    .headline1
+                    .headline1!
                     .copyWith(color: style.secondaryTextColor),
               ),
               Text(
@@ -56,7 +56,7 @@ class ZarinAccountBalance extends StatelessWidget {
                 textAlign: TextAlign.end,
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText1
+                    .bodyText1!
                     .copyWith(color: style.secondaryTextColor),
               ),
             ],

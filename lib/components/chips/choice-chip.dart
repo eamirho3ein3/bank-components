@@ -3,26 +3,26 @@ part of bank_components;
 class CustomChoiceChip extends StatelessWidget {
   final ChipType type;
   final String title;
-  final String numbers;
-  final IconData icon;
-  final Function onClick;
-  final Function onClose;
+  final String? numbers;
+  final IconData? icon;
+  final Function()? onClick;
+  final Function()? onClose;
   final bool selected;
   final bool isSkeleton;
   final SkeletonSetting setting;
-  final Color titleColor;
+  final Color? titleColor;
 
   CustomChoiceChip(
-      {@required this.title,
+      {required this.title,
       this.numbers,
       this.icon,
       this.onClick,
       this.titleColor,
-      @required this.selected,
-      @required this.type,
+      required this.selected,
+      required this.type,
       this.onClose,
-      @required this.isSkeleton,
-      @required this.setting});
+      required this.isSkeleton,
+      required this.setting});
   @override
   Widget build(BuildContext context) {
     return isSkeleton ? _buildSkeletonView(context) : _buildChip(context);
@@ -34,8 +34,8 @@ class CustomChoiceChip extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            (numbers != null ? numbers + " " : '') + title,
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
+            (numbers != null ? (numbers! + " ") : '') + title,
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                 color: selected ? Theme.of(context).primaryColor : titleColor),
           ),
           selected && type == ChipType.Action
@@ -44,7 +44,8 @@ class CustomChoiceChip extends StatelessWidget {
                   child: CustomAvatar(
                     radius: 12,
                     icon: Icons.close,
-                    iconColor: Theme.of(context).chipTheme.backgroundColor,
+                    iconColor: Theme.of(context).chipTheme.backgroundColor ??
+                        Colors.black,
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                 )
@@ -63,8 +64,8 @@ class CustomChoiceChip extends StatelessWidget {
           : null,
       backgroundColor: Theme.of(context).chipTheme.backgroundColor,
       onSelected: (value) {
-        if (value) {
-          onClick();
+        if (value && onClick != null) {
+          onClick!();
         }
       },
       elevation: 0,
