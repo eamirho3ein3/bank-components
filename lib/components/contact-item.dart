@@ -1,7 +1,7 @@
 part of bank_components;
 
 class ContactItem extends StatelessWidget {
-  final CustomAvatar avatar;
+  final CustomAvatar? avatar;
   final String title;
   final String? subtitle;
   final String? subtitleImage;
@@ -16,7 +16,7 @@ class ContactItem extends StatelessWidget {
     this.subtitleImage,
     this.button,
     this.suffixImage,
-    required this.avatar,
+    this.avatar,
     required this.style,
     required this.title,
     required this.isSkeleton,
@@ -39,7 +39,7 @@ class ContactItem extends StatelessWidget {
         child: Row(
           children: [
             // avatar
-            avatar,
+            avatar ?? SizedBox(),
 
             SizedBox(
               width: 12,
@@ -87,7 +87,7 @@ class ContactItem extends StatelessWidget {
       child: Row(
         children: [
           // avatar
-          avatar != null ? avatar : SizedBox(),
+          avatar ?? SizedBox(),
 
           SizedBox(
             width: avatar != null ? 12 : 0,
