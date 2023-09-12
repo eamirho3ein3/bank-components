@@ -4,9 +4,9 @@ class SettingCard extends StatelessWidget {
   final CustomCardTheme style;
   final String title;
   final String? description;
-  final bool toggleValue;
+  final bool? toggleValue;
   final CustomIconTheme icon;
-  final Function(bool) onToggleChange;
+  final Function(bool)? onToggleChange;
   final Function()? onClick;
   final ToggleTheme toggleTheme;
 
@@ -14,9 +14,9 @@ class SettingCard extends StatelessWidget {
     required this.style,
     required this.title,
     this.description,
-    required this.toggleValue,
+    this.toggleValue,
     required this.icon,
-    required this.onToggleChange,
+    this.onToggleChange,
     required this.toggleTheme,
     this.onClick,
   });
@@ -49,7 +49,7 @@ class SettingCard extends StatelessWidget {
                     ? CustomToggle(
                         style: toggleTheme,
                         onToggle: onToggleChange,
-                        value: toggleValue,
+                        value: toggleValue!,
                       )
                     : Icon(Icons.chevron_right_rounded)
               ],
