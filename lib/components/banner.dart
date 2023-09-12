@@ -97,7 +97,7 @@ class BannerTheme {
 }
 
 class CustomIconTheme {
-  final IconData icon;
+  final IconData? icon;
   final Color? iconColor;
   final Color? backgroundColor;
   final Color? borderColor;

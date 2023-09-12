@@ -75,7 +75,8 @@ class _MainTextFieldState extends State<MainTextField> {
                 ? Container(
                     child: Text(
                       replaceToFarsiNumber(
-                          '$maxLength/${widget.controller.text.length}'),
+                              '$maxLength/${widget.controller.text.length}') ??
+                          '',
                       style:
                           Theme.of(context).inputDecorationTheme.counterStyle,
                     ),

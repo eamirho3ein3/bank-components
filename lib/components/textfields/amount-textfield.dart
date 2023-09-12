@@ -49,8 +49,8 @@ class _AmountTextFieldState extends State<AmountTextField> {
       keyboardType: TextInputType.number,
       type: TextfieldType.Reqular,
       onChanged: (value) {
-        var result =
-            replaceToEnglishNumber(value).replaceAll(RegExp('[^0-9]'), '');
+        var result = (replaceToEnglishNumber(value) ?? '')
+            .replaceAll(RegExp('[^0-9]'), '');
 
         // final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
         final regexp = RegExp(
@@ -96,7 +96,7 @@ class PriceTextFormatter extends TextInputFormatter {
         newValue.text.trim() == currencySymbol.trim()) {
       return newValue.copyWith(text: '$currencySymbol');
     } else if (newValue.text.compareTo(oldValue.text) != 0) {
-      var newString = replaceToEnglishNumber(newValue.text)
+      var newString = (replaceToEnglishNumber(newValue.text) ?? '')
           .replaceAll(RegExp('[^0-9]'), '');
       if (newString.trim().isEmpty) {
         return TextEditingValue(
@@ -106,13 +106,13 @@ class PriceTextFormatter extends TextInputFormatter {
         );
       } else {
         final f = intel.NumberFormat("#,###");
-        var num = int.parse(replaceToEnglishNumber(newValue.text)
+        var num = int.parse(replaceToEnglishNumber(newValue.text)!
             .replaceAll(RegExp('[^0-9]'), ''));
         final newString =
             '$currencySymbol' + '\u2066' + ' ' + f.format(num).trim();
 
         return TextEditingValue(
-          text: replaceToFarsiNumber(newString),
+          text: replaceToFarsiNumber(newString)!,
           selection: TextSelection.fromPosition(
               TextPosition(offset: newString.length)),
         );
