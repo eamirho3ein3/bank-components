@@ -5,7 +5,7 @@ class ZarinCardBalance extends StatelessWidget {
   final ComponentAction? leftButton;
   final CustomCardTheme style;
   final String title;
-  final String subtitle;
+  final String? subtitle;
   final String amount;
   final String? currency;
   final bool isSkeleton;
@@ -18,7 +18,7 @@ class ZarinCardBalance extends StatelessWidget {
     required this.style,
     required this.title,
     this.currency,
-    required this.subtitle,
+    this.subtitle,
     required this.amount,
     required this.isSkeleton,
     required this.setting,
@@ -127,7 +127,7 @@ class ZarinCardBalance extends StatelessWidget {
             // subtitle
             subtitle != null
                 ? Text(
-                    subtitle,
+                    subtitle!,
                     textAlign: TextAlign.start,
                     style: Theme.of(context)
                         .textTheme
