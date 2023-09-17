@@ -3,7 +3,7 @@ part of bank_components;
 class ProfileCard extends StatelessWidget {
   final CustomCardTheme style;
   final String title;
-  final String profileImage;
+  final String? profileImage;
   final String mobile;
   final Function()? changeProfileImage;
   final CustomAvatar avatar;
@@ -12,7 +12,7 @@ class ProfileCard extends StatelessWidget {
   ProfileCard({
     required this.style,
     required this.title,
-    required this.profileImage,
+    this.profileImage,
     required this.mobile,
     required this.avatar,
     this.changeProfileImage,
