@@ -144,7 +144,10 @@ class ConinTheme extends TransactionItemTheme {
     required this.defaultIcon,
     required this.selectedIcon,
     required this.colorDisable,
-  }) : super(backgroundColor: backgroundColor, subtitleColor: subtitleColor);
+  }) : super(
+            backgroundColor: backgroundColor,
+            subtitleColor: subtitleColor,
+            badgeBackgroundColor: null);
 }
 
 enum CoinStatus {

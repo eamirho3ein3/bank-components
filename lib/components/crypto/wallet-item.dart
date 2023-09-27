@@ -154,5 +154,8 @@ class WalletItem extends StatelessWidget {
 
 class WalletItemTheme extends TransactionItemTheme {
   WalletItemTheme({@required backgroundColor, @required subtitleColor})
-      : super(backgroundColor: backgroundColor, subtitleColor: subtitleColor);
+      : super(
+            backgroundColor: backgroundColor,
+            subtitleColor: subtitleColor,
+            badgeBackgroundColor: null);
 }

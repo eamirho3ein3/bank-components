@@ -158,7 +158,10 @@ class CryptoTransactionItemTheme extends TransactionItemTheme {
       required subtitleColor,
       required this.incomeColor,
       required this.outgoingColor})
-      : super(backgroundColor: backgroundColor, subtitleColor: subtitleColor);
+      : super(
+            backgroundColor: backgroundColor,
+            subtitleColor: subtitleColor,
+            badgeBackgroundColor: null);
 }
 
 enum TransactionType { income, outgoing }

@@ -4,6 +4,7 @@ class TransactionItem extends StatelessWidget {
   final CustomIconTheme icon;
   final String? title;
   final String? subtitle;
+  final String? imageBadge;
   final PriceWidget priceWidget;
   final TransactionItemTheme style;
   final SkeletonSetting setting;
@@ -19,6 +20,7 @@ class TransactionItem extends StatelessWidget {
     required this.isSkeleton,
     required this.setting,
     this.onClick,
+    this.imageBadge,
   });
 
   @override
@@ -48,11 +50,35 @@ class TransactionItem extends StatelessWidget {
       child: Row(
         children: [
           // logo
-          CustomAvatar(
-            radius: 24,
-            icon: icon.icon,
-            iconColor: icon.iconColor,
-            backgroundColor: icon.backgroundColor ?? setting.color,
+          Stack(
+            children: [
+              CustomAvatar(
+                radius: 24,
+                icon: icon.icon,
+                iconColor: icon.iconColor,
+                backgroundColor: icon.backgroundColor ?? setting.color,
+              ),
+              Positioned(
+                left: 0,
+                bottom: 0,
+                child: imageBadge != null
+                    ? Container(
+                        alignment: Alignment.center,
+                        height: 16,
+                        width: 16,
+                        decoration: BoxDecoration(
+                          color: style.badgeBackgroundColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.asset(
+                          imageBadge!,
+                          height: 10,
+                          width: 10,
+                        ),
+                      )
+                    : SizedBox(),
+              ),
+            ],
           ),
 
           SizedBox(
@@ -128,7 +154,11 @@ class TransactionItem extends StatelessWidget {
 class TransactionItemTheme {
   final Color backgroundColor;
   final Color subtitleColor;
+  final Color? badgeBackgroundColor;
 
-  TransactionItemTheme(
-      {required this.backgroundColor, required this.subtitleColor});
+  TransactionItemTheme({
+    required this.backgroundColor,
+    required this.subtitleColor,
+    required this.badgeBackgroundColor,
+  });
 }
