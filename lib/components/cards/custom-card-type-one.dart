@@ -1,14 +1,14 @@
 part of bank_components;
 
 class CustomCardTypeOne extends StatelessWidget {
-  final Widget header;
-  final Widget content;
-  final Widget buttons;
+  final Widget? header;
+  final Widget? content;
+  final Widget? buttons;
 
   CustomCardTypeOne({
-    @required this.header,
-    @required this.content,
-    @required this.buttons,
+    this.header,
+    this.content,
+    this.buttons,
   });
   @override
   Widget build(BuildContext context) {
@@ -17,13 +17,13 @@ class CustomCardTypeOne extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         // header
-        header != null ? header : SizedBox(),
+        header ?? SizedBox(),
 
         // content
-        content != null ? content : SizedBox(),
+        content ?? SizedBox(),
 
         // buttons
-        buttons != null ? buttons : SizedBox(),
+        buttons ?? SizedBox(),
       ],
     );
   }

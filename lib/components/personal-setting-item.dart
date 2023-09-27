@@ -5,16 +5,16 @@ class PersonalSettingItem extends StatefulWidget {
   final String title;
   final String description;
   final PersonalSettingStyle style;
-  final Function(String) onSelect;
-  final String selected;
+  final Function(String?) onSelect;
+  final String? selected;
 
   const PersonalSettingItem({
-    Key key,
-    @required this.options,
-    @required this.title,
-    @required this.description,
-    @required this.style,
-    @required this.onSelect,
+    Key? key,
+    required this.options,
+    required this.title,
+    required this.description,
+    required this.style,
+    required this.onSelect,
     this.selected,
   }) : super(key: key);
 
@@ -27,8 +27,8 @@ class _PersonalSettingItemState extends State<PersonalSettingItem> {
   @override
   void initState() {
     super.initState();
-    if (selected != null) {
-      selected = widget.selected;
+    if (widget.selected != null) {
+      selected = widget.selected!;
     }
     if (widget.options.isNotEmpty && widget.selected == null) {
       selected = widget.options[0];
@@ -79,7 +79,7 @@ class _PersonalSettingItemState extends State<PersonalSettingItem> {
                 widget.description,
                 style: Theme.of(context)
                     .textTheme
-                    .caption
+                    .caption!
                     .copyWith(color: widget.style.descriptionColor),
               ),
             ],
@@ -97,7 +97,7 @@ class _PersonalSettingItemState extends State<PersonalSettingItem> {
           padding: const EdgeInsets.only(right: 12.0),
           child: Text(
             value,
-            style: Theme.of(context).textTheme.subtitle1.copyWith(
+            style: Theme.of(context).textTheme.subtitle1!.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
           ),
@@ -113,9 +113,11 @@ class _PersonalSettingItemState extends State<PersonalSettingItem> {
           }),
           onChanged: (v) {
             widget.onSelect(v);
-            setState(() {
-              selected = v;
-            });
+            if (v != null) {
+              setState(() {
+                selected = v;
+              });
+            }
           },
         ),
       ],
@@ -132,11 +134,11 @@ class PersonalSettingStyle {
   final Color inactiveColor;
 
   PersonalSettingStyle({
-    @required this.backgroundColor,
-    @required this.itemBackgroundColor,
-    @required this.descriptionColor,
-    @required this.dividerColor,
-    @required this.activeColor,
-    @required this.inactiveColor,
+    required this.backgroundColor,
+    required this.itemBackgroundColor,
+    required this.descriptionColor,
+    required this.dividerColor,
+    required this.activeColor,
+    required this.inactiveColor,
   });
 }

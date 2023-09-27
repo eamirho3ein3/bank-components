@@ -1,18 +1,18 @@
 part of bank_components;
 
 class ZarinCard extends StatelessWidget {
-  final ComponentAction button;
+  final ComponentAction? button;
   final ZarinCardTheme style;
   final String backgroundImage;
-  final List<String> cardNumbers;
+  final List<String>? cardNumbers;
   final bool isActive;
 
   ZarinCard({
     this.button,
-    @required this.style,
+    required this.style,
     this.cardNumbers,
-    @required this.isActive,
-    @required this.backgroundImage,
+    required this.isActive,
+    required this.backgroundImage,
   });
 
   @override
@@ -44,11 +44,11 @@ class ZarinCard extends StatelessWidget {
                     child: Container(
                       width: double.infinity,
                       child: CustomButton(
-                        title: button.text,
+                        title: button!.text,
                         size: ButtonSize.large,
-                        onClick: button.onClick,
-                        style: button.style,
-                        rightIcon: button.icon.icon,
+                        onClick: button!.onClick,
+                        style: button!.style,
+                        rightIcon: button!.icon?.icon,
                       ),
                     ))
                 : SizedBox(),
@@ -104,11 +104,11 @@ class ZarinCard extends StatelessWidget {
       );
     }
     List<Widget> _children = [];
-    for (var item in cardNumbers) {
+    for (var item in cardNumbers!) {
       var widget = Text(
         item,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headline2.copyWith(
+        style: Theme.of(context).textTheme.headline2!.copyWith(
             fontWeight: FontWeight.w700, color: style.secondaryTextColor),
       );
       _children.add(widget);
@@ -133,8 +133,8 @@ class ZarinCardTheme extends CustomCardTheme {
   final Color borderColor;
 
   ZarinCardTheme(
-      {@required this.deactiveBackgroundColor,
-      @required this.borderColor,
+      {required this.deactiveBackgroundColor,
+      required this.borderColor,
       @required backgroundColor,
       @required secondaryTextColor})
       : super(

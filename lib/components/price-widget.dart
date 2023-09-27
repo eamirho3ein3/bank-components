@@ -6,10 +6,10 @@ class PriceWidget extends StatelessWidget {
   final PriceWidgetTheme theme;
   final String unit;
   PriceWidget(
-      {@required this.price,
-      @required this.convertedPrice,
-      @required this.theme,
-      @required this.unit});
+      {required this.price,
+      required this.convertedPrice,
+      required this.theme,
+      required this.unit});
   @override
   Widget build(BuildContext context) {
     TextStyle _style;
@@ -39,7 +39,7 @@ class PriceWidgetTheme {
   final TextStyle unitStyle;
 
   PriceWidgetTheme(
-      {@required this.negativeStyle,
-      @required this.posetiveStyle,
-      @required this.unitStyle});
+      {required this.negativeStyle,
+      required this.posetiveStyle,
+      required this.unitStyle});
 }

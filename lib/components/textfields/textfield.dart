@@ -3,30 +3,30 @@ part of bank_components;
 class MainTextField extends StatefulWidget {
   final TextfieldType type;
   final TextEditingController controller;
-  final FocusNode focusNode;
-  final TextAlign textAlign;
-  final String label;
-  final String placeholder;
-  final Widget helper;
-  final int limit;
-  final TextfieldExtend prefix;
-  final TextfieldExtend suffix;
-  final Function(String) validator;
-  final TextInputType keyboardType;
-  final Function(String) onChanged;
-  final List<TextInputFormatter> inputFormatters;
-  final TextStyle textFieldStyle;
-  final TextDirection textDirection;
-  final EdgeInsetsGeometry contentPadding;
-  final bool showCursor;
+  final FocusNode? focusNode;
+  final TextAlign? textAlign;
+  final String? label;
+  final String? placeholder;
+  final Widget? helper;
+  final int? limit;
+  final TextfieldExtend? prefix;
+  final TextfieldExtend? suffix;
+  final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
+  final Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextStyle? textFieldStyle;
+  final TextDirection? textDirection;
+  final EdgeInsetsGeometry? contentPadding;
+  final bool? showCursor;
   final bool readOnly;
-  final bool enabled;
+  final bool? enabled;
   final bool showCounter;
-  final Function(String) onFieldSubmitted;
-  final Function onTap;
+  final Function(String)? onFieldSubmitted;
+  final Function()? onTap;
 
   MainTextField({
-    @required this.controller,
+    required this.controller,
     this.textAlign,
     this.label,
     this.helper,
@@ -34,7 +34,7 @@ class MainTextField extends StatefulWidget {
     this.prefix,
     this.suffix,
     this.validator,
-    @required this.type,
+    required this.type,
     this.keyboardType,
     this.onChanged,
     this.inputFormatters,
@@ -65,17 +65,18 @@ class _MainTextFieldState extends State<MainTextField> {
         TextFormField(
           controller: widget.controller,
           focusNode: widget.focusNode,
-          textAlign:
-              widget.textAlign != null ? widget.textAlign : TextAlign.start,
+          textAlign: widget.textAlign ?? TextAlign.start,
           maxLength: widget.limit,
           minLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
           maxLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
-          buildCounter: (context, {currentLength, isFocused, maxLength}) {
+          buildCounter: (context,
+              {required currentLength, required isFocused, maxLength}) {
             return widget.limit != null && widget.showCounter
                 ? Container(
                     child: Text(
                       replaceToFarsiNumber(
-                          '$maxLength/${widget.controller.text.length}'),
+                              '$maxLength/${widget.controller.text.length}') ??
+                          '',
                       style:
                           Theme.of(context).inputDecorationTheme.counterStyle,
                     ),
@@ -133,7 +134,7 @@ class _MainTextFieldState extends State<MainTextField> {
   }
 
   _buildExtendWidget(
-      TextfieldExtend widget, BuildContext context, bool isSuffix) {
+      TextfieldExtend? widget, BuildContext context, bool isSuffix) {
     if (widget == null) {
       return null;
     } else if (widget.type == TextfieldExtendType.Icon) {
@@ -142,8 +143,8 @@ class _MainTextFieldState extends State<MainTextField> {
       return InkWell(
         onTap: widget.onTap,
         child: Icon(
-          widget.icon.icon,
-          color: widget.icon.iconColor,
+          widget.icon?.icon,
+          color: widget.icon?.iconColor,
         ),
       );
     } else if (widget.type == TextfieldExtendType.Text) {
@@ -162,7 +163,7 @@ class _MainTextFieldState extends State<MainTextField> {
           color: widget.textBackgroundColor,
         ),
         child: Text(
-          widget.text,
+          widget.text ?? '',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.subtitle1,
         ),
@@ -180,7 +181,7 @@ class TextfieldHelper extends StatelessWidget {
   final HelperWidgetTheme theme;
 
   TextfieldHelper(
-      {@required this.type, @required this.text, @required this.theme});
+      {required this.type, required this.text, required this.theme});
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +206,7 @@ class TextfieldHelper extends StatelessWidget {
               text,
               style: Theme.of(context)
                   .inputDecorationTheme
-                  .helperStyle
+                  .helperStyle!
                   .copyWith(
                       color: type == HeplerType.Success
                           ? theme.success
@@ -223,19 +224,19 @@ class HelperWidgetTheme {
   final Color success;
   final Color error;
 
-  HelperWidgetTheme({@required this.success, @required this.error});
+  HelperWidgetTheme({required this.success, required this.error});
 }
 
 class TextfieldExtend {
   final TextfieldExtendType type;
-  final CustomIconTheme icon;
-  final String text;
-  final Widget child;
-  final Function onTap;
-  final Color textBackgroundColor;
+  final CustomIconTheme? icon;
+  final String? text;
+  final Widget? child;
+  final Function()? onTap;
+  final Color? textBackgroundColor;
 
   TextfieldExtend({
-    @required this.type,
+    required this.type,
     this.icon,
     this.text,
     this.child,

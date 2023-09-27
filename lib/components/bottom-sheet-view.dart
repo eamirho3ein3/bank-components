@@ -6,22 +6,22 @@ typedef ScrollableContentWidgetBuilder = Widget Function(
 );
 
 class BottomSheetView extends StatelessWidget {
-  final String title;
-  final Widget content;
+  final String? title;
+  final Widget? content;
 
   /// content that contains scrollview and padding
-  final Widget contentWithSelfScroll;
-  final ComponentAction rightButton;
-  final ComponentAction leftButton;
+  final Widget? contentWithSelfScroll;
+  final ComponentAction? rightButton;
+  final ComponentAction? leftButton;
   final BottomSheetTheme style;
-  final ScrollableContentWidgetBuilder builder;
+  final ScrollableContentWidgetBuilder? builder;
   BottomSheetView({
     this.title,
     this.content,
     this.contentWithSelfScroll,
     this.rightButton,
     this.leftButton,
-    @required this.style,
+    required this.style,
     this.builder,
   });
   @override
@@ -69,9 +69,9 @@ class BottomSheetView extends StatelessWidget {
             _buildHandle(context),
             _buildTitle(context),
             contentWithSelfScroll != null
-                ? Expanded(child: contentWithSelfScroll)
+                ? Expanded(child: contentWithSelfScroll!)
                 : SizedBox(),
-            content != null ? content : SizedBox(),
+            content ?? SizedBox(),
             _buildButtons(context),
           ],
         ),
@@ -101,7 +101,7 @@ class BottomSheetView extends StatelessWidget {
                   controller: scrollController,
                   child: Column(
                     children: [
-                      builder(context, scrollController),
+                      builder!(context, scrollController),
                     ],
                   ),
                 ),
@@ -133,7 +133,7 @@ class BottomSheetView extends StatelessWidget {
     return title != null
         ? Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(title,
+            child: Text(title!,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline4),
           )
@@ -148,11 +148,11 @@ class BottomSheetView extends StatelessWidget {
               rightButton != null
                   ? Expanded(
                       child: CustomButton(
-                        title: rightButton.text,
+                        title: rightButton!.text,
                         size: ButtonSize.medium,
-                        onClick: rightButton.onClick,
-                        style: rightButton.style,
-                        isLoading: rightButton.isLoading,
+                        onClick: rightButton!.onClick,
+                        style: rightButton!.style,
+                        isLoading: rightButton!.isLoading,
                       ),
                     )
                   : SizedBox(),
@@ -163,11 +163,11 @@ class BottomSheetView extends StatelessWidget {
               leftButton != null
                   ? Expanded(
                       child: CustomButton(
-                        title: leftButton.text,
+                        title: leftButton!.text,
                         size: ButtonSize.medium,
-                        onClick: leftButton.onClick,
-                        style: leftButton.style,
-                        isLoading: leftButton.isLoading,
+                        onClick: leftButton!.onClick,
+                        style: leftButton!.style,
+                        isLoading: leftButton!.isLoading,
                       ),
                     )
                   : SizedBox(),
@@ -182,7 +182,7 @@ class BottomSheetTheme {
   final Color handleColor;
 
   BottomSheetTheme({
-    @required this.backgroundColor,
-    @required this.handleColor,
+    required this.backgroundColor,
+    required this.handleColor,
   });
 }

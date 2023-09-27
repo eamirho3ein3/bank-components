@@ -5,16 +5,16 @@ class CustomDatePicker extends StatefulWidget {
   final String placeholder;
   final int minYear;
   final int maxYear;
-  final Widget confirmTitle;
-  final Widget cancelTitle;
-  final Function(String) validator;
-  final String initValue;
-  final String dateFormat;
+  final Widget? confirmTitle;
+  final Widget? cancelTitle;
+  final String? Function(String?)? validator;
+  final String? initValue;
+  final String? dateFormat;
   CustomDatePicker(
-      {@required this.onComplete,
-      @required this.placeholder,
-      @required this.minYear,
-      @required this.maxYear,
+      {required this.onComplete,
+      required this.placeholder,
+      required this.minYear,
+      required this.maxYear,
       this.confirmTitle,
       this.cancelTitle,
       this.validator,

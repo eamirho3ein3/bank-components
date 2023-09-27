@@ -3,13 +3,13 @@ part of bank_components;
 class CustomBanner extends StatelessWidget {
   final CustomIconTheme icon;
   final String message;
-  final ComponentAction action;
+  final ComponentAction? action;
   final BannerTheme style;
   CustomBanner(
-      {@required this.icon,
-      @required this.message,
+      {required this.icon,
+      required this.message,
       this.action,
-      @required this.style});
+      required this.style});
   @override
   Widget build(BuildContext context) {
     return _buildBanner(context);
@@ -67,17 +67,17 @@ class CustomBanner extends StatelessWidget {
               : Padding(
                   padding: const EdgeInsets.only(top: 16),
                   child: InkWell(
-                    onTap: action.onClick,
+                    onTap: action?.onClick,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          action.text,
+                          action!.text,
                           style: Theme.of(context).textTheme.button,
                         ),
-                        action.icon != null
-                            ? Icon(action.icon.icon,
-                                color: action.icon?.iconColor)
+                        action!.icon != null
+                            ? Icon(action!.icon!.icon,
+                                color: action!.icon!.iconColor)
                             : SizedBox(),
                       ],
                     ),
@@ -93,16 +93,16 @@ class BannerTheme {
   final Color borderColor;
   final Color backgroundColor;
 
-  BannerTheme({@required this.borderColor, @required this.backgroundColor});
+  BannerTheme({required this.borderColor, required this.backgroundColor});
 }
 
 class CustomIconTheme {
-  final IconData icon;
-  final Color iconColor;
-  final Color backgroundColor;
-  final Color borderColor;
+  final IconData? icon;
+  final Color? iconColor;
+  final Color? backgroundColor;
+  final Color? borderColor;
   CustomIconTheme(
-      {@required this.icon,
+      {required this.icon,
       this.iconColor,
       this.backgroundColor,
       this.borderColor});

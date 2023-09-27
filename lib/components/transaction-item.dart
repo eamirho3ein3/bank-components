@@ -2,23 +2,25 @@ part of bank_components;
 
 class TransactionItem extends StatelessWidget {
   final CustomIconTheme icon;
-  final String title;
-  final String subtitle;
+  final String? title;
+  final String? subtitle;
+  final String? imageBadge;
   final PriceWidget priceWidget;
   final TransactionItemTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
-  final Function(BuildContext) onClick;
+  final Function(BuildContext)? onClick;
 
   TransactionItem({
-    @required this.icon,
-    @required this.title,
-    @required this.subtitle,
-    @required this.style,
-    @required this.priceWidget,
-    @required this.isSkeleton,
-    @required this.setting,
+    required this.icon,
+    this.title,
+    this.subtitle,
+    required this.style,
+    required this.priceWidget,
+    required this.isSkeleton,
+    required this.setting,
     this.onClick,
+    this.imageBadge,
   });
 
   @override
@@ -41,18 +43,50 @@ class TransactionItem extends StatelessWidget {
   _buildView(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (!isSkeleton) {
-          onClick(context);
+        if (!isSkeleton && onClick != null) {
+          onClick!(context);
         }
       },
       child: Row(
         children: [
           // logo
-          CustomAvatar(
-            radius: 24,
-            icon: icon.icon,
-            iconColor: icon.iconColor,
-            backgroundColor: icon.backgroundColor ?? setting.color,
+          Stack(
+            children: [
+              CustomAvatar(
+                radius: 24,
+                icon: icon.icon,
+                iconColor: icon.iconColor,
+                backgroundColor: icon.backgroundColor ?? setting.color,
+              ),
+              Positioned(
+                left: 0,
+                bottom: 0,
+                child: imageBadge != null
+                    ? Container(
+                        alignment: Alignment.center,
+                        height: 16,
+                        width: 16,
+                        decoration: BoxDecoration(
+                          color: style.badgeBackgroundColor,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xff0000000).withOpacity(0.05),
+                              spreadRadius: 0,
+                              blurRadius: 4,
+                              offset: Offset(0, 1),
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(
+                          imageBadge!,
+                          height: 10,
+                          width: 10,
+                        ),
+                      )
+                    : SizedBox(),
+              ),
+            ],
           ),
 
           SizedBox(
@@ -106,7 +140,7 @@ class TransactionItem extends StatelessWidget {
                     ? Text(subtitle ?? '',
                         style: Theme.of(context)
                             .textTheme
-                            .caption
+                            .caption!
                             .copyWith(color: style.subtitleColor))
                     : Container(
                         width: 64,
@@ -128,7 +162,11 @@ class TransactionItem extends StatelessWidget {
 class TransactionItemTheme {
   final Color backgroundColor;
   final Color subtitleColor;
+  final Color? badgeBackgroundColor;
 
-  TransactionItemTheme(
-      {@required this.backgroundColor, @required this.subtitleColor});
+  TransactionItemTheme({
+    required this.backgroundColor,
+    required this.subtitleColor,
+    required this.badgeBackgroundColor,
+  });
 }

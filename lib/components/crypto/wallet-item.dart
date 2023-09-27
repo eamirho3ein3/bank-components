@@ -1,28 +1,28 @@
 part of bank_components;
 
 class WalletItem extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String image;
-  final String price;
+  final String? title;
+  final String? subtitle;
+  final String? image;
+  final String? price;
   final WalletItemTheme style;
   final SkeletonSetting setting;
   final bool isSkeleton;
-  final Function(BuildContext) onClick;
+  final Function(BuildContext)? onClick;
   final MarketChanges changewWidget;
   final CryptoSymbol symbolWidget;
 
   WalletItem({
-    @required this.title,
-    @required this.image,
-    @required this.subtitle,
-    @required this.style,
-    @required this.price,
-    @required this.isSkeleton,
-    @required this.setting,
+    this.title,
+    this.image,
+    this.subtitle,
+    required this.style,
+    this.price,
+    required this.isSkeleton,
+    required this.setting,
     this.onClick,
-    @required this.changewWidget,
-    @required this.symbolWidget,
+    required this.changewWidget,
+    required this.symbolWidget,
   });
 
   @override
@@ -45,20 +45,22 @@ class WalletItem extends StatelessWidget {
   _buildView(BuildContext context) {
     return InkWell(
       onTap: () {
-        onClick(context);
+        if (onClick != null) {
+          onClick!(context);
+        }
       },
       child: Row(
         children: [
           // logo
           CircleAvatar(
             radius: 24,
-            backgroundColor: image == null || image.isEmpty
+            backgroundColor: image == null || image!.isEmpty
                 ? setting.color
                 : Colors.transparent,
-            child: image == null || image.isEmpty
+            child: image == null || image!.isEmpty
                 ? SizedBox()
                 : Image.network(
-                    image,
+                    image!,
                     errorBuilder: (context, error, stackTrace) => SizedBox(),
                   ),
           ),
@@ -97,7 +99,7 @@ class WalletItem extends StatelessWidget {
                           Text(subtitle ?? '',
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption
+                                  .caption!
                                   .copyWith(color: style.subtitleColor)),
                           SizedBox(
                             width: 8,
@@ -152,5 +154,8 @@ class WalletItem extends StatelessWidget {
 
 class WalletItemTheme extends TransactionItemTheme {
   WalletItemTheme({@required backgroundColor, @required subtitleColor})
-      : super(backgroundColor: backgroundColor, subtitleColor: subtitleColor);
+      : super(
+            backgroundColor: backgroundColor,
+            subtitleColor: subtitleColor,
+            badgeBackgroundColor: null);
 }

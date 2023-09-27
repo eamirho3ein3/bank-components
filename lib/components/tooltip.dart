@@ -4,7 +4,7 @@ class CustomTooltip extends StatefulWidget {
   final Widget child;
 
   final TooltipSetting setting;
-  CustomTooltip({@required this.child, @required this.setting});
+  CustomTooltip({required this.child, required this.setting});
   @override
   _CustomTooltipState createState() => _CustomTooltipState();
 }
@@ -36,7 +36,7 @@ class _CustomTooltipState extends State<CustomTooltip> {
       ),
       textStyle: Theme.of(context)
           .textTheme
-          .subtitle1
+          .subtitle1!
           .copyWith(color: widget.setting.textColor),
       showDuration: Duration(seconds: 4),
       preferBelow: false,
@@ -54,9 +54,9 @@ class TooltipSetting {
   final Color backgroundColor;
   final String message;
   TooltipSetting(
-      {@required this.textColor,
-      @required this.backgroundColor,
-      @required this.message});
+      {required this.textColor,
+      required this.backgroundColor,
+      required this.message});
 }
 
 class TooltipShapeBorder extends ShapeBorder {
@@ -76,10 +76,10 @@ class TooltipShapeBorder extends ShapeBorder {
   EdgeInsetsGeometry get dimensions => EdgeInsets.only(bottom: arrowHeight);
 
   @override
-  Path getInnerPath(Rect rect, {TextDirection textDirection}) => null;
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) => Path();
 
   @override
-  Path getOuterPath(Rect rect, {TextDirection textDirection}) {
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
     rect = Rect.fromPoints(
         rect.topLeft, rect.bottomRight - Offset(0, arrowHeight));
     double x = arrowWidth, y = arrowHeight, r = 1 - arrowArc;
@@ -93,7 +93,7 @@ class TooltipShapeBorder extends ShapeBorder {
   }
 
   @override
-  void paint(Canvas canvas, Rect rect, {TextDirection textDirection}) {}
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
 
   @override
   ShapeBorder scale(double t) => this;

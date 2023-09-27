@@ -1,15 +1,15 @@
 part of bank_components;
 
 class CircleButton extends StatelessWidget {
-  final Function onClick;
+  final Function() onClick;
   final IconData icon;
-  final String label;
+  final String? label;
   final CustomButtonTheme style;
   CircleButton(
-      {@required this.onClick,
+      {required this.onClick,
       this.label,
-      @required this.icon,
-      @required this.style});
+      required this.icon,
+      required this.style});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class CircleButton extends StatelessWidget {
             ? Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
-                  label,
+                  label!,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
               )

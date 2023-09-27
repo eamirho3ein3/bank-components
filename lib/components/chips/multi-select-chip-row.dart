@@ -1,10 +1,10 @@
 part of bank_components;
 
 class MultiSelectChips extends StatefulWidget {
-  final CustomChoiceChip mainChip;
-  final List<CustomChoiceChip> actions;
-  final List<ChipModel> filters;
-  final Function(int) filterOnSelect;
+  final CustomChoiceChip? mainChip;
+  final List<CustomChoiceChip>? actions;
+  final List<ChipModel>? filters;
+  final Function(int)? filterOnSelect;
   final bool isSkeleton;
   final SkeletonSetting setting;
   MultiSelectChips(
@@ -12,8 +12,8 @@ class MultiSelectChips extends StatefulWidget {
       this.actions,
       this.filters,
       this.filterOnSelect,
-      @required this.isSkeleton,
-      @required this.setting});
+      required this.isSkeleton,
+      required this.setting});
   @override
   _MultiSelectChipsState createState() => _MultiSelectChipsState();
 }
@@ -31,7 +31,7 @@ class _MultiSelectChipsState extends State<MultiSelectChips> {
           widget.mainChip != null
               ? Row(
                   children: [
-                    widget.mainChip,
+                    widget.mainChip!,
                     VerticalDivider(
                       thickness: 16,
                       width: 1,
@@ -41,17 +41,21 @@ class _MultiSelectChipsState extends State<MultiSelectChips> {
               : SizedBox(),
 
           // actions
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Row(
-              children: _addActionRoWItemSpace(widget.actions),
-            ),
-          ),
+          widget.actions != null
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Row(
+                    children: _addActionRoWItemSpace(widget.actions!),
+                  ),
+                )
+              : SizedBox(),
 
           // filters
-          Row(
-            children: _addFilterRoWItemSpace(widget.filters),
-          ),
+          widget.filters != null
+              ? Row(
+                  children: _addFilterRoWItemSpace(widget.filters!),
+                )
+              : SizedBox(),
         ],
       ),
     );
@@ -92,7 +96,9 @@ class _MultiSelectChipsState extends State<MultiSelectChips> {
             setState(() {
               filtersSelected.add(i);
             });
-            widget.filterOnSelect(i);
+            if (widget.filterOnSelect != null) {
+              widget.filterOnSelect!(i);
+            }
           },
           isSkeleton: widget.isSkeleton,
           setting: widget.setting,

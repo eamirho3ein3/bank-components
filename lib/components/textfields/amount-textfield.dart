@@ -3,16 +3,16 @@ part of bank_components;
 class AmountTextField extends StatefulWidget {
   final TextStyle textFieldStyle;
   final TextStyle textUnitStyle;
-  final Function(String) onTextFieldChanged;
-  final dynamic Function(String) validator;
+  final Function(String)? onTextFieldChanged;
+  final String? Function(String?)? validator;
   final String currency;
 
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState>? formKey;
 
   AmountTextField({
-    @required this.textFieldStyle,
-    @required this.textUnitStyle,
-    @required this.currency,
+    required this.textFieldStyle,
+    required this.textUnitStyle,
+    required this.currency,
     this.onTextFieldChanged,
     this.validator,
     this.formKey,
@@ -23,8 +23,8 @@ class AmountTextField extends StatefulWidget {
 }
 
 class _AmountTextFieldState extends State<AmountTextField> {
-  TextEditingController controller;
-  var wordPrice = '';
+  late TextEditingController controller;
+  String? wordPrice = '';
 
   @override
   void initState() {
@@ -49,14 +49,14 @@ class _AmountTextFieldState extends State<AmountTextField> {
       keyboardType: TextInputType.number,
       type: TextfieldType.Reqular,
       onChanged: (value) {
-        var result =
-            replaceToEnglishNumber(value).replaceAll(RegExp('[^0-9]'), '');
+        var result = (replaceToEnglishNumber(value) ?? '')
+            .replaceAll(RegExp('[^0-9]'), '');
 
         // final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
         final regexp = RegExp(
             '(?:${widget.currency.trim() + '\u2066' + ' '}\u2067)|(?:${widget.currency.trim() + '\u2066' + ' '})');
         if (widget.formKey != null) {
-          if (!widget.formKey.currentState.validate()) {
+          if (!widget.formKey!.currentState!.validate()) {
             wordPrice = null;
           } else {
             wordPrice = result.replaceAll(regexp, '');
@@ -67,13 +67,15 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
         setState(() {});
 
-        widget.onTextFieldChanged(result);
+        if (widget.onTextFieldChanged != null) {
+          widget.onTextFieldChanged!(result);
+        }
       },
       validator: widget.validator,
-      helper: wordPrice == null || wordPrice.isEmpty
+      helper: wordPrice == null || wordPrice!.isEmpty
           ? SizedBox()
           : Text(
-              wordPrice.toWord() + widget.currency,
+              wordPrice!.toWord() + widget.currency,
               style: Theme.of(context).textTheme.caption,
             ),
       textDirection: TextDirection.ltr,
@@ -85,7 +87,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
 class PriceTextFormatter extends TextInputFormatter {
   final String currency;
-  PriceTextFormatter({@required this.currency});
+  PriceTextFormatter({required this.currency});
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
@@ -94,7 +96,7 @@ class PriceTextFormatter extends TextInputFormatter {
         newValue.text.trim() == currencySymbol.trim()) {
       return newValue.copyWith(text: '$currencySymbol');
     } else if (newValue.text.compareTo(oldValue.text) != 0) {
-      var newString = replaceToEnglishNumber(newValue.text)
+      var newString = (replaceToEnglishNumber(newValue.text) ?? '')
           .replaceAll(RegExp('[^0-9]'), '');
       if (newString.trim().isEmpty) {
         return TextEditingValue(
@@ -104,13 +106,13 @@ class PriceTextFormatter extends TextInputFormatter {
         );
       } else {
         final f = intel.NumberFormat("#,###");
-        var num = int.parse(replaceToEnglishNumber(newValue.text)
+        var num = int.parse(replaceToEnglishNumber(newValue.text)!
             .replaceAll(RegExp('[^0-9]'), ''));
         final newString =
             '$currencySymbol' + '\u2066' + ' ' + f.format(num).trim();
 
         return TextEditingValue(
-          text: replaceToFarsiNumber(newString),
+          text: replaceToFarsiNumber(newString)!,
           selection: TextSelection.fromPosition(
               TextPosition(offset: newString.length)),
         );

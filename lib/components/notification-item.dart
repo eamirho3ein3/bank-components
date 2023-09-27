@@ -1,11 +1,11 @@
 part of bank_components;
 
 class NotificationItem extends StatelessWidget {
-  final IconData icon;
-  final String image;
-  final String imageFailure;
+  final IconData? icon;
+  final String? image;
+  final String? imageFailure;
   final String title;
-  final String description;
+  final String? description;
   final String date;
   final NotificationItemTheme style;
   final bool isSkeleton;
@@ -15,11 +15,11 @@ class NotificationItem extends StatelessWidget {
     this.icon,
     this.image,
     this.description,
-    @required this.style,
-    @required this.title,
-    @required this.date,
-    @required this.isSkeleton,
-    @required this.setting,
+    required this.style,
+    required this.title,
+    required this.date,
+    required this.isSkeleton,
+    required this.setting,
     this.imageFailure,
   });
   @override
@@ -86,15 +86,13 @@ class NotificationItem extends StatelessWidget {
                   ),
                   clipBehavior: Clip.antiAlias,
                   child: Image.network(
-                    image,
+                    image!,
                     height: 176,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     errorBuilder: (context, exception, stackTrace) {
                       return Image.asset(
-                        imageFailure != null
-                            ? imageFailure
-                            : 'assets/images/image-empty.png',
+                        imageFailure ?? 'assets/images/image-empty.png',
                         height: 176,
                         width: double.infinity,
                         fit: BoxFit.cover,
@@ -126,7 +124,7 @@ class NotificationItem extends StatelessWidget {
                       child: Text(title,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1
+                              .subtitle1!
                               .copyWith(fontWeight: FontWeight.w700)),
                     ),
 
@@ -134,7 +132,7 @@ class NotificationItem extends StatelessWidget {
                     description != null
                         ? Padding(
                             padding: const EdgeInsets.only(bottom: 6),
-                            child: Text(description,
+                            child: Text(description!,
                                 style: Theme.of(context).textTheme.subtitle1),
                           )
                         : SizedBox(),
@@ -143,7 +141,7 @@ class NotificationItem extends StatelessWidget {
                     Text(date,
                         style: Theme.of(context)
                             .textTheme
-                            .caption
+                            .caption!
                             .copyWith(color: style.secondaryColor)),
                   ],
                 ),
@@ -161,5 +159,5 @@ class NotificationItemTheme {
   final Color backgroundColor;
 
   NotificationItemTheme(
-      {@required this.secondaryColor, @required this.backgroundColor});
+      {required this.secondaryColor, required this.backgroundColor});
 }

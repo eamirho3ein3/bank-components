@@ -6,8 +6,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color backgroundColor;
 
   MainAppBar(
-      {@required this.title,
-      @required this.actions,
+      {required this.title,
+      required this.actions,
       this.backgroundColor = Colors.transparent});
   static final _appBar = AppBar();
 

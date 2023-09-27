@@ -1,27 +1,27 @@
 part of bank_components;
 
 class CustomToggle extends StatelessWidget {
-  final String title;
+  final String? title;
   final ToggleTheme style;
-  final Function(bool) onToggle;
+  final Function(bool)? onToggle;
   final bool value;
-  final bool rightText;
+  final bool? rightText;
   CustomToggle(
       {this.title,
-      @required this.style,
+      required this.style,
       this.onToggle,
       this.rightText,
-      @required this.value});
+      required this.value});
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        rightText != null && rightText
+        rightText != null && rightText!
             ? Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  title ?? '',
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                       color: onToggle == null ? style.textColorDisabled : null),
                 ),
               )
@@ -39,12 +39,12 @@ class CustomToggle extends StatelessWidget {
             ),
           ),
         ),
-        rightText != null && !rightText
+        rightText != null && !rightText!
             ? Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.subtitle1.copyWith(
+                  title ?? '',
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
                       color: onToggle == null ? style.textColorDisabled : null),
                 ),
               )
@@ -55,10 +55,10 @@ class CustomToggle extends StatelessWidget {
 }
 
 class ToggleTheme {
-  final Color trackColor;
-  final Color activeColor;
-  final Color textColor;
-  final Color textColorDisabled;
+  final Color? trackColor;
+  final Color? activeColor;
+  final Color? textColor;
+  final Color? textColorDisabled;
 
   ToggleTheme(
       {this.trackColor,

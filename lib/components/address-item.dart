@@ -4,21 +4,21 @@ class AddressItem extends StatelessWidget {
   final String title;
   final String address;
   final String code;
-  final IconData icon;
+  final IconData? icon;
   final AddressItemTheme style;
   final bool isSkeleton;
   final SkeletonSetting setting;
   final List<SlidableAction> actions;
 
   AddressItem({
-    @required this.title,
-    @required this.address,
-    @required this.code,
-    @required this.icon,
-    @required this.style,
-    @required this.isSkeleton,
-    @required this.setting,
-    @required this.actions,
+    required this.title,
+    required this.address,
+    required this.code,
+    this.icon,
+    required this.style,
+    required this.isSkeleton,
+    required this.setting,
+    required this.actions,
   });
   @override
   Widget build(BuildContext context) {
@@ -125,7 +125,7 @@ class AddressItem extends StatelessWidget {
                     child: Text(title,
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle1
+                            .subtitle1!
                             .copyWith(fontWeight: FontWeight.w700)),
                   ),
 
@@ -135,7 +135,7 @@ class AddressItem extends StatelessWidget {
                     child: Text(address + ' -  کدپستی: ' + code,
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle1
+                            .subtitle1!
                             .copyWith(color: style.addressColor)),
                   ),
                 ],
@@ -154,8 +154,8 @@ class AddressItemTheme {
   final Color iconColor;
   final Color addressColor;
   AddressItemTheme(
-      {@required this.backgroundColor,
-      @required this.addressColor,
-      @required this.iconColor,
-      @required this.iconBackgroundColor});
+      {required this.backgroundColor,
+      required this.addressColor,
+      required this.iconColor,
+      required this.iconBackgroundColor});
 }
