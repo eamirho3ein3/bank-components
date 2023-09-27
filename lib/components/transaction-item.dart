@@ -69,6 +69,14 @@ class TransactionItem extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: style.badgeBackgroundColor,
                           shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xff0000000).withOpacity(0.05),
+                              spreadRadius: 0,
+                              blurRadius: 4,
+                              offset: Offset(0, 1),
+                            ),
+                          ],
                         ),
                         child: Image.asset(
                           imageBadge!,
