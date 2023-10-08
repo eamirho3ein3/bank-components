@@ -90,37 +90,40 @@ class _PersonalSettingItemState extends State<PersonalSettingItem> {
   }
 
   _buildSelectedItem(String value) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 12.0),
-          child: Text(
-            value,
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+    return InkWell(
+      onTap: () {
+        widget.onSelect(value);
+        setState(() {
+          selected = value;
+        });
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
           ),
-        ),
-        Radio<String>(
-          value: value,
-          groupValue: selected,
-          fillColor: MaterialStateColor.resolveWith((states) {
-            if (states.contains(MaterialState.selected)) {
-              return widget.style.activeColor;
-            }
-            return widget.style.inactiveColor;
-          }),
-          onChanged: (v) {
-            widget.onSelect(v);
-            if (v != null) {
-              setState(() {
-                selected = v;
-              });
-            }
-          },
-        ),
-      ],
+          AbsorbPointer(
+            child: Radio<String>(
+              value: value,
+              groupValue: selected,
+              fillColor: MaterialStateColor.resolveWith((states) {
+                if (states.contains(MaterialState.selected)) {
+                  return widget.style.activeColor;
+                }
+                return widget.style.inactiveColor;
+              }),
+              onChanged: (v) {},
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
