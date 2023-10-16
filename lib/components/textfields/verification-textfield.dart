@@ -3,15 +3,22 @@ part of bank_components;
 class VerificationTextField extends StatefulWidget {
   final Function(String) onComplete;
   final Function(String) onChanged;
+  final Function(TextEditingController) onClipboardChange;
+
   final int otpLength;
-  VerificationTextField(
-      {required this.onComplete, required this.onChanged, this.otpLength = 6});
+  VerificationTextField({
+    required this.onComplete,
+    required this.onChanged,
+    this.otpLength = 6,
+    required this.onClipboardChange,
+  });
 
   @override
   _VerificationTextFieldState createState() => _VerificationTextFieldState();
 }
 
-class _VerificationTextFieldState extends State<VerificationTextField> {
+class _VerificationTextFieldState extends State<VerificationTextField>
+    with WidgetsBindingObserver {
   late TextEditingController _controller;
   FocusNode _focusNode = FocusNode();
   String _input = "";
@@ -19,7 +26,22 @@ class _VerificationTextFieldState extends State<VerificationTextField> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _controller = VerificationTextEditingController(limit: widget.otpLength);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      widget.onClipboardChange(_controller);
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
