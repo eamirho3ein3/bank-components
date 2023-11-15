@@ -34,6 +34,7 @@ class CustomSnackBar extends SnackBar {
         super(
           content: Row(
             children: [
+              SizedBox(width: 4.0),
               icon != null
                   ? Icon(
                       icon,
@@ -96,7 +97,10 @@ class CustomSnackBar extends SnackBar {
           backgroundColor: style.backgroundColor,
           dismissDirection: DismissDirection.down,
           padding: EdgeInsets.only(
-              left: button != null ? 8 : 12, right: 12, top: 12, bottom: 12),
+              left: 8,
+              right: 8,
+              top: button != null ? 4 : 12,
+              bottom: button != null ? 4 : 12),
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.only(
               left: horizontalMargin,
