@@ -5,6 +5,7 @@ class ZarinCardBalance extends StatelessWidget {
   final ComponentAction? leftButton;
   final CustomCardTheme style;
   final String title;
+  final Widget? titleIcon;
   final String? subtitle;
   final String amount;
   final String? currency;
@@ -17,6 +18,7 @@ class ZarinCardBalance extends StatelessWidget {
     this.leftButton,
     required this.style,
     required this.title,
+    this.titleIcon,
     this.currency,
     this.subtitle,
     required this.amount,
@@ -120,10 +122,16 @@ class ZarinCardBalance extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // title
-            Text(title,
-                textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.bodyText2),
-
+            Row(
+              children: [
+                Expanded(
+                  child: Text(title,
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.bodyText2),
+                ),
+                titleIcon != null ? titleIcon! : SizedBox(),
+              ],
+            ),
             // subtitle
             subtitle != null
                 ? Text(
