@@ -1,8 +1,8 @@
 part of bank_components;
 
 class ZarinCardBalance extends StatelessWidget {
-  final ComponentAction? rightButton;
-  final ComponentAction? leftButton;
+  final Widget? rightButton;
+  final Widget? leftButton;
   final CustomCardTheme style;
   final String title;
   final Widget? titleIcon;
@@ -84,12 +84,8 @@ class ZarinCardBalance extends StatelessWidget {
             children: [
               rightButton != null
                   ? Expanded(
-                      child: CustomButton(
-                        title: rightButton!.text,
-                        size: ButtonSize.large,
-                        onClick: () {},
-                        style: rightButton!.style,
-                        rightIcon: rightButton!.icon?.icon,
+                      child: IgnorePointer(
+                        child: rightButton!,
                       ),
                     )
                   : SizedBox(),
@@ -98,12 +94,8 @@ class ZarinCardBalance extends StatelessWidget {
               ),
               leftButton != null
                   ? Expanded(
-                      child: CustomButton(
-                        title: leftButton!.text,
-                        size: ButtonSize.large,
-                        onClick: () {},
-                        style: leftButton!.style,
-                        rightIcon: leftButton!.icon?.icon,
+                      child: IgnorePointer(
+                        child: leftButton!,
                       ),
                     )
                   : SizedBox()
@@ -169,13 +161,7 @@ class ZarinCardBalance extends StatelessWidget {
             rightButton != null
                 ? Expanded(
                     child: _buildRightButton(
-                      child: CustomButton(
-                        title: rightButton!.text,
-                        size: ButtonSize.large,
-                        onClick: rightButton!.onClick,
-                        style: rightButton!.style,
-                        rightIcon: rightButton!.icon?.icon,
-                      ),
+                      child: rightButton!,
                     ),
                   )
                 : SizedBox(),
@@ -184,13 +170,7 @@ class ZarinCardBalance extends StatelessWidget {
             ),
             leftButton != null
                 ? Expanded(
-                    child: CustomButton(
-                      title: leftButton!.text,
-                      size: ButtonSize.large,
-                      onClick: leftButton!.onClick,
-                      style: leftButton!.style,
-                      rightIcon: leftButton!.icon?.icon,
-                    ),
+                    child: leftButton!,
                   )
                 : SizedBox()
           ],
