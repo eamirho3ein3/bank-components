@@ -1,11 +1,13 @@
 part of bank_components;
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends StatefulWidget {
   final ButtonSize? size;
   final String? title;
   final IconData? rightIcon;
   final IconData? leftIcon;
   final Function()? onClick;
+  final Function()? onSingleClick;
+  final int clickInterval;
   final CustomButtonTheme style;
   final double? horizontalPadding;
   final bool? isLoading;
@@ -16,82 +18,112 @@ class CustomButton extends StatelessWidget {
       this.rightIcon,
       this.leftIcon,
       this.onClick,
+      this.onSingleClick,
+      this.clickInterval = 1000,
       required this.style,
       this.horizontalPadding,
       this.isLoading});
 
   @override
+  State<CustomButton> createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  var isClicked = false;
+
+  Timer? _timer;
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: isLoading != null && isLoading! ? null : onClick,
+      onPressed: widget.isLoading != null &&
+              widget.isLoading! &&
+              (widget.onClick == null || widget.onSingleClick == null)
+          ? null
+          : widget.onSingleClick != null
+              ? () {
+                  if (isClicked == false) {
+                    _startTimer();
+                    widget.onSingleClick!();
+                    isClicked = true;
+                  }
+                }
+              : widget.onClick,
       child: Padding(
         padding: EdgeInsets.symmetric(
-            vertical: isLoading != null && isLoading!
-                ? size == ButtonSize.large
+            vertical: widget.isLoading != null && widget.isLoading!
+                ? widget.size == ButtonSize.large
                     ? 14
                     : 10
-                : size == ButtonSize.large
+                : widget.size == ButtonSize.large
                     ? 12
                     : 8,
-            horizontal: horizontalPadding ?? 8),
-        child: isLoading != null && isLoading!
+            horizontal: widget.horizontalPadding ?? 8),
+        child: widget.isLoading != null && widget.isLoading!
             ? _buildLoading(context)
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // right icon
-                  rightIcon != null
+                  widget.rightIcon != null
                       ? Padding(
-                          padding: EdgeInsets.only(left: title != null ? 8 : 0),
-                          child: Icon(rightIcon),
+                          padding: EdgeInsets.only(
+                              left: widget.title != null ? 8 : 0),
+                          child: Icon(widget.rightIcon),
                         )
                       : SizedBox(),
 
                   // title
-                  title != null
+                  widget.title != null
                       ? Flexible(
-                          child: Text(title!,
+                          child: Text(widget.title!,
                               style: Theme.of(context)
                                   .textTheme
                                   .button!
                                   .copyWith(
-                                      color: onClick != null
-                                          ? style.foregroundColor
-                                          : style.foregroundDisabledColor)),
+                                      color: widget.onClick != null
+                                          ? widget.style.foregroundColor
+                                          : widget
+                                              .style.foregroundDisabledColor)),
                         )
                       : SizedBox(),
 
                   // left icon
-                  leftIcon != null
+                  widget.leftIcon != null
                       ? Padding(
-                          padding:
-                              EdgeInsets.only(right: title != null ? 8 : 0),
-                          child: Icon(leftIcon),
+                          padding: EdgeInsets.only(
+                              right: widget.title != null ? 8 : 0),
+                          child: Icon(widget.leftIcon),
                         )
                       : SizedBox(),
                 ],
               ),
       ),
       style: ButtonStyle(
-        alignment: style.alignment,
+        alignment: widget.style.alignment,
         elevation: MaterialStateProperty.all(0),
         overlayColor: MaterialStateProperty.all(Colors.black.withOpacity(0.08)),
         backgroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return style.disabledColor;
+              return widget.style.disabledColor;
             } else {
-              return style.backgroundColor;
+              return widget.style.backgroundColor;
             }
           },
         ),
         foregroundColor: MaterialStateProperty.resolveWith<Color>(
           (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return style.foregroundDisabledColor;
+              return widget.style.foregroundDisabledColor;
             } else {
-              return style.foregroundColor;
+              return widget.style.foregroundColor;
             }
           },
         ),
@@ -111,11 +143,16 @@ class CustomButton extends StatelessWidget {
       height: 20,
       width: 20,
       child: CircularProgressIndicator(
-        valueColor:
-            AlwaysStoppedAnimation<Color>(style.loadingButtonTheme.valueColor),
-        backgroundColor: style.loadingButtonTheme.backgroundColor,
+        valueColor: AlwaysStoppedAnimation<Color>(
+            widget.style.loadingButtonTheme.valueColor),
+        backgroundColor: widget.style.loadingButtonTheme.backgroundColor,
       ),
     );
+  }
+
+  _startTimer() {
+    _timer = Timer(
+        Duration(milliseconds: widget.clickInterval), () => isClicked = false);
   }
 }
 
