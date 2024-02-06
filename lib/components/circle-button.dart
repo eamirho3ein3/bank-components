@@ -11,6 +11,8 @@ class CircleButton extends StatelessWidget {
       required this.icon,
       required this.style});
 
+  double get width => 24 + 2 * 12;
+
   @override
   Widget build(BuildContext context) {
     return Column(
