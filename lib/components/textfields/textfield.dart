@@ -24,6 +24,8 @@ class MainTextField extends StatefulWidget {
   final bool showCounter;
   final Function(String)? onFieldSubmitted;
   final Function()? onTap;
+  final int? minLines;
+  final int? maxLines;
 
   MainTextField({
     required this.controller,
@@ -49,6 +51,8 @@ class MainTextField extends StatefulWidget {
     this.enabled,
     this.onFieldSubmitted,
     this.onTap,
+    this.minLines,
+    this.maxLines,
   });
 
   @override
@@ -67,8 +71,10 @@ class _MainTextFieldState extends State<MainTextField> {
           focusNode: widget.focusNode,
           textAlign: widget.textAlign ?? TextAlign.start,
           maxLength: widget.limit,
-          minLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
-          maxLines: widget.keyboardType == TextInputType.multiline ? 4 : 1,
+          minLines: widget.minLines ??
+              (widget.keyboardType == TextInputType.multiline ? 4 : 1),
+          maxLines: widget.maxLines ??
+              (widget.keyboardType == TextInputType.multiline ? 4 : 1),
           buildCounter: (context,
               {required currentLength, required isFocused, maxLength}) {
             return widget.limit != null && widget.showCounter
