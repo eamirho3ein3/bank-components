@@ -6,13 +6,14 @@ class AmountTextField extends StatefulWidget {
   final Function(String)? onTextFieldChanged;
   final String? Function(String?)? validator;
   final String currency;
-
+  final String Function(String) showValueBaseOnOppositeCurrency;
   final GlobalKey<FormState>? formKey;
 
   AmountTextField({
     required this.textFieldStyle,
     required this.textUnitStyle,
     required this.currency,
+    required this.showValueBaseOnOppositeCurrency,
     this.onTextFieldChanged,
     this.validator,
     this.formKey,
@@ -75,7 +76,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
       helper: wordPrice == null || wordPrice!.isEmpty
           ? SizedBox()
           : Text(
-              wordPrice!.toWord() + widget.currency,
+              wordPrice!,
               style: Theme.of(context).textTheme.caption,
             ),
       textDirection: TextDirection.ltr,
