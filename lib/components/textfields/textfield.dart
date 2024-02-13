@@ -26,6 +26,7 @@ class MainTextField extends StatefulWidget {
   final Function()? onTap;
   final int? minLines;
   final int? maxLines;
+  final TextInputAction? textInputAction;
 
   MainTextField({
     required this.controller,
@@ -53,6 +54,7 @@ class MainTextField extends StatefulWidget {
     this.onTap,
     this.minLines,
     this.maxLines,
+    this.textInputAction,
   });
 
   @override
@@ -67,6 +69,7 @@ class _MainTextFieldState extends State<MainTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          textInputAction: widget.textInputAction,
           controller: widget.controller,
           focusNode: widget.focusNode,
           textAlign: widget.textAlign ?? TextAlign.start,
