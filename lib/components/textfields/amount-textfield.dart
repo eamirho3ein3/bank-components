@@ -60,10 +60,12 @@ class _AmountTextFieldState extends State<AmountTextField> {
           if (!widget.formKey!.currentState!.validate()) {
             wordPrice = null;
           } else {
-            wordPrice = result.replaceAll(regexp, '');
+            wordPrice = widget
+                .showValueBaseOnOppositeCurrency(result.replaceAll(regexp, ''));
           }
         } else {
-          wordPrice = result.replaceAll(regexp, '');
+          wordPrice = widget
+              .showValueBaseOnOppositeCurrency(result.replaceAll(regexp, ''));
         }
 
         setState(() {});
