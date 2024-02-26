@@ -34,6 +34,7 @@ class CustomToggle extends StatelessWidget {
             child: CupertinoSwitch(
               trackColor: style.trackColor,
               activeColor: style.activeColor,
+              thumbColor: style.thumbColor,
               value: value,
               onChanged: onToggle,
             ),
@@ -59,10 +60,12 @@ class ToggleTheme {
   final Color? activeColor;
   final Color? textColor;
   final Color? textColorDisabled;
+  final Color? thumbColor;
 
   ToggleTheme(
       {this.trackColor,
       this.activeColor,
       this.textColorDisabled,
+      this.thumbColor,
       this.textColor});
 }
