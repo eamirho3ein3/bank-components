@@ -4,14 +4,18 @@ class CircleButton extends StatelessWidget {
   final Function() onClick;
   final IconData icon;
   final String? label;
-  final CustomButtonTheme style;
-  CircleButton(
-      {required this.onClick,
-      this.label,
-      required this.icon,
-      required this.style});
+  final double? padding;
 
-  double get width => 24 + 2 * 12;
+  final CustomButtonTheme style;
+  CircleButton({
+    required this.onClick,
+    this.label,
+    required this.icon,
+    required this.style,
+    this.padding,
+  });
+
+  double get width => 24 + (2 * (padding ?? 12));
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +55,7 @@ class CircleButton extends StatelessWidget {
             ),
             minimumSize: MaterialStateProperty.all(Size.zero),
             padding: MaterialStateProperty.all(
-              EdgeInsets.all(12),
+              EdgeInsets.all(padding ?? 12),
             ),
           ),
         ),
