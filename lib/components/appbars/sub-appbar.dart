@@ -23,6 +23,7 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      surfaceTintColor: Colors.transparent,
       actions: actions,
       title: title != null || titleWidget != null
           ? _buildTitle(context)
