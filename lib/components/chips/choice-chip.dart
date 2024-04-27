@@ -52,6 +52,7 @@ class CustomChoiceChip extends StatelessWidget {
               : SizedBox()
         ],
       ),
+      showCheckmark: false,
       selected: selected,
       avatar: icon != null
           ? Icon(
