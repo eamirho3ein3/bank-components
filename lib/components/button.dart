@@ -131,6 +131,11 @@ class _CustomButtonState extends State<CustomButton> {
         padding: MaterialStateProperty.all(
           EdgeInsets.zero,
         ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
         // padding: MaterialStateProperty.all(EdgeInsets.symmetric(
         //     vertical: size == ButtonSize.large ? 12 : 8,
         //     horizontal: size == ButtonSize.large ? 24 : 16)),
