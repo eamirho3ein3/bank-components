@@ -116,7 +116,7 @@ class _MainTextFieldState extends State<MainTextField> {
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
           style:
-              Theme.of(context).textTheme.titleMedium ?? widget.textFieldStyle,
+              widget.textFieldStyle ?? Theme.of(context).textTheme.titleMedium,
           textDirection: widget.textDirection,
           onFieldSubmitted: widget.onFieldSubmitted,
         ),
