@@ -62,7 +62,7 @@ class _VerificationTextFieldState extends State<VerificationTextField>
         ],
         textFieldStyle: widget.textFieldStyle,
         keyboardType: TextInputType.number,
-        contentPadding: EdgeInsets.symmetric(vertical: 8),
+        contentPadding: EdgeInsets.symmetric(vertical: 30),
         showCounter: false,
         onChanged: (String value) {
           _input = value;
@@ -93,7 +93,7 @@ class VerificationTextEditingController extends TextEditingController {
       required bool withComposing}) {
     TextSpan original = super.buildTextSpan(
         context: context, style: style, withComposing: withComposing);
-    String text = original.toPlainText();
+    String text = replaceToEnglishNumber(original.toPlainText())!;
     const dashCode = 45;
     List<int> codes = List.filled(6, dashCode);
     String result = String.fromCharCodes(codes);
@@ -101,7 +101,8 @@ class VerificationTextEditingController extends TextEditingController {
     String newText = text.isEmpty ? result : text.padRight(limit, '-');
     // Add spaces between each character to looks better
     newText = newText.split('').join('  ');
-    TextSpan newSpan = TextSpan(text: newText, style: original.style);
+    TextSpan newSpan =
+        TextSpan(text: replaceToFarsiNumber(newText), style: original.style);
     return newSpan;
   }
 }
