@@ -83,7 +83,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
             ),
       textDirection: TextDirection.ltr,
       textFieldStyle: widget.textFieldStyle,
-      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
     );
   }
 }
