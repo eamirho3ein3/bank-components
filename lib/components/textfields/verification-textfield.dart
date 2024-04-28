@@ -4,6 +4,7 @@ class VerificationTextField extends StatefulWidget {
   final Function(String) onComplete;
   final Function(String) onChanged;
   final Function(TextEditingController) onClipboardChange;
+  final TextStyle? textFieldStyle;
 
   final int otpLength;
   VerificationTextField({
@@ -11,6 +12,7 @@ class VerificationTextField extends StatefulWidget {
     required this.onChanged,
     this.otpLength = 6,
     required this.onClipboardChange,
+    this.textFieldStyle,
   });
 
   @override
@@ -58,7 +60,7 @@ class _VerificationTextFieldState extends State<VerificationTextField>
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.digitsOnly
         ],
-        textFieldStyle: Theme.of(context).textTheme.headline1,
+        textFieldStyle: widget.textFieldStyle,
         keyboardType: TextInputType.number,
         contentPadding: EdgeInsets.symmetric(vertical: 8),
         showCounter: false,
