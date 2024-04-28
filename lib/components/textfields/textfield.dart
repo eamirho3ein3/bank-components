@@ -115,7 +115,8 @@ class _MainTextFieldState extends State<MainTextField> {
           validator: widget.validator,
           keyboardType: widget.keyboardType,
           onChanged: widget.onChanged,
-          style: widget.textFieldStyle,
+          style:
+              Theme.of(context).textTheme.titleMedium ?? widget.textFieldStyle,
           textDirection: widget.textDirection,
           onFieldSubmitted: widget.onFieldSubmitted,
         ),
