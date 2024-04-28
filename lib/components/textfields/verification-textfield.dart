@@ -62,7 +62,7 @@ class _VerificationTextFieldState extends State<VerificationTextField>
         ],
         textFieldStyle: widget.textFieldStyle,
         keyboardType: TextInputType.number,
-        contentPadding: EdgeInsets.symmetric(vertical: 30),
+        contentPadding: EdgeInsets.only(top: 30),
         showCounter: false,
         onChanged: (String value) {
           _input = value;
