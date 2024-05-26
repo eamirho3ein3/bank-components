@@ -11,6 +11,7 @@ class ZarinCardBalance extends StatelessWidget {
   final String? currency;
   final bool isSkeleton;
   final SkeletonSetting setting;
+  final Widget? leadingTitleIcon;
   final TooltipSetting? tooltipSetting;
 
   ZarinCardBalance({
@@ -24,6 +25,7 @@ class ZarinCardBalance extends StatelessWidget {
     required this.amount,
     required this.isSkeleton,
     required this.setting,
+    this.leadingTitleIcon,
     this.tooltipSetting,
   });
 
@@ -116,6 +118,7 @@ class ZarinCardBalance extends StatelessWidget {
             // title
             Row(
               children: [
+                leadingTitleIcon != null ? leadingTitleIcon! : SizedBox(),
                 Expanded(
                   child: Text(title,
                       textAlign: TextAlign.start,
