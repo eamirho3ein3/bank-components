@@ -118,7 +118,12 @@ class ZarinCardBalance extends StatelessWidget {
             // title
             Row(
               children: [
-                leadingTitleIcon != null ? leadingTitleIcon! : SizedBox(),
+                leadingTitleIcon != null
+                    ? Padding(
+                        padding: EdgeInsets.only(left: 8, top: 2),
+                        child: leadingTitleIcon!,
+                      )
+                    : SizedBox(),
                 Expanded(
                   child: Text(title,
                       textAlign: TextAlign.start,
