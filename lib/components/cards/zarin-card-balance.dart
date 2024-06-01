@@ -7,6 +7,7 @@ class ZarinCardBalance extends StatelessWidget {
   final String title;
   final Widget? titleIcon;
   final String? subtitle;
+  final String? lastUpdate;
   final String amount;
   final String? currency;
   final bool isSkeleton;
@@ -22,6 +23,7 @@ class ZarinCardBalance extends StatelessWidget {
     this.titleIcon,
     this.currency,
     this.subtitle,
+    this.lastUpdate,
     required this.amount,
     required this.isSkeleton,
     required this.setting,
@@ -129,7 +131,27 @@ class ZarinCardBalance extends StatelessWidget {
                       textAlign: TextAlign.start,
                       style: Theme.of(context).textTheme.bodyText2),
                 ),
-                titleIcon != null ? titleIcon! : SizedBox(),
+                titleIcon != null || lastUpdate != null
+                    ? Row(
+                        children: [
+                          lastUpdate != null
+                              ? Text(
+                                  lastUpdate!,
+                                  textAlign: TextAlign.end,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .caption!
+                                      .copyWith(
+                                          color: style.secondaryTextColor),
+                                )
+                              : SizedBox(),
+                          SizedBox(
+                            width: lastUpdate != null ? 4 : 0,
+                          ),
+                          titleIcon != null ? titleIcon! : SizedBox(),
+                        ],
+                      )
+                    : SizedBox(),
               ],
             ),
             // subtitle
@@ -176,11 +198,7 @@ class ZarinCardBalance extends StatelessWidget {
             SizedBox(
               width: leftButton != null ? 12 : 0,
             ),
-            leftButton != null
-                ? Expanded(
-                    child: leftButton!,
-                  )
-                : SizedBox()
+            leftButton != null ? leftButton! : SizedBox()
           ],
         ),
       ),
