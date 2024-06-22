@@ -1,6 +1,6 @@
 part of bank_components;
 
-class TestAmountTextField extends StatefulWidget {
+class AmountTextField extends StatefulWidget {
   final TextStyle textFieldStyle;
   final Function(String)? onTextFieldChanged;
   final String? Function(String?)? validator;
@@ -9,7 +9,7 @@ class TestAmountTextField extends StatefulWidget {
   final TextfieldExtend? suffix;
   final TextfieldExtend? prefix;
 
-  TestAmountTextField({
+  AmountTextField({
     required this.showValueBaseOnOppositeCurrency,
     required this.textFieldStyle,
     this.onTextFieldChanged,
@@ -20,10 +20,10 @@ class TestAmountTextField extends StatefulWidget {
   });
 
   @override
-  _TestAmountTextFieldState createState() => _TestAmountTextFieldState();
+  _AmountTextFieldState createState() => _AmountTextFieldState();
 }
 
-class _TestAmountTextFieldState extends State<TestAmountTextField> {
+class _AmountTextFieldState extends State<AmountTextField> {
   late TextEditingController controller;
   String? wordPrice = '';
 
