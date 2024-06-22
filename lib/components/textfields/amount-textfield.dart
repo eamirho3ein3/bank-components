@@ -8,6 +8,7 @@ class AmountTextField extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
   final TextfieldExtend? suffix;
   final TextfieldExtend? prefix;
+  final FocusNode? focusNode;
 
   AmountTextField({
     required this.showValueBaseOnOppositeCurrency,
@@ -17,6 +18,7 @@ class AmountTextField extends StatefulWidget {
     this.formKey,
     this.suffix,
     this.prefix,
+    this.focusNode,
   });
 
   @override
@@ -36,6 +38,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
   @override
   Widget build(BuildContext context) {
     return MainTextField(
+      focusNode: widget.focusNode,
       controller: controller,
       inputFormatters: [PriceTextFormatterV2()],
       textAlign: TextAlign.center,
