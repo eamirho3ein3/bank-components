@@ -1,43 +1,35 @@
 part of bank_components;
 
-class AmountTextField extends StatefulWidget {
+class TestAmountTextField extends StatefulWidget {
   final TextStyle textFieldStyle;
-  final TextStyle textUnitStyle;
   final Function(String)? onTextFieldChanged;
   final String? Function(String?)? validator;
-  final String currency;
   final String Function(String) showValueBaseOnOppositeCurrency;
   final GlobalKey<FormState>? formKey;
+  final TextfieldExtend? suffix;
+  final TextfieldExtend? prefix;
 
-  AmountTextField({
-    required this.textFieldStyle,
-    required this.textUnitStyle,
-    required this.currency,
+  TestAmountTextField({
     required this.showValueBaseOnOppositeCurrency,
+    required this.textFieldStyle,
     this.onTextFieldChanged,
     this.validator,
     this.formKey,
+    this.suffix,
+    this.prefix,
   });
 
   @override
-  _AmountTextFieldState createState() => _AmountTextFieldState();
+  _TestAmountTextFieldState createState() => _TestAmountTextFieldState();
 }
 
-class _AmountTextFieldState extends State<AmountTextField> {
+class _TestAmountTextFieldState extends State<TestAmountTextField> {
   late TextEditingController controller;
   String? wordPrice = '';
 
   @override
   void initState() {
-    var regExp = "\B${widget.currency.trim() + '\u2066' + ' '}";
-    controller = RichTextController(
-      patternMatchMap: {
-        RegExp(regExp): widget.textUnitStyle,
-      },
-      onMatch: (List<String> match) {},
-      deleteOnBack: true,
-      text: widget.currency.trim() + '\u2066' + ' ',
-    );
+    controller = TextEditingController();
     super.initState();
   }
 
@@ -45,7 +37,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
   Widget build(BuildContext context) {
     return MainTextField(
       controller: controller,
-      inputFormatters: [PriceTextFormatter(currency: widget.currency)],
+      inputFormatters: [PriceTextFormatterV2()],
       textAlign: TextAlign.center,
       keyboardType: TextInputType.number,
       type: TextfieldType.Reqular,
@@ -53,19 +45,14 @@ class _AmountTextFieldState extends State<AmountTextField> {
         var result = (replaceToEnglishNumber(value) ?? '')
             .replaceAll(RegExp('[^0-9]'), '');
 
-        // final regexp = RegExp(r'(?:ریال\u2067)|(?:ریال)');
-        final regexp = RegExp(
-            '(?:${widget.currency.trim() + '\u2066' + ' '}\u2067)|(?:${widget.currency.trim() + '\u2066' + ' '})');
         if (widget.formKey != null) {
           if (!widget.formKey!.currentState!.validate()) {
             wordPrice = null;
           } else {
-            wordPrice = widget
-                .showValueBaseOnOppositeCurrency(result.replaceAll(regexp, ''));
+            wordPrice = widget.showValueBaseOnOppositeCurrency(result);
           }
         } else {
-          wordPrice = widget
-              .showValueBaseOnOppositeCurrency(result.replaceAll(regexp, ''));
+          wordPrice = widget.showValueBaseOnOppositeCurrency(result);
         }
 
         setState(() {});
@@ -84,7 +71,39 @@ class _AmountTextFieldState extends State<AmountTextField> {
       textDirection: TextDirection.ltr,
       textFieldStyle: widget.textFieldStyle,
       contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      prefix: widget.prefix,
+      suffix: widget.suffix,
     );
+  }
+}
+
+class PriceTextFormatterV2 extends TextInputFormatter {
+  PriceTextFormatterV2();
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) {
+      return newValue;
+    } else if (newValue.text.compareTo(oldValue.text) != 0) {
+      var newString = (replaceToEnglishNumber(newValue.text) ?? '')
+          .replaceAll(RegExp('[^0-9]'), '');
+      if (newString.trim().isEmpty) {
+        return newValue;
+      } else {
+        final f = intel.NumberFormat("#,###");
+        var num = int.parse(replaceToEnglishNumber(newValue.text)!
+            .replaceAll(RegExp('[^0-9]'), ''));
+        final newString = f.format(num).trim();
+
+        return TextEditingValue(
+          text: replaceToFarsiNumber(newString)!,
+          selection: TextSelection.fromPosition(
+              TextPosition(offset: newString.length)),
+        );
+      }
+    } else {
+      return newValue;
+    }
   }
 }
 
