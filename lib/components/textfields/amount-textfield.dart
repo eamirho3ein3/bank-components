@@ -31,7 +31,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
   @override
   void initState() {
-    controller = TextEditingController();
+    controller = TextEditingController(text: '۰');
     super.initState();
   }
 
