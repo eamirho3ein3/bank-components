@@ -31,7 +31,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
 
   @override
   void initState() {
-    controller = TextEditingController(text: '۰');
+    controller = TextEditingController();
     super.initState();
   }
 
@@ -41,6 +41,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
       focusNode: widget.focusNode,
       controller: controller,
       inputFormatters: [PriceTextFormatterV2()],
+      placeholder: '۰',
       textAlign: TextAlign.center,
       keyboardType: TextInputType.number,
       type: TextfieldType.Reqular,
