@@ -9,6 +9,7 @@ class AmountTextField extends StatefulWidget {
   final TextfieldExtend? suffix;
   final TextfieldExtend? prefix;
   final FocusNode? focusNode;
+  final TextEditingController? controller;
 
   AmountTextField({
     required this.showValueBaseOnOppositeCurrency,
@@ -19,6 +20,7 @@ class AmountTextField extends StatefulWidget {
     this.suffix,
     this.prefix,
     this.focusNode,
+    this.controller,
   });
 
   @override
@@ -26,12 +28,10 @@ class AmountTextField extends StatefulWidget {
 }
 
 class _AmountTextFieldState extends State<AmountTextField> {
-  late TextEditingController controller;
   String? wordPrice = '';
 
   @override
   void initState() {
-    controller = TextEditingController();
     super.initState();
   }
 
@@ -39,7 +39,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
   Widget build(BuildContext context) {
     return MainTextField(
       focusNode: widget.focusNode,
-      controller: controller,
+      controller: widget.controller ?? TextEditingController(),
       inputFormatters: [PriceTextFormatterV2()],
       placeholder: '۰',
       textAlign: TextAlign.center,
