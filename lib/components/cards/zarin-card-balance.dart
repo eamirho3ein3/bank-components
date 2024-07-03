@@ -65,6 +65,7 @@ class ZarinCardBalance extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
+              margin: EdgeInsets.symmetric(vertical: 6.5),
               width: 176,
               height: 24,
               decoration: BoxDecoration(
