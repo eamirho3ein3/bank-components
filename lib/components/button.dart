@@ -58,11 +58,19 @@ class _CustomButtonState extends State<CustomButton> {
         padding: EdgeInsets.symmetric(
             vertical: widget.isLoading != null && widget.isLoading!
                 ? widget.size == ButtonSize.large
-                    ? 14
-                    : 10
+                    ? (widget.rightIcon != null || widget.leftIcon != null
+                        ? 12
+                        : 14)
+                    : (widget.rightIcon != null || widget.leftIcon != null
+                        ? 8
+                        : 10)
                 : widget.size == ButtonSize.large
-                    ? 12
-                    : 8,
+                    ? (widget.rightIcon != null || widget.leftIcon != null
+                        ? 10
+                        : 12)
+                    : (widget.rightIcon != null || widget.leftIcon != null
+                        ? 6
+                        : 8),
             horizontal: widget.horizontalPadding ?? 8),
         child: widget.isLoading != null && widget.isLoading!
             ? _buildLoading(context)
