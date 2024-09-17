@@ -58,29 +58,31 @@ class ProfileCard extends StatelessWidget {
             SizedBox(
               width: 24,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  //profile name
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.start,
-                    style: Theme.of(context).textTheme.bodyText1,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    //profile name
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.start,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
                   ),
-                ),
 
-                // profile mobile
-                Text(
-                  mobile,
-                  textAlign: TextAlign.start,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1!
-                      .copyWith(color: style.secondaryTextColor),
-                )
-              ],
+                  // profile mobile
+                  Text(
+                    mobile,
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle1!
+                        .copyWith(color: style.secondaryTextColor),
+                  )
+                ],
+              ),
             ),
           ],
         ),
