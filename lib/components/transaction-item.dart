@@ -140,7 +140,7 @@ class TransactionItem extends StatelessWidget {
                     ? Text(subtitle ?? '',
                         style: Theme.of(context)
                             .textTheme
-                            .caption!
+                            .bodySmall!
                             .copyWith(color: style.subtitleColor))
                     : Container(
                         width: 64,

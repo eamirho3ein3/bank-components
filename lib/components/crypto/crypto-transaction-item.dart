@@ -100,7 +100,7 @@ class CryptoTransactionItem extends StatelessWidget {
                               Text(price ?? '',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle1!
+                                      .titleMedium!
                                       .copyWith(color: _getColor())),
                             ],
                           )
@@ -122,7 +122,7 @@ class CryptoTransactionItem extends StatelessWidget {
                     ? Text(subtitle ?? '',
                         style: Theme.of(context)
                             .textTheme
-                            .caption!
+                            .bodySmall!
                             .copyWith(color: style.subtitleColor))
                     : Container(
                         width: 64,

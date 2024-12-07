@@ -109,7 +109,7 @@ class ContactItem extends StatelessWidget {
                           Text(subtitle!,
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption!
+                                  .bodySmall!
                                   .copyWith(color: style.subtitleColor)),
                           SizedBox(
                             width: subtitleImage != null ? 8 : 0,

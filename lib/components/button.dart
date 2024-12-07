@@ -93,7 +93,7 @@ class _CustomButtonState extends State<CustomButton> {
                           child: Text(widget.title!,
                               style: Theme.of(context)
                                   .textTheme
-                                  .button!
+                                  .labelLarge!
                                   .copyWith(
                                       color: widget.onClick != null
                                           ? widget.style.foregroundColor

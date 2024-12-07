@@ -35,7 +35,7 @@ class ZarinAccountBalance extends StatelessWidget {
               textAlign: TextAlign.start,
               style: Theme.of(context)
                   .textTheme
-                  .bodyText2!
+                  .bodyMedium!
                   .copyWith(color: style.secondaryTextColor),
             ),
           ),
@@ -48,7 +48,7 @@ class ZarinAccountBalance extends StatelessWidget {
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .textTheme
-                    .headline1!
+                    .displayLarge!
                     .copyWith(color: style.secondaryTextColor),
               ),
               Text(
@@ -56,7 +56,7 @@ class ZarinAccountBalance extends StatelessWidget {
                 textAlign: TextAlign.end,
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText1!
+                    .bodyLarge!
                     .copyWith(color: style.secondaryTextColor),
               ),
             ],

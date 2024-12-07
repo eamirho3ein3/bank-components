@@ -85,7 +85,7 @@ class _CustomPickerState extends State<CustomPicker> {
                   'تایید',
                   style: Theme.of(context)
                       .textTheme
-                      .button!
+                      .labelLarge!
                       .copyWith(color: Theme.of(context).primaryColor),
                 ),
         ),
@@ -102,7 +102,7 @@ class _CustomPickerState extends State<CustomPicker> {
                   'لغو',
                   style: Theme.of(context)
                       .textTheme
-                      .button!
+                      .labelLarge!
                       .copyWith(color: widget.style.cancelColor),
                 ),
         ),
@@ -111,7 +111,7 @@ class _CustomPickerState extends State<CustomPicker> {
       backgroundColor: widget.style.backgroundColor,
       textStyle: Theme.of(context)
           .textTheme
-          .caption!
+          .bodySmall!
           .copyWith(color: widget.style.textColor),
       selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
       onConfirm: (picker, value) {

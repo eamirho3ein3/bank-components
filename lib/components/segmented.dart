@@ -72,7 +72,7 @@ class _CustomSegmentedState extends State<CustomSegmented> {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .subtitle1!
+                  .titleMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
           ),

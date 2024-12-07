@@ -99,7 +99,7 @@ class WalletItem extends StatelessWidget {
                           Text(subtitle ?? '',
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption!
+                                  .bodySmall!
                                   .copyWith(color: style.subtitleColor)),
                           SizedBox(
                             width: 8,

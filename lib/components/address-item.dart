@@ -125,7 +125,7 @@ class AddressItem extends StatelessWidget {
                     child: Text(title,
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle1!
+                            .titleMedium!
                             .copyWith(fontWeight: FontWeight.w700)),
                   ),
 
@@ -135,7 +135,7 @@ class AddressItem extends StatelessWidget {
                     child: Text(address + ' -  کدپستی: ' + code,
                         style: Theme.of(context)
                             .textTheme
-                            .subtitle1!
+                            .titleMedium!
                             .copyWith(color: style.addressColor)),
                   ),
                 ],

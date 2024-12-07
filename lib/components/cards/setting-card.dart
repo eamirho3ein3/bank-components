@@ -63,7 +63,7 @@ class SettingCard extends StatelessWidget {
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle1!
+                    .titleMedium!
                     .copyWith(fontWeight: FontWeight.w500),
               ),
             ),
@@ -77,7 +77,7 @@ class SettingCard extends StatelessWidget {
                       textAlign: TextAlign.start,
                       style: Theme.of(context)
                           .textTheme
-                          .subtitle1!
+                          .titleMedium!
                           .copyWith(color: style.secondaryTextColor),
                     ),
                   )

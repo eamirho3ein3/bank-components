@@ -79,7 +79,7 @@ class _PersonalSettingItemState extends State<PersonalSettingItem> {
                 widget.description,
                 style: Theme.of(context)
                     .textTheme
-                    .caption!
+                    .bodySmall!
                     .copyWith(color: widget.style.descriptionColor),
               ),
             ],

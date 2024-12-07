@@ -78,7 +78,7 @@ class ProfileCard extends StatelessWidget {
                     textAlign: TextAlign.start,
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle1!
+                        .titleMedium!
                         .copyWith(color: style.secondaryTextColor),
                   )
                 ],

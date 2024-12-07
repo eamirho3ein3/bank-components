@@ -56,7 +56,7 @@ class ZarinCardBalance extends StatelessWidget {
             textAlign: TextAlign.start,
             style: Theme.of(context)
                 .textTheme
-                .bodyText2!
+                .bodyMedium!
                 .copyWith(color: style.secondaryTextColor),
           ),
         ),
@@ -141,7 +141,7 @@ class ZarinCardBalance extends StatelessWidget {
                                   textAlign: TextAlign.end,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .caption!
+                                      .bodySmall!
                                       .copyWith(
                                           color: style.secondaryTextColor),
                                 )
@@ -162,7 +162,7 @@ class ZarinCardBalance extends StatelessWidget {
                     textAlign: TextAlign.start,
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(color: style.secondaryTextColor),
                   )
                 : SizedBox(),

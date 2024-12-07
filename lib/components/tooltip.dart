@@ -36,7 +36,7 @@ class _CustomTooltipState extends State<CustomTooltip> {
       ),
       textStyle: Theme.of(context)
           .textTheme
-          .subtitle1!
+          .titleMedium!
           .copyWith(color: widget.setting.textColor),
       showDuration: Duration(seconds: 4),
       preferBelow: false,

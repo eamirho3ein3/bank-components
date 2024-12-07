@@ -16,7 +16,7 @@ class CryptoSymbol extends StatelessWidget {
         title,
         style: Theme.of(context)
             .textTheme
-            .caption!
+            .bodySmall!
             .copyWith(color: style.titleColor),
       ),
     );

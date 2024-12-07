@@ -57,7 +57,7 @@ class CustomSnackBar extends SnackBar {
                           message,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1!
+                              .titleMedium!
                               .copyWith(color: style.textColor),
                         ),
                   subMessage != null

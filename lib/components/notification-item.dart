@@ -124,7 +124,7 @@ class NotificationItem extends StatelessWidget {
                       child: Text(title,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1!
+                              .titleMedium!
                               .copyWith(fontWeight: FontWeight.w700)),
                     ),
 
@@ -141,7 +141,7 @@ class NotificationItem extends StatelessWidget {
                     Text(date,
                         style: Theme.of(context)
                             .textTheme
-                            .caption!
+                            .bodySmall!
                             .copyWith(color: style.secondaryColor)),
                   ],
                 ),
