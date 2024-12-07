@@ -133,7 +133,7 @@ class NotificationItem extends StatelessWidget {
                         ? Padding(
                             padding: const EdgeInsets.only(bottom: 6),
                             child: Text(description!,
-                                style: Theme.of(context).textTheme.subtitle1),
+                                style: Theme.of(context).textTheme.titleMedium),
                           )
                         : SizedBox(),
 

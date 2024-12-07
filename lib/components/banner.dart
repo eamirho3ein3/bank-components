@@ -55,7 +55,7 @@ class CustomBanner extends StatelessWidget {
               Expanded(
                 child: Text(
                   message,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
             ],
@@ -73,7 +73,7 @@ class CustomBanner extends StatelessWidget {
                       children: [
                         Text(
                           action!.text,
-                          style: Theme.of(context).textTheme.button,
+                          style: Theme.of(context).textTheme.labelLarge,
                         ),
                         action!.icon != null
                             ? Icon(action!.icon!.icon,

@@ -78,7 +78,7 @@ class WalletItem extends StatelessWidget {
                     // title
                     !isSkeleton
                         ? Text(title ?? '',
-                            style: Theme.of(context).textTheme.subtitle1)
+                            style: Theme.of(context).textTheme.titleMedium)
                         : Container(
                             width: 120,
                             height: 12,
@@ -134,7 +134,7 @@ class WalletItem extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 8.0),
                       child: Text(price ?? '',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.subtitle1),
+                          style: Theme.of(context).textTheme.titleMedium),
                     ),
                   ],
                 )

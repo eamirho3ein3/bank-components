@@ -60,7 +60,7 @@ class ProfileSettingItem extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 toggleValue != null && toggleTheme != null
                     ? CustomToggle(

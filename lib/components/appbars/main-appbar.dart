@@ -24,7 +24,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headline2,
+        style: Theme.of(context).textTheme.displayMedium,
       ),
     );
   }

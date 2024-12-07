@@ -12,7 +12,7 @@ class MarketChanges extends StatelessWidget {
     return Text(
       (isPositive ? '+' : '-') + "$value" + "٪",
       textDirection: TextDirection.ltr,
-      style: Theme.of(context).textTheme.caption!.copyWith(color: color),
+      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: color),
     );
   }
 }

@@ -63,9 +63,12 @@ class CustomSnackBar extends SnackBar {
                   subMessage != null
                       ? Text(
                           subMessage,
-                          style: Theme.of(context).textTheme.caption!.copyWith(
-                              color:
-                                  style.secondaryTextColor ?? style.textColor),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  color: style.secondaryTextColor ??
+                                      style.textColor),
                         )
                       : SizedBox(),
                 ],
@@ -78,7 +81,7 @@ class CustomSnackBar extends SnackBar {
                       onPressed: button.onClick,
                       child: Text(
                         button.text,
-                        style: Theme.of(context).textTheme.button!.copyWith(
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
                             color: style.buttonTextColor ?? style.textColor),
                       ),
                       style: ButtonStyle(

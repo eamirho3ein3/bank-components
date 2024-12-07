@@ -106,7 +106,7 @@ class TransactionItem extends StatelessWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 softWrap: false,
-                                style: Theme.of(context).textTheme.subtitle1),
+                                style: Theme.of(context).textTheme.titleMedium),
                           )
                         : Container(
                             width: 120,

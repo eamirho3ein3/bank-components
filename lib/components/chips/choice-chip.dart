@@ -35,7 +35,7 @@ class CustomChoiceChip extends StatelessWidget {
         children: [
           Text(
             (numbers != null ? (numbers! + " ") : '') + title,
-            style: Theme.of(context).textTheme.subtitle1!.copyWith(
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: selected ? Theme.of(context).primaryColor : titleColor),
           ),
           selected && type == ChipType.Action

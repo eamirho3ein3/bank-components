@@ -108,7 +108,7 @@ class ZarinAccountCard extends StatelessWidget {
         child: Text(
           title,
           textAlign: TextAlign.end,
-          style: Theme.of(context).textTheme.bodyText2,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ),
       subtitle:
@@ -117,11 +117,11 @@ class ZarinAccountCard extends StatelessWidget {
         textAlign: TextAlign.end,
         text: TextSpan(
             text: amount,
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
             children: <TextSpan>[
               TextSpan(
                 text: ' ' + 'ریال',
-                style: Theme.of(context).textTheme.caption,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ]),
       ),

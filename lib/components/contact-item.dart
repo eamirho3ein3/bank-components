@@ -97,7 +97,7 @@ class ContactItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // title
-                Text(title, style: Theme.of(context).textTheme.subtitle1),
+                Text(title, style: Theme.of(context).textTheme.titleMedium),
                 SizedBox(
                   height: subtitle != null ? 6 : 0,
                 ),

@@ -70,7 +70,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     //                 CupertinoButton(
     //                   child: Text(
     //                     'لغو',
-    //                     style: Theme.of(context).textTheme.button,
+    //                     style: Theme.of(context).textTheme.labelLarge,
     //                   ),
     //                   onPressed: () {
     //                     Navigator.of(context).pop();
@@ -79,7 +79,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     //                 CupertinoButton(
     //                   child: Text(
     //                     'تایید',
-    //                     style: Theme.of(context).textTheme.button,
+    //                     style: Theme.of(context).textTheme.labelLarge,
     //                   ),
     //                   onPressed: () {
     //                     dateController.text = _formatDate(tempPickedDate.year,
@@ -102,7 +102,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     //                 data: CupertinoThemeData(
     //                   textTheme: CupertinoTextThemeData(
     //                     dateTimePickerTextStyle:
-    //                         Theme.of(context).textTheme.subtitle1,
+    //                         Theme.of(context).textTheme.titleMedium,
     //                   ),
     //                 ),
     //                 child: PCupertinoDatePicker(
@@ -128,7 +128,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     //       : Text(
     //           'تایید',
     //           style:
-    //               TextStyle(color: Theme.of(context).textTheme.bodyText1.color),
+    //               TextStyle(color: Theme.of(context).textTheme.bodyLarge.color),
     //         ),
     //   cancel: widget.cancelTitle != null
     //       ? widget.cancelTitle

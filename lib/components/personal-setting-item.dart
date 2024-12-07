@@ -42,7 +42,7 @@ class _PersonalSettingItemState extends State<PersonalSettingItem> {
       children: [
         Text(
           widget.title,
-          style: Theme.of(context).textTheme.button,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
         SizedBox(height: 16),
         Container(
@@ -104,7 +104,7 @@ class _PersonalSettingItemState extends State<PersonalSettingItem> {
             padding: const EdgeInsets.only(right: 12.0),
             child: Text(
               value,
-              style: Theme.of(context).textTheme.subtitle1!.copyWith(
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
             ),

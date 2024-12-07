@@ -73,7 +73,7 @@ class CryptoTransactionItem extends StatelessWidget {
                     // title
                     !isSkeleton
                         ? Text(title ?? '',
-                            style: Theme.of(context).textTheme.subtitle1)
+                            style: Theme.of(context).textTheme.titleMedium)
                         : Container(
                             width: 120,
                             height: 12,

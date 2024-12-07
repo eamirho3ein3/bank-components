@@ -70,7 +70,7 @@ class _AmountTextFieldState extends State<AmountTextField> {
           ? SizedBox()
           : Text(
               wordPrice!,
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
       textDirection: TextDirection.ltr,
       textFieldStyle: widget.textFieldStyle,

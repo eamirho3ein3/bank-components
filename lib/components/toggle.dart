@@ -21,7 +21,7 @@ class CustomToggle extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 8),
                 child: Text(
                   title ?? '',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: onToggle == null ? style.textColorDisabled : null),
                 ),
               )
@@ -45,7 +45,7 @@ class CustomToggle extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 8),
                 child: Text(
                   title ?? '',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: onToggle == null ? style.textColorDisabled : null),
                 ),
               )

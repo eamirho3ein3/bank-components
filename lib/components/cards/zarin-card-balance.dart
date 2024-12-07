@@ -130,7 +130,7 @@ class ZarinCardBalance extends StatelessWidget {
                 Expanded(
                   child: Text(title,
                       textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.bodyText2),
+                      style: Theme.of(context).textTheme.bodyMedium),
                 ),
                 titleIcon != null || lastUpdate != null
                     ? Row(
@@ -176,12 +176,12 @@ class ZarinCardBalance extends StatelessWidget {
           Text(
             amount,
             textAlign: TextAlign.start,
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           Text(
             currency ?? ' ' + 'ریال',
             textAlign: TextAlign.end,
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],
       ),

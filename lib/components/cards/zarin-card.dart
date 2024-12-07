@@ -108,7 +108,7 @@ class ZarinCard extends StatelessWidget {
       var widget = Text(
         item,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headline2!.copyWith(
+        style: Theme.of(context).textTheme.displayMedium!.copyWith(
             fontWeight: FontWeight.w700, color: style.secondaryTextColor),
       );
       _children.add(widget);

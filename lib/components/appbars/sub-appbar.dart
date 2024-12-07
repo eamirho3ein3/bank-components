@@ -46,7 +46,7 @@ class SubAppBar extends StatelessWidget implements PreferredSizeWidget {
         ? titleWidget
         : Text(
             title ?? '',
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headlineMedium,
           );
   }
 }

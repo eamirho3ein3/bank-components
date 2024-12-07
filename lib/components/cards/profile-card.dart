@@ -68,7 +68,7 @@ class ProfileCard extends StatelessWidget {
                     child: Text(
                       title,
                       textAlign: TextAlign.start,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
 

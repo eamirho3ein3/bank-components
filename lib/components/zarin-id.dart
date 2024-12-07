@@ -19,7 +19,7 @@ class ZarinId extends StatelessWidget {
         children: [
           Text(
             id ?? '',
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           style.backgroundStatusColor != null
               ? Padding(

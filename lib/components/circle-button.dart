@@ -66,7 +66,7 @@ class CircleButton extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   label!,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               )
             : SizedBox(),

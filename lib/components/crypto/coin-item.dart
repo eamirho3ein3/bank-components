@@ -69,10 +69,13 @@ class CoinItem extends StatelessWidget {
                 // title
                 !isSkeleton
                     ? Text(title ?? '',
-                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: status == CoinStatus.selected
-                                ? style.colorDisable
-                                : null))
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(
+                                color: status == CoinStatus.selected
+                                    ? style.colorDisable
+                                    : null))
                     : Container(
                         width: 104,
                         height: 12,
