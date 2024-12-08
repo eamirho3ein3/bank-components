@@ -15,8 +15,6 @@ dependencies:
   flutter_svg: ^2.0.10+1
   intl: any
   shimmer: ^3.0.0
-  # persian_datetime_picker: ^2.5.0
-  flutter_picker: ^2.1.0
   flutter_slidable: ^3.1.0
   rich_text_controller: ^1.4.0
   persian_number_utility: ^1.1.2
