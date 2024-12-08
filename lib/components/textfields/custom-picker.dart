@@ -33,8 +33,21 @@ class CustomPicker extends StatefulWidget {
 
 class _CustomPickerState extends State<CustomPicker> {
   int selectedIndex = 0;
+  late FixedExtentScrollController _scrollController;
+  @override
+  void initState() {
+    super.initState();
+
+    selectedIndex = widget.selectedValue == ''
+        ? 0
+        : widget.itemList.indexOf(widget.selectedValue);
+
+    _scrollController = FixedExtentScrollController(initialItem: selectedIndex);
+  }
+
   @override
   void dispose() {
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -43,8 +56,11 @@ class _CustomPickerState extends State<CustomPicker> {
     return GestureDetector(
       onTap: () async {
         if (widget.itemList.isNotEmpty) {
-          var result = await _showPicker(context);
-          widget.onComplete(result);
+          _scrollController.dispose();
+          _scrollController =
+              FixedExtentScrollController(initialItem: selectedIndex);
+          await _showPicker(context);
+          widget.onComplete(widget.itemList[selectedIndex]);
         }
       },
       child: AbsorbPointer(
@@ -61,15 +77,12 @@ class _CustomPickerState extends State<CustomPicker> {
   }
 
   Future _showPicker(BuildContext context) async {
-    List<int> selected = widget.selectedValue == ''
-        ? [0]
-        : [widget.itemList.indexOf(widget.selectedValue)];
-    widget.controller.text = widget.itemList[selected.first];
+    widget.controller.text = widget.itemList[selectedIndex];
     if (widget.onSelect != null) {
-      widget.onSelect!(widget.itemList[selected.first]);
+      widget.onSelect!(widget.itemList[selectedIndex]);
     }
 
-    return showModalBottomSheet(
+    return await showModalBottomSheet(
       isScrollControlled: true,
       isDismissible: true,
       enableDrag: true,
@@ -80,18 +93,18 @@ class _CustomPickerState extends State<CustomPicker> {
       context: context,
       builder: (context) {
         return Container(
-          height: 250,
-          color: Colors.white,
+          height: 280,
+          color: widget.style.buttonBackgroundColor,
           child: Column(
             children: [
               Container(
-                color: Colors.white,
+                color: widget.style.buttonBackgroundColor,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).pop(widget.controller.text);
+                        Navigator.of(context).pop();
                       },
                       child: Padding(
                         padding:
@@ -129,11 +142,11 @@ class _CustomPickerState extends State<CustomPicker> {
                   ],
                 ),
               ),
-              StatefulBuilder(
-                builder: (context, setState) {
-                  return SizedBox(
-                    height: 210,
-                    child: CupertinoPicker(
+              Expanded(
+                child: StatefulBuilder(
+                  builder: (context, setState) {
+                    return CupertinoPicker(
+                      scrollController: _scrollController,
                       useMagnifier: false,
                       itemExtent: 46,
                       backgroundColor: widget.style.backgroundColor,
@@ -161,74 +174,19 @@ class _CustomPickerState extends State<CustomPicker> {
                                                 : widget.style.textColor),
                               )))
                           .toList(),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
+              ),
+              Container(
+                color: widget.style.backgroundColor,
+                height: 30,
               ),
             ],
           ),
         );
       },
     );
-    // return await Picker(
-    //   adapter: PickerDataAdapter<String>(pickerData: widget.itemList),
-    //   changeToFirst: false,
-    //   looping: false,
-    //   height: 200,
-    //   itemExtent: 36,
-    //   confirm: InkWell(
-    //     onTap: () {
-    //       Navigator.of(context).pop(widget.controller.text);
-    //     },
-    //     child: Padding(
-    //       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    //       child: widget.confirmTitle != null
-    //           ? widget.confirmTitle
-    //           : Text(
-    //               'تایید',
-    //               style: Theme.of(context)
-    //                   .textTheme
-    //                   .labelLarge!
-    //                   .copyWith(color: Theme.of(context).primaryColor),
-    //             ),
-    //     ),
-    //   ),
-    //   cancel: InkWell(
-    //     onTap: () {
-    //       Navigator.of(context).pop();
-    //     },
-    //     child: Padding(
-    //       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    //       child: widget.cancelTitle != null
-    //           ? widget.cancelTitle
-    //           : Text(
-    //               'لغو',
-    //               style: Theme.of(context)
-    //                   .textTheme
-    //                   .labelLarge!
-    //                   .copyWith(color: widget.style.cancelColor),
-    //             ),
-    //     ),
-    //   ),
-    //   selecteds: selected,
-    //   backgroundColor: widget.style.backgroundColor,
-    //   textStyle: Theme.of(context)
-    //       .textTheme
-    //       .bodySmall!
-    //       .copyWith(color: widget.style.textColor),
-    //   selectedTextStyle: TextStyle(color: Theme.of(context).primaryColor),
-    //   onConfirm: (picker, value) {
-    //     widget.controller.text = widget.itemList[value.first];
-    //     // widget.onComplete(widget.itemList[value.first]);
-    //   },
-    //   onCancel: () {},
-    //   onSelect: (Picker picker, int selected, List value) {
-    //     widget.controller.text = widget.itemList[value.first];
-    //     if (widget.onSelect != null) {
-    //       widget.onSelect!(widget.itemList[value.first]);
-    //     }
-    //   },
-    // ).showModal(context);
   }
 }
 
@@ -236,9 +194,12 @@ class CustomPickerStyle {
   final Color backgroundColor;
   final Color cancelColor;
   final Color textColor;
+  final Color buttonBackgroundColor;
 
-  CustomPickerStyle(
-      {required this.backgroundColor,
-      required this.cancelColor,
-      required this.textColor});
+  CustomPickerStyle({
+    required this.backgroundColor,
+    required this.cancelColor,
+    required this.textColor,
+    required this.buttonBackgroundColor,
+  });
 }
