@@ -77,6 +77,9 @@ class _CustomPickerState extends State<CustomPicker> {
   }
 
   Future _showPicker(BuildContext context) async {
+    selectedIndex = widget.selectedValue == ''
+        ? 0
+        : widget.itemList.indexOf(widget.selectedValue);
     widget.controller.text = widget.itemList[selectedIndex];
     if (widget.onSelect != null) {
       widget.onSelect!(widget.itemList[selectedIndex]);
